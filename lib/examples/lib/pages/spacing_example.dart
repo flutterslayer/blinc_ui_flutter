@@ -17,34 +17,34 @@ class SpacingExample extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               block(context),
-              SpaceComponent.hxxs,
+              BlincSpacer.horizontal.xxs,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SpaceComponent.vxxxs,
+                  BlincSpacer.vertical.xxxs,
                   block2(),
-                  SpaceComponent.vxs,
+                  BlincSpacer.vertical.xs,
                   block2(),
-                  SpaceComponent.vsm,
+                  BlincSpacer.vertical.sm,
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       block3(),
-                      SpaceComponent.hxxs,
+                      BlincSpacer.horizontal.xxs,
                       Column(
                         children: [
-                          SpaceComponent.vsm,
+                          BlincSpacer.vertical.sm,
                           block4(),
                         ],
                       ),
                     ],
                   ),
-                  SpaceComponent.vxs,
+                  BlincSpacer.vertical.xs,
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       block5(),
-                      SpaceComponent.hxxs,
+                      BlincSpacer.horizontal.xxs,
                       block6(),
                     ],
                   ),
