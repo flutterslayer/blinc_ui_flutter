@@ -1,15 +1,16 @@
 class Spacing {
-  static const _baseValue = 8;
+  static const double _baseValue = 8;
 
-  static const zero = 0; // 0
-  static const xxxs = _baseValue; // 8
-  static const xxs = _baseValue * 2; // 16
-  static const xs = _baseValue * 3; // 24
-  static const sm = _baseValue * 4; // 32
-  static const md = _baseValue * 5; // 40
-  static const lg = _baseValue * 6; // 48
-  static const xl = _baseValue * 7; // 56
-  static const xxl = _baseValue * 8; // 64
-  static const xxxl = _baseValue * 9; // 72
-  static const huge = _baseValue * 10; // 80
+  static const double zero = 0; // 0
+  static const double xxxs = _baseValue; // 8
+  static const double xxs = _baseValue * 2; // 16
+  static const double xs = _baseValue * 3; // 24
+  static const double sm = _baseValue * 4; // 32
+  static const double md = _baseValue * 5; // 40
+  static const double lg = _baseValue * 6; // 48
+  static const double xl = _baseValue * 7; // 56
+  static const double xxl = _baseValue * 8; // 64
+  static const double xxxl = _baseValue * 9; // 72
+  static const double huge = _baseValue * 10; // 80
+
 }
