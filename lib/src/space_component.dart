@@ -1,6 +1,10 @@
 import 'package:blinc_ui_flutter/src/spacing.dart';
 import 'package:flutter/material.dart';
 
+/// Creates a spacer that can be horizontal or vertical and follows the
+/// [Spacing] size values.
+/// It can be used to separate layout blocks, for
+/// example: [BlincSpacer.horizontal.huge]
 enum BlincSpacer {
   horizontal,
   vertical,
@@ -26,6 +30,7 @@ class _CustomSpaceComponent extends StatelessWidget {
 }
 
 extension SelectOrientationAndSize on BlincSpacer {
+  /// The [huge] size measures 80px
   Widget get huge {
     switch (this) {
       case BlincSpacer.horizontal:
@@ -35,6 +40,7 @@ extension SelectOrientationAndSize on BlincSpacer {
     }
   }
 
+  /// The [xxxl] size measures 72px
   Widget get xxxl {
     switch (this) {
       case BlincSpacer.horizontal:
@@ -44,6 +50,7 @@ extension SelectOrientationAndSize on BlincSpacer {
     }
   }
 
+  /// The [xxl] size measures 64px
   Widget get xxl {
     switch (this) {
       case BlincSpacer.horizontal:
@@ -53,6 +60,7 @@ extension SelectOrientationAndSize on BlincSpacer {
     }
   }
 
+  /// The [xl] size measures 56px
   Widget get xl {
     switch (this) {
       case BlincSpacer.horizontal:
@@ -62,6 +70,7 @@ extension SelectOrientationAndSize on BlincSpacer {
     }
   }
 
+  /// The [lg] size measures 48px
   Widget get lg {
     switch (this) {
       case BlincSpacer.horizontal:
@@ -71,6 +80,7 @@ extension SelectOrientationAndSize on BlincSpacer {
     }
   }
 
+  /// The [md] size measures 40px
   Widget get md {
     switch (this) {
       case BlincSpacer.horizontal:
@@ -80,6 +90,7 @@ extension SelectOrientationAndSize on BlincSpacer {
     }
   }
 
+  /// The [sm] size measures 32px
   Widget get sm {
     switch (this) {
       case BlincSpacer.horizontal:
@@ -89,6 +100,7 @@ extension SelectOrientationAndSize on BlincSpacer {
     }
   }
 
+  /// The [xs] size measures 24px
   Widget get xs {
     switch (this) {
       case BlincSpacer.horizontal:
@@ -98,6 +110,7 @@ extension SelectOrientationAndSize on BlincSpacer {
     }
   }
 
+  /// The [xxs] size measures 16px
   Widget get xxs {
     switch (this) {
       case BlincSpacer.horizontal:
@@ -107,6 +120,7 @@ extension SelectOrientationAndSize on BlincSpacer {
     }
   }
 
+  /// The [xxxs] size measures 8px
   Widget get xxxs {
     switch (this) {
       case BlincSpacer.horizontal:
@@ -116,6 +130,7 @@ extension SelectOrientationAndSize on BlincSpacer {
     }
   }
 
+  /// The [zero] size measures 0px
   Widget get zero {
     switch (this) {
       case BlincSpacer.horizontal:
