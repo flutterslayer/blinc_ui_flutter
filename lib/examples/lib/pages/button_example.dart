@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:blinc_ui_flutter/src/button_components.dart';
+import 'package:blinc_ui_flutter/src/icon_button_components.dart';
 
 class ButtonExample extends StatelessWidget {
   const ButtonExample({Key? key}) : super(key: key);
@@ -16,8 +17,7 @@ class ButtonExample extends StatelessWidget {
             child: Column(
           children: [
             const BlincButton(
-              text: 'SMALL PRIMARY',
-              icon: Icons.person_pin_circle_outlined,
+              text: 'Label',
             ).smallPrimary(),
             const BlincButton(
               text: 'SMALL SECONDARY',
@@ -32,9 +32,15 @@ class ButtonExample extends StatelessWidget {
               text: 'LARGE SECONDARY',
               icon: Icons.person_pin_circle_outlined,
             ).largeSecondary(),
-            const BlincButton(
-              text: 'LARGE TERTIARY',
-            ).largeTertiary(),
+            const BlincIconButton(
+              icon: Icons.person_pin_circle_outlined,
+            ).iconSmallPrimary(),
+            const BlincIconButton(
+              icon: Icons.person_pin_circle_outlined,
+            ).iconSmallSecondary(),
+            const BlincIconButton(
+              icon: Icons.person_pin_circle_outlined,
+            ).iconLargePrimary(),
           ],
         )),
       ),

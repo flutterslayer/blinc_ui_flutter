@@ -4,7 +4,7 @@ class BlincButton extends StatefulWidget {
   const BlincButton({
     Key? key,
     this.onPressed,
-    required this.text,
+    this.text,
     this.buttonTheme,
     this.sizePresets,
     this.textStyle,
@@ -12,7 +12,7 @@ class BlincButton extends StatefulWidget {
     this.icon,
   }) : super(key: key);
 
-  final String text;
+  final String? text;
   final Function? onPressed;
   final BlincButtonTheme? buttonTheme;
   final SizePresets? sizePresets;
@@ -154,13 +154,6 @@ class _BlincButtonState extends State<BlincButton> {
                 DefaultTheme.backgroundColor),
         overlayColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered)) {
-              return widget.buttonTheme?.hoverColor ?? DefaultTheme.hoverColor;
-            }
-            if (states.contains(MaterialState.disabled)) {
-              return widget.buttonTheme?.disabledColor ??
-                  DefaultTheme.disabledColor;
-            }
             if (states.contains(MaterialState.focused)) {
               return widget.buttonTheme?.focusColor ?? DefaultTheme.focusColor;
             }
@@ -168,12 +161,23 @@ class _BlincButtonState extends State<BlincButton> {
               return widget.buttonTheme?.pressedColor ??
                   DefaultTheme.pressedColor;
             }
+            if (states.contains(MaterialState.hovered)) {
+              return widget.buttonTheme?.hoverColor ?? DefaultTheme.hoverColor;
+            }
+            if (states.contains(MaterialState.disabled)) {
+              return widget.buttonTheme?.disabledColor ??
+                  DefaultTheme.disabledColor;
+            }
+
             return widget.buttonTheme?.backgroundColor ??
                 DefaultTheme.backgroundColor;
           },
         ),
         minimumSize: MaterialStatePropertyAll<Size?>(
           widget.sizePresets?.minimumSize ?? DefaultPresets.minimumSize,
+        ),
+        maximumSize: MaterialStatePropertyAll<Size?>(
+          widget.sizePresets?.maximumSize,
         ),
         shape: MaterialStatePropertyAll<OutlinedBorder?>(
           widget.sizePresets?.shape ?? DefaultPresets.shape,
@@ -184,19 +188,24 @@ class _BlincButtonState extends State<BlincButton> {
             widget.sizePresets?.padding ??
             DefaultPresets.padding,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             ...[
               if (widget.icon != null)
                 Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
+                  padding: const EdgeInsets.only(right: 5),
                   child: Icon(widget.icon),
-                ),
+                )
             ],
-            Text(
-              widget.text,
-              style: widget.textStyle,
-            ),
+            ...[
+              if (widget.text != null)
+                Text(
+                  widget.text!,
+                  style: widget.textStyle,
+                ),
+            ]
           ],
         ),
       ),
@@ -328,12 +337,14 @@ abstract class SizePresets {
   final EdgeInsets padding;
   final RoundedRectangleBorder shape;
   final TextStyle textStyle;
+  final Size? maximumSize;
 
   SizePresets({
     required this.minimumSize,
     required this.padding,
     required this.shape,
     required this.textStyle,
+    this.maximumSize,
   });
 }
 
@@ -341,7 +352,7 @@ class SmallPresets implements SizePresets {
   @override
   final minimumSize = const Size(137, 32);
   @override
-  final padding = const EdgeInsets.fromLTRB(0, 16, 0, 16);
+  final padding = const EdgeInsets.fromLTRB(0, 0, 0, 0);
 
   @override
   final shape = RoundedRectangleBorder(
@@ -351,13 +362,15 @@ class SmallPresets implements SizePresets {
   final textStyle = const TextStyle(
     fontSize: 14,
   );
+  @override
+  final maximumSize = null;
 }
 
 class LargePresets implements SizePresets {
   @override
   final minimumSize = const Size(326, 72);
   @override
-  final padding = const EdgeInsets.fromLTRB(24, 16, 24, 16);
+  final padding = const EdgeInsets.all(0);
 
   @override
   final shape = RoundedRectangleBorder(
@@ -367,4 +380,6 @@ class LargePresets implements SizePresets {
   final textStyle = const TextStyle(
     fontSize: 20,
   );
+  @override
+  final maximumSize = null;
 }
