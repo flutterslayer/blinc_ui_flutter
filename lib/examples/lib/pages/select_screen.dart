@@ -12,24 +12,34 @@ class SelectScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SizedBox(
-            child: GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(20),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 3,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/spacing');
-              },
-              child: const Text(
-                'Spacing',
-                style: TextStyle(fontSize: 16),
+          child: GridView.count(
+            primary: false,
+            padding: const EdgeInsets.all(20),
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            crossAxisCount: 3,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/spacing');
+                },
+                child: const Text(
+                  'Spacing',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
-            ),
-          ],
-        )),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/borders');
+                },
+                child: const Text(
+                  'Borders',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

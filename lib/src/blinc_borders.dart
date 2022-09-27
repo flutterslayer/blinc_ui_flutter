@@ -17,7 +17,7 @@ class BlincBorders {
 
   ///The [zero] size provides a non-border [Container]
   static BoxBorder zero = Border.all(
-    width: 0,
+    style: BorderStyle.none,
   );
 
   ///The [sm] border size measures 0.5px
