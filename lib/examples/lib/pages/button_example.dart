@@ -16,7 +16,7 @@ class ButtonExample extends StatelessWidget {
             child: Column(
           children: [
             const BlincButton(
-              text: 'SMALL PRIMAdasddasdsasdRY',
+              text: 'SMALL PRIMARY',
             ).smallPrimary(),
             const BlincButton(
               text: 'SMALL SECONDARY',
