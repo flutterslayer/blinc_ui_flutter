@@ -9,6 +9,7 @@ class BlincButton extends StatefulWidget {
     this.sizePresets,
     this.textStyle,
     this.padding,
+    this.icon,
   }) : super(key: key);
 
   final String text;
@@ -17,6 +18,7 @@ class BlincButton extends StatefulWidget {
   final SizePresets? sizePresets;
   final TextStyle? textStyle;
   final EdgeInsets? padding;
+  final IconData? icon;
 
   BlincButton smallPrimary() {
     return BlincButton(
@@ -29,6 +31,7 @@ class BlincButton extends StatefulWidget {
       buttonTheme: PrimaryTheme(),
       sizePresets: SmallPresets(),
       padding: padding,
+      icon: icon,
     );
   }
 
@@ -43,6 +46,7 @@ class BlincButton extends StatefulWidget {
       buttonTheme: SecondaryTheme(),
       sizePresets: SmallPresets(),
       padding: padding,
+      icon: icon,
     );
   }
 
@@ -57,6 +61,7 @@ class BlincButton extends StatefulWidget {
       buttonTheme: TertiaryTheme(),
       sizePresets: SmallPresets(),
       padding: padding,
+      icon: icon,
     );
   }
 
@@ -71,6 +76,7 @@ class BlincButton extends StatefulWidget {
       buttonTheme: PrimaryTheme(),
       sizePresets: LargePresets(),
       padding: padding,
+      icon: icon,
     );
   }
 
@@ -85,6 +91,7 @@ class BlincButton extends StatefulWidget {
       buttonTheme: SecondaryTheme(),
       sizePresets: LargePresets(),
       padding: padding,
+      icon: icon,
     );
   }
 
@@ -99,6 +106,7 @@ class BlincButton extends StatefulWidget {
       buttonTheme: TertiaryTheme(),
       sizePresets: LargePresets(),
       padding: padding,
+      icon: icon,
     );
   }
 
@@ -175,9 +183,21 @@ class _BlincButtonState extends State<BlincButton> {
         padding: widget.padding ??
             widget.sizePresets?.padding ??
             DefaultPresets.padding,
-        child: Text(
-          widget.text,
-          style: widget.textStyle,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ...[
+              if (widget.icon != null)
+                Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: Icon(widget.icon),
+                ),
+            ],
+            Text(
+              widget.text,
+              style: widget.textStyle,
+            ),
+          ],
         ),
       ),
     );

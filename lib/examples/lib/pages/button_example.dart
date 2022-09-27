@@ -17,6 +17,7 @@ class ButtonExample extends StatelessWidget {
           children: [
             const BlincButton(
               text: 'SMALL PRIMARY',
+              icon: Icons.person_pin_circle_outlined,
             ).smallPrimary(),
             const BlincButton(
               text: 'SMALL SECONDARY',
@@ -29,6 +30,7 @@ class ButtonExample extends StatelessWidget {
             ).largePrimary(),
             const BlincButton(
               text: 'LARGE SECONDARY',
+              icon: Icons.person_pin_circle_outlined,
             ).largeSecondary(),
             const BlincButton(
               text: 'LARGE TERTIARY',
