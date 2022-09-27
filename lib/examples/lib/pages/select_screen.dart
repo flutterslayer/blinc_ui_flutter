@@ -19,18 +19,27 @@ class SelectScreen extends StatelessWidget {
           mainAxisSpacing: 10,
           crossAxisCount: 3,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/spacing');
-              },
-              child: const Text(
-                'Spacing',
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
+            selectBlock(context: context, route: '/spacing', text: 'Spacing'),
+            selectBlock(context: context, route: '/buttons', text: 'Buttons'),
           ],
         )),
       ),
     );
   }
+}
+
+Widget selectBlock({
+  required BuildContext context,
+  required String route,
+  required String text,
+}) {
+  return ElevatedButton(
+    onPressed: () {
+      Navigator.pushNamed(context, route);
+    },
+    child: Text(
+      text,
+      style: const TextStyle(fontSize: 16),
+    ),
+  );
 }
