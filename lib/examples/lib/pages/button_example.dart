@@ -17,6 +17,13 @@ class ButtonExample extends StatelessWidget {
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            BlincButton(
+              text: 'Click here to go back to selection',
+              icon: Icons.arrow_back,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ).largePrimary(),
             const BlincButton(
               text: 'Large Primary',
               icon: Icons.add_a_photo,
@@ -26,8 +33,7 @@ class ButtonExample extends StatelessWidget {
             ).largeSecondary(),
             const BlincButton(
               text: 'Large Tertiary',
-              icon: Icons.location_on_outlined,
-              isIconInverted: true,
+              icon: Icons.location_on,
             ).largeTertiary(),
             Padding(
               padding: const EdgeInsets.only(bottom: 5.0),
