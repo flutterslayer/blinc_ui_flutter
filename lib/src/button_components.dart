@@ -1,3 +1,4 @@
+import 'package:blinc_ui_flutter/src/loading_spinner_component.dart';
 import 'package:flutter/material.dart';
 
 class BlincButton extends StatefulWidget {
@@ -12,6 +13,7 @@ class BlincButton extends StatefulWidget {
     this.padding,
     this.icon,
     this.isIconInverted,
+    this.isLoading,
   }) : super(key: key);
 
   final String? text;
@@ -23,6 +25,7 @@ class BlincButton extends StatefulWidget {
   final EdgeInsets? padding;
   final IconData? icon;
   final bool? isIconInverted;
+  final bool? isLoading;
 
   BlincButton smallPrimary() {
     return BlincButton(
@@ -37,6 +40,7 @@ class BlincButton extends StatefulWidget {
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
+      isLoading: isLoading,
     );
   }
 
@@ -53,6 +57,7 @@ class BlincButton extends StatefulWidget {
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
+      isLoading: isLoading,
     );
   }
 
@@ -69,6 +74,7 @@ class BlincButton extends StatefulWidget {
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
+      isLoading: isLoading,
       isUnderlined: true,
     );
   }
@@ -86,6 +92,7 @@ class BlincButton extends StatefulWidget {
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
+      isLoading: isLoading,
     );
   }
 
@@ -102,6 +109,7 @@ class BlincButton extends StatefulWidget {
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
+      isLoading: isLoading,
     );
   }
 
@@ -118,6 +126,7 @@ class BlincButton extends StatefulWidget {
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
+      isLoading: isLoading,
       isUnderlined: true,
     );
   }
@@ -266,7 +275,17 @@ class _BlincButtonState extends State<BlincButton> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ...[
+                  if (widget.isLoading == true)
+                    SizedBox(
+                        width: 25,
+                        height: 25,
+                        child: LoadingSpinner(
+                          color: widget.buttonTheme?.loadingSpinnerColor ??
+                              DefaultTheme.loadingSpinnerColor,
+                          size: widget.sizePresets?.loadingSpinnerSize ??
+                              DefaultPresets.loadingSpinnerSize,
+                        ))
+                  else ...[
                     if (widget.icon != null && widget.isIconInverted != true)
                       Padding(
                         padding: const EdgeInsets.only(right: 5),
@@ -275,9 +294,7 @@ class _BlincButtonState extends State<BlincButton> {
                           size: widget.sizePresets?.iconSize ??
                               DefaultPresets.iconSize,
                         ),
-                      )
-                  ],
-                  ...[
+                      ),
                     if (widget.isUnderlined == true)
                       Text(
                         widget.text!,
@@ -287,14 +304,10 @@ class _BlincButtonState extends State<BlincButton> {
                           color: Colors.transparent,
                         ),
                       ),
-                  ],
-                  ...[
                     if (widget.isUnderlined != true)
                       Text(
                         widget.text!,
                       ),
-                  ],
-                  ...[
                     if (widget.icon != null && widget.isIconInverted == true)
                       Padding(
                         padding: const EdgeInsets.only(left: 5),
@@ -304,7 +317,7 @@ class _BlincButtonState extends State<BlincButton> {
                               DefaultPresets.iconSize,
                         ),
                       )
-                  ],
+                  ]
                 ],
               ),
             ),
@@ -327,6 +340,7 @@ class DefaultTheme {
   static const focusedFontColor = Color.fromARGB(255, 255, 255, 255);
   static const disabledFontColor = Color.fromARGB(255, 255, 255, 255);
   static const focusedBorderColor = Color.fromRGBO(133, 133, 131, 1);
+  static const loadingSpinnerColor = Color.fromRGBO(243, 244, 249, 1);
 }
 
 class DefaultPresets {
@@ -340,6 +354,7 @@ class DefaultPresets {
     fontSize: 14,
   );
   static const double iconSize = 16;
+  static const double loadingSpinnerSize = 14;
 }
 
 abstract class BlincButtonTheme {
@@ -354,6 +369,7 @@ abstract class BlincButtonTheme {
   final Color focusedFontColor;
   final Color disabledFontColor;
   final Color focusedBorderColor;
+  final Color loadingSpinnerColor;
 
   BlincButtonTheme({
     required this.backgroundColor,
@@ -367,6 +383,7 @@ abstract class BlincButtonTheme {
     required this.focusedFontColor,
     required this.disabledFontColor,
     required this.focusedBorderColor,
+    required this.loadingSpinnerColor,
   });
 }
 
@@ -403,6 +420,8 @@ class PrimaryTheme implements BlincButtonTheme {
   final disabledFontColor = const Color.fromARGB(255, 255, 255, 255);
   @override
   final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
+  @override
+  final loadingSpinnerColor = const Color.fromRGBO(243, 244, 249, 1);
 }
 
 class SecondaryTheme implements BlincButtonTheme {
@@ -428,6 +447,8 @@ class SecondaryTheme implements BlincButtonTheme {
   final disabledFontColor = const Color.fromRGBO(67, 67, 66, 1);
   @override
   final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
+  @override
+  final loadingSpinnerColor = const Color.fromRGBO(67, 67, 66, 1);
 }
 
 class TertiaryTheme implements BlincButtonTheme {
@@ -453,6 +474,8 @@ class TertiaryTheme implements BlincButtonTheme {
   final disabledFontColor = const Color.fromRGBO(67, 67, 66, 1);
   @override
   final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
+  @override
+  final loadingSpinnerColor = const Color.fromRGBO(67, 67, 66, 1);
 }
 
 abstract class SizePresets {
@@ -462,15 +485,16 @@ abstract class SizePresets {
   final RoundedRectangleBorder shape;
   final double fontSize;
   final double iconSize;
+  final double loadingSpinnerSize;
 
-  SizePresets({
-    required this.minimumWidth,
-    required this.minimumHeight,
-    required this.padding,
-    required this.shape,
-    required this.fontSize,
-    required this.iconSize,
-  });
+  SizePresets(
+      {required this.minimumWidth,
+      required this.minimumHeight,
+      required this.padding,
+      required this.shape,
+      required this.fontSize,
+      required this.iconSize,
+      required this.loadingSpinnerSize});
 }
 
 class SmallPresets implements SizePresets {
@@ -488,6 +512,8 @@ class SmallPresets implements SizePresets {
   final fontSize = 14;
   @override
   final iconSize = 16;
+  @override
+  final loadingSpinnerSize = 14;
 }
 
 class LargePresets implements SizePresets {
@@ -505,4 +531,6 @@ class LargePresets implements SizePresets {
   final fontSize = 20;
   @override
   final iconSize = 19.5;
+  @override
+  final loadingSpinnerSize = 19;
 }
