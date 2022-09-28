@@ -157,133 +157,157 @@ class _BlincButtonState extends State<BlincButton> {
   late final pressedFontColor =
       widget.buttonTheme?.pressedFontColor ?? DefaultTheme.pressedFontColor;
 
+  late final focusedBorderColor =
+      widget.buttonTheme?.focusedBorderColor ?? DefaultTheme.focusedBorderColor;
+
+  bool isFocused = false;
+
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        minWidth:
-            widget.sizePresets?.minimumWidth ?? DefaultPresets.minimumWidth,
-        minHeight:
-            widget.sizePresets?.minimumHeight ?? DefaultPresets.minimumHeight,
+    return Container(
+      decoration: BoxDecoration(
+        border: isFocused == true
+            ? Border.all(color: focusedBorderColor, width: 2)
+            : null,
+        borderRadius: BorderRadius.circular(10),
       ),
-      child: ElevatedButton(
-        onPressed: () {
-          if (widget.onPressed != null) {
-            widget.onPressed!();
-          }
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll<Color>(defaultColor),
-          overlayColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.focused) &&
-                  widget.textStyle != null) {
-                return focusedColor;
+      // Padding is used here to compensate the dislocation from the focused border
+      // Prevents dislocating the widget when the container border is added
+      padding:
+          isFocused == true ? const EdgeInsets.all(0) : const EdgeInsets.all(2),
+      child: Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minWidth:
+                widget.sizePresets?.minimumWidth ?? DefaultPresets.minimumWidth,
+            minHeight: widget.sizePresets?.minimumHeight ??
+                DefaultPresets.minimumHeight,
+          ),
+          child: ElevatedButton(
+            onFocusChange: (value) {
+              setState(() {
+                isFocused = value;
+              });
+            },
+            onPressed: () {
+              if (widget.onPressed != null) {
+                widget.onPressed!();
               }
-              if (states.contains(MaterialState.pressed)) {
-                return pressedColor;
-              }
-              if (states.contains(MaterialState.hovered)) {
-                return hoverColor;
-              }
-              if (states.contains(MaterialState.disabled)) {
-                return disabledColor;
-              }
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll<Color>(defaultColor),
+              overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return pressedColor;
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return widget.buttonTheme?.focusColor;
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return hoverColor;
+                  }
+                  if (states.contains(MaterialState.disabled)) {
+                    return disabledColor;
+                  }
 
-              return defaultColor;
-            },
-          ),
-          textStyle: MaterialStateProperty.resolveWith<TextStyle?>(
-            (Set<MaterialState> states) {
-              if (widget.isUnderlined == true) {
-                if (states.contains(MaterialState.hovered)) {
-                  return UnderlineDecoration.textStyle(hoverFontColor);
-                }
-                if (states.contains(MaterialState.focused) &&
-                    widget.textStyle != null) {
-                  return UnderlineDecoration.textStyle(focusedFontColor);
-                }
-                if (states.contains(MaterialState.disabled)) {
-                  return UnderlineDecoration.textStyle(disabledFontColor);
-                }
-                if (states.contains(MaterialState.pressed)) {
-                  return UnderlineDecoration.textStyle(pressedFontColor);
-                }
-                return UnderlineDecoration.textStyle(defaultFontColor);
-              }
-              return null;
-            },
-          ),
-          foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.hovered)) {
-                return hoverFontColor;
-              }
-              if (states.contains(MaterialState.focused)) {
-                return focusedFontColor;
-              }
-              if (states.contains(MaterialState.disabled)) {
-                return disabledFontColor;
-              }
-              if (states.contains(MaterialState.pressed)) {
-                return pressedFontColor;
-              }
-              return defaultFontColor;
-            },
-          ),
-          shape: MaterialStatePropertyAll<OutlinedBorder?>(
-            widget.sizePresets?.shape ?? DefaultPresets.shape,
-          ),
-        ),
-        child: Padding(
-          padding: widget.padding ??
-              widget.sizePresets?.padding ??
-              DefaultPresets.padding,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ...[
-                if (widget.icon != null && widget.isIconInverted != true)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5),
-                    child: Icon(
-                      widget.icon,
-                      size: widget.sizePresets?.iconSize ??
-                          DefaultPresets.iconSize,
-                    ),
-                  )
-              ],
-              ...[
-                if (widget.isUnderlined == true)
-                  Text(
-                    widget.text!,
-                    style: const TextStyle(
-                      height: 1.4,
-                      decorationThickness: 1.2,
-                      color: Colors.transparent,
-                    ),
-                  ),
-              ],
-              ...[
-                if (widget.isUnderlined != true)
-                  Text(
-                    widget.text!,
-                  ),
-              ],
-              ...[
-                if (widget.icon != null && widget.isIconInverted == true)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5),
-                    child: Icon(
-                      widget.icon,
-                      size: widget.sizePresets?.iconSize ??
-                          DefaultPresets.iconSize,
-                    ),
-                  )
-              ],
-            ],
+                  return defaultColor;
+                },
+              ),
+              textStyle: MaterialStateProperty.resolveWith<TextStyle?>(
+                (Set<MaterialState> states) {
+                  if (widget.isUnderlined == true) {
+                    if (states.contains(MaterialState.hovered)) {
+                      return UnderlineDecoration.textStyle(hoverFontColor);
+                    }
+                    if (states.contains(MaterialState.focused) &&
+                        widget.textStyle != null) {
+                      return UnderlineDecoration.textStyle(focusedFontColor);
+                    }
+                    if (states.contains(MaterialState.disabled)) {
+                      return UnderlineDecoration.textStyle(disabledFontColor);
+                    }
+                    if (states.contains(MaterialState.pressed)) {
+                      return UnderlineDecoration.textStyle(pressedFontColor);
+                    }
+                    return UnderlineDecoration.textStyle(defaultFontColor);
+                  }
+                  return null;
+                },
+              ),
+              foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.focused)) {
+                    return focusedFontColor;
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return hoverFontColor;
+                  }
+                  if (states.contains(MaterialState.disabled)) {
+                    return disabledFontColor;
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return pressedFontColor;
+                  }
+                  return defaultFontColor;
+                },
+              ),
+              shape: MaterialStatePropertyAll<OutlinedBorder?>(
+                widget.sizePresets?.shape ?? DefaultPresets.shape,
+              ),
+            ),
+            child: Padding(
+              padding: widget.padding ??
+                  widget.sizePresets?.padding ??
+                  DefaultPresets.padding,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ...[
+                    if (widget.icon != null && widget.isIconInverted != true)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: Icon(
+                          widget.icon,
+                          size: widget.sizePresets?.iconSize ??
+                              DefaultPresets.iconSize,
+                        ),
+                      )
+                  ],
+                  ...[
+                    if (widget.isUnderlined == true)
+                      Text(
+                        widget.text!,
+                        style: const TextStyle(
+                          height: 1.4,
+                          decorationThickness: 1.2,
+                          color: Colors.transparent,
+                        ),
+                      ),
+                  ],
+                  ...[
+                    if (widget.isUnderlined != true)
+                      Text(
+                        widget.text!,
+                      ),
+                  ],
+                  ...[
+                    if (widget.icon != null && widget.isIconInverted == true)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: Icon(
+                          widget.icon,
+                          size: widget.sizePresets?.iconSize ??
+                              DefaultPresets.iconSize,
+                        ),
+                      )
+                  ],
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -302,6 +326,7 @@ class DefaultTheme {
   static const pressedFontColor = Color.fromARGB(255, 255, 255, 255);
   static const focusedFontColor = Color.fromARGB(255, 255, 255, 255);
   static const disabledFontColor = Color.fromARGB(255, 255, 255, 255);
+  static const focusedBorderColor = Color.fromRGBO(133, 133, 131, 1);
 }
 
 class DefaultPresets {
@@ -328,6 +353,7 @@ abstract class BlincButtonTheme {
   final Color pressedFontColor;
   final Color focusedFontColor;
   final Color disabledFontColor;
+  final Color focusedBorderColor;
 
   BlincButtonTheme({
     required this.backgroundColor,
@@ -340,6 +366,7 @@ abstract class BlincButtonTheme {
     required this.pressedFontColor,
     required this.focusedFontColor,
     required this.disabledFontColor,
+    required this.focusedBorderColor,
   });
 }
 
@@ -374,6 +401,8 @@ class PrimaryTheme implements BlincButtonTheme {
   final focusedFontColor = const Color.fromARGB(255, 255, 255, 255);
   @override
   final disabledFontColor = const Color.fromARGB(255, 255, 255, 255);
+  @override
+  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
 }
 
 class SecondaryTheme implements BlincButtonTheme {
@@ -397,6 +426,8 @@ class SecondaryTheme implements BlincButtonTheme {
   final focusedFontColor = const Color.fromRGBO(26, 26, 25, 1);
   @override
   final disabledFontColor = const Color.fromRGBO(67, 67, 66, 1);
+  @override
+  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
 }
 
 class TertiaryTheme implements BlincButtonTheme {
@@ -420,6 +451,8 @@ class TertiaryTheme implements BlincButtonTheme {
   final focusedFontColor = const Color.fromRGBO(26, 26, 25, 1);
   @override
   final disabledFontColor = const Color.fromRGBO(67, 67, 66, 1);
+  @override
+  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
 }
 
 abstract class SizePresets {

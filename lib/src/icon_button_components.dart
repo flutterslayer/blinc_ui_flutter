@@ -77,7 +77,7 @@ class BlincIconButton extends StatefulWidget {
           onPressed!();
         }
       },
-      buttonTheme: PrimaryTheme(),
+      buttonTheme: SecondaryTheme(),
       iconPresets: LargeIconPresets(),
       icon: icon,
     );
@@ -90,7 +90,7 @@ class BlincIconButton extends StatefulWidget {
           onPressed!();
         }
       },
-      buttonTheme: PrimaryTheme(),
+      buttonTheme: TertiaryTheme(),
       iconPresets: LargeIconPresets(),
       icon: icon,
     );
@@ -101,74 +101,120 @@ class BlincIconButton extends StatefulWidget {
 }
 
 class _BlincIconButtonState extends State<BlincIconButton> {
+  late final defaultColor =
+      widget.buttonTheme?.backgroundColor ?? DefaultTheme.backgroundColor;
+
+  late final hoverColor =
+      widget.buttonTheme?.hoverColor ?? DefaultTheme.hoverColor;
+
+  late final disabledColor =
+      widget.buttonTheme?.disabledColor ?? DefaultTheme.disabledColor;
+
+  late final focusedColor =
+      widget.buttonTheme?.focusColor ?? DefaultTheme.focusColor;
+
+  late final pressedColor =
+      widget.buttonTheme?.pressedColor ?? DefaultTheme.pressedColor;
+
+  late final defaultFontColor = widget.buttonTheme?.backgroundFontColor ??
+      DefaultTheme.backgroundFontColor;
+
+  late final hoverFontColor =
+      widget.buttonTheme?.hoverFontColor ?? DefaultTheme.hoverFontColor;
+
+  late final disabledFontColor =
+      widget.buttonTheme?.disabledFontColor ?? DefaultTheme.disabledFontColor;
+
+  late final focusedFontColor =
+      widget.buttonTheme?.focusedFontColor ?? DefaultTheme.focusedFontColor;
+
+  late final pressedFontColor =
+      widget.buttonTheme?.pressedFontColor ?? DefaultTheme.pressedFontColor;
+
+  late final focusedBorderColor =
+      widget.buttonTheme?.focusedBorderColor ?? DefaultTheme.focusedBorderColor;
+
+  bool isFocused = false;
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: widget.iconPresets?.buttonSize ?? DefaultIconPresets.buttonSize,
-      height: widget.iconPresets?.buttonSize ?? DefaultIconPresets.buttonSize,
-      child: ElevatedButton(
-        clipBehavior: Clip.none,
-        onPressed: () {
-          if (widget.onPressed != null) {
-            widget.onPressed!();
-          }
-        },
-        style: ButtonStyle(
-          padding: const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.zero),
-          backgroundColor: MaterialStatePropertyAll<Color>(
-              widget.buttonTheme?.backgroundColor ??
-                  DefaultTheme.backgroundColor),
-          foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.focused)) {
-                return widget.buttonTheme?.focusedFontColor ??
-                    DefaultTheme.focusedFontColor;
+    return Container(
+      decoration: BoxDecoration(
+        border: isFocused == true
+            ? Border.all(color: focusedBorderColor, width: 2)
+            : null,
+        borderRadius: BorderRadius.circular(60),
+      ),
+      // Padding is used here to compensate the dislocation from the focused border
+      // Prevents dislocating the widget when the container border is added
+      padding:
+          isFocused == true ? const EdgeInsets.all(0) : const EdgeInsets.all(2),
+      child: Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: SizedBox(
+          width:
+              widget.iconPresets?.buttonSize ?? DefaultIconPresets.buttonSize,
+          height:
+              widget.iconPresets?.buttonSize ?? DefaultIconPresets.buttonSize,
+          child: ElevatedButton(
+            clipBehavior: Clip.none,
+            onPressed: () {
+              if (widget.onPressed != null) {
+                widget.onPressed!();
               }
-              if (states.contains(MaterialState.hovered)) {
-                return widget.buttonTheme?.hoverFontColor ??
-                    DefaultTheme.hoverFontColor;
-              }
-              if (states.contains(MaterialState.pressed)) {
-                return widget.buttonTheme?.pressedFontColor ??
-                    DefaultTheme.pressedFontColor;
-              }
-
-              if (states.contains(MaterialState.disabled)) {
-                return widget.buttonTheme?.disabledColor ??
-                    DefaultTheme.disabledFontColor;
-              }
-
-              return widget.buttonTheme?.backgroundFontColor ??
-                  DefaultTheme.backgroundFontColor;
             },
-          ),
-          overlayColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
-                return widget.buttonTheme?.pressedColor ??
-                    DefaultTheme.pressedColor;
-              } else if (states.contains(MaterialState.focused)) {
-                return widget.buttonTheme?.focusColor ??
-                    DefaultTheme.focusColor;
-              } else if (states.contains(MaterialState.hovered)) {
-                return widget.buttonTheme?.hoverColor ??
-                    DefaultTheme.hoverColor;
-              } else if (states.contains(MaterialState.disabled)) {
-                return widget.buttonTheme?.disabledColor ??
-                    DefaultTheme.disabledColor;
-              }
-
-              return widget.buttonTheme?.backgroundColor ??
-                  DefaultTheme.backgroundColor;
+            onFocusChange: (value) {
+              setState(() {
+                isFocused = value;
+              });
             },
+            style: ButtonStyle(
+              padding:
+                  const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.zero),
+              backgroundColor: MaterialStatePropertyAll<Color>(defaultColor),
+              foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.focused)) {
+                    return focusedFontColor;
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return hoverFontColor;
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return pressedFontColor;
+                  }
+
+                  if (states.contains(MaterialState.disabled)) {
+                    return disabledFontColor;
+                  }
+
+                  return defaultFontColor;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return pressedColor;
+                  } else if (states.contains(MaterialState.focused)) {
+                    return focusedColor;
+                  } else if (states.contains(MaterialState.hovered)) {
+                    return hoverColor;
+                  } else if (states.contains(MaterialState.disabled)) {
+                    return disabledColor;
+                  }
+
+                  return defaultColor;
+                },
+              ),
+              shape: MaterialStatePropertyAll<OutlinedBorder?>(
+                widget.iconPresets?.shape ?? DefaultIconPresets.shape,
+              ),
+            ),
+            child: Icon(
+              widget.icon,
+              size: widget.iconPresets?.iconSize ?? DefaultIconPresets.iconSize,
+            ),
           ),
-          shape: MaterialStatePropertyAll<OutlinedBorder?>(
-            widget.iconPresets?.shape ?? DefaultIconPresets.shape,
-          ),
-        ),
-        child: Icon(
-          widget.icon,
-          size: widget.iconPresets?.iconSize ?? DefaultIconPresets.iconSize,
         ),
       ),
     );
@@ -186,6 +232,7 @@ class DefaultTheme {
   static const pressedFontColor = Color.fromARGB(255, 255, 255, 255);
   static const focusedFontColor = Color.fromARGB(255, 255, 255, 255);
   static const disabledFontColor = Color.fromARGB(255, 255, 255, 255);
+  static const focusedBorderColor = Color.fromRGBO(133, 133, 131, 1);
 }
 
 class DefaultIconPresets {
@@ -208,6 +255,7 @@ abstract class BlincIconButtonTheme {
   final Color pressedFontColor;
   final Color focusedFontColor;
   final Color disabledFontColor;
+  final Color focusedBorderColor;
 
   BlincIconButtonTheme({
     required this.backgroundColor,
@@ -220,6 +268,7 @@ abstract class BlincIconButtonTheme {
     required this.pressedFontColor,
     required this.focusedFontColor,
     required this.disabledFontColor,
+    required this.focusedBorderColor,
   });
 }
 
@@ -244,6 +293,8 @@ class PrimaryTheme implements BlincIconButtonTheme {
   final focusedFontColor = const Color.fromARGB(255, 255, 255, 255);
   @override
   final disabledFontColor = const Color.fromARGB(255, 255, 255, 255);
+  @override
+  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
 }
 
 class SecondaryTheme implements BlincIconButtonTheme {
@@ -267,6 +318,8 @@ class SecondaryTheme implements BlincIconButtonTheme {
   final focusedFontColor = const Color.fromRGBO(26, 26, 25, 1);
   @override
   final disabledFontColor = const Color.fromRGBO(67, 67, 66, 1);
+  @override
+  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
 }
 
 class TertiaryTheme implements BlincIconButtonTheme {
@@ -290,6 +343,8 @@ class TertiaryTheme implements BlincIconButtonTheme {
   final focusedFontColor = const Color.fromRGBO(26, 26, 25, 1);
   @override
   final disabledFontColor = const Color.fromRGBO(67, 67, 66, 1);
+  @override
+  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
 }
 
 abstract class IconPresets {
