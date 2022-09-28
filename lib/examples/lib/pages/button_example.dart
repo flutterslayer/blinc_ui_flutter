@@ -15,32 +15,65 @@ class ButtonExample extends StatelessWidget {
       body: SafeArea(
         child: SizedBox(
             child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const BlincButton(
-              text: 'Label',
-            ).smallPrimary(),
-            const BlincButton(
-              text: 'SMALL SECONDARY',
-            ).smallSecondary(),
-            const BlincButton(
-              text: 'SMALL TERTIARY',
-            ).smallTertiary(),
-            const BlincButton(
-              text: 'LARGE PRIMARY',
+              text: 'Large Primary',
+              icon: Icons.add_a_photo,
             ).largePrimary(),
             const BlincButton(
-              text: 'LARGE SECONDARY',
-              icon: Icons.person_pin_circle_outlined,
+              text: 'Large Secondary',
             ).largeSecondary(),
-            const BlincIconButton(
-              icon: Icons.person_pin_circle_outlined,
-            ).iconSmallPrimary(),
-            const BlincIconButton(
-              icon: Icons.person_pin_circle_outlined,
-            ).iconSmallSecondary(),
-            const BlincIconButton(
-              icon: Icons.person_pin_circle_outlined,
-            ).iconLargePrimary(),
+            const BlincButton(
+              text: 'Large Tertiary',
+              icon: Icons.location_on_outlined,
+              isIconInverted: true,
+            ).largeTertiary(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const BlincButton(
+                    text: 'Small Primary',
+                    icon: Icons.person_pin_circle_outlined,
+                  ).smallPrimary(),
+                  const BlincButton(
+                    text: 'Small Tertiary',
+                    icon: Icons.person_pin_circle_outlined,
+                    isIconInverted: true,
+                  ).smallSecondary(),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const BlincIconButton(
+                  icon: Icons.facebook,
+                ).iconLargePrimary(),
+                const BlincIconButton(
+                  icon: Icons.whatsapp,
+                ).iconLargeSecondary(),
+                const BlincIconButton(
+                  icon: Icons.accessibility_new_sharp,
+                ).iconLargeTertiary(),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const BlincIconButton(
+                  icon: Icons.arrow_back_ios_new,
+                ).iconSmallPrimary(),
+                const BlincIconButton(
+                  icon: Icons.subdirectory_arrow_left_sharp,
+                ).iconSmallSecondary(),
+                const BlincIconButton(
+                  icon: Icons.arrow_forward_ios,
+                ).iconSmallTertiary(),
+              ],
+            ),
           ],
         )),
       ),
