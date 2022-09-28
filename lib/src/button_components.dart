@@ -295,7 +295,7 @@ class _BlincButtonState extends State<BlincButton> {
                               DefaultPresets.iconSize,
                         ),
                       ),
-                    if (widget.isUnderlined == true)
+                    if (widget.isUnderlined == true && widget.text != null)
                       Text(
                         widget.text!,
                         style: const TextStyle(
@@ -304,7 +304,7 @@ class _BlincButtonState extends State<BlincButton> {
                           color: Colors.transparent,
                         ),
                       ),
-                    if (widget.isUnderlined != true)
+                    if (widget.isUnderlined != true && widget.text != null)
                       Text(
                         widget.text!,
                       ),
