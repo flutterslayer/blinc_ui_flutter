@@ -66,10 +66,10 @@ class LoadingSpinner extends StatefulWidget {
   final Color color;
   final double size;
   @override
-  _LoadingSpinnerState createState() => _LoadingSpinnerState();
+  LoadingSpinnerState createState() => LoadingSpinnerState();
 }
 
-class _LoadingSpinnerState extends State<LoadingSpinner>
+class LoadingSpinnerState extends State<LoadingSpinner>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
