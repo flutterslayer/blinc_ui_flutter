@@ -25,7 +25,16 @@ class SelectScreen extends StatelessWidget {
               },
               child: const Text(
                 'Spacing',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/shadows');
+              },
+              child: const Text(
+                'Shadows',
+                style: TextStyle(fontSize: 20),
               ),
             ),
           ],
