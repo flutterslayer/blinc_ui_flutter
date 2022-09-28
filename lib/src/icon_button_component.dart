@@ -20,12 +20,8 @@ class BlincIconButton extends StatefulWidget {
 
   BlincIconButton iconSmallPrimary() {
     return BlincIconButton(
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: PrimaryTheme(),
+      onPressed: onPressed,
+      buttonTheme: PrimaryIconButtonTheme(),
       iconPresets: SmallIconPresets(),
       icon: icon,
     );
@@ -33,12 +29,8 @@ class BlincIconButton extends StatefulWidget {
 
   BlincIconButton iconSmallSecondary() {
     return BlincIconButton(
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: SecondaryTheme(),
+      onPressed: onPressed,
+      buttonTheme: SecondaryIconButtonTheme(),
       iconPresets: SmallIconPresets(),
       icon: icon,
     );
@@ -46,12 +38,8 @@ class BlincIconButton extends StatefulWidget {
 
   BlincIconButton iconSmallTertiary() {
     return BlincIconButton(
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: TertiaryTheme(),
+      onPressed: onPressed,
+      buttonTheme: TertiaryIconButtonTheme(),
       iconPresets: SmallIconPresets(),
       icon: icon,
     );
@@ -59,12 +47,8 @@ class BlincIconButton extends StatefulWidget {
 
   BlincIconButton iconLargePrimary() {
     return BlincIconButton(
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: PrimaryTheme(),
+      onPressed: onPressed,
+      buttonTheme: PrimaryIconButtonTheme(),
       iconPresets: LargeIconPresets(),
       icon: icon,
     );
@@ -72,12 +56,8 @@ class BlincIconButton extends StatefulWidget {
 
   BlincIconButton iconLargeSecondary() {
     return BlincIconButton(
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: SecondaryTheme(),
+      onPressed: onPressed,
+      buttonTheme: SecondaryIconButtonTheme(),
       iconPresets: LargeIconPresets(),
       icon: icon,
     );
@@ -85,12 +65,8 @@ class BlincIconButton extends StatefulWidget {
 
   BlincIconButton iconLargeTertiary() {
     return BlincIconButton(
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: TertiaryTheme(),
+      onPressed: onPressed,
+      buttonTheme: TertiaryIconButtonTheme(),
       iconPresets: LargeIconPresets(),
       icon: icon,
     );
@@ -101,38 +77,38 @@ class BlincIconButton extends StatefulWidget {
 }
 
 class _BlincIconButtonState extends State<BlincIconButton> {
-  late final defaultColor =
-      widget.buttonTheme?.backgroundColor ?? DefaultTheme.backgroundColor;
+  late final defaultColor = widget.buttonTheme?.backgroundColor ??
+      DefaultIconButtonTheme.backgroundColor;
 
   late final hoverColor =
-      widget.buttonTheme?.hoverColor ?? DefaultTheme.hoverColor;
+      widget.buttonTheme?.hoverColor ?? DefaultIconButtonTheme.hoverColor;
 
   late final disabledColor =
-      widget.buttonTheme?.disabledColor ?? DefaultTheme.disabledColor;
+      widget.buttonTheme?.disabledColor ?? DefaultIconButtonTheme.disabledColor;
 
   late final focusedColor =
-      widget.buttonTheme?.focusColor ?? DefaultTheme.focusColor;
+      widget.buttonTheme?.focusColor ?? DefaultIconButtonTheme.focusColor;
 
   late final pressedColor =
-      widget.buttonTheme?.pressedColor ?? DefaultTheme.pressedColor;
+      widget.buttonTheme?.pressedColor ?? DefaultIconButtonTheme.pressedColor;
 
   late final defaultFontColor = widget.buttonTheme?.backgroundFontColor ??
-      DefaultTheme.backgroundFontColor;
+      DefaultIconButtonTheme.backgroundFontColor;
 
-  late final hoverFontColor =
-      widget.buttonTheme?.hoverFontColor ?? DefaultTheme.hoverFontColor;
+  late final hoverFontColor = widget.buttonTheme?.hoverFontColor ??
+      DefaultIconButtonTheme.hoverFontColor;
 
-  late final disabledFontColor =
-      widget.buttonTheme?.disabledFontColor ?? DefaultTheme.disabledFontColor;
+  late final disabledFontColor = widget.buttonTheme?.disabledFontColor ??
+      DefaultIconButtonTheme.disabledFontColor;
 
-  late final focusedFontColor =
-      widget.buttonTheme?.focusedFontColor ?? DefaultTheme.focusedFontColor;
+  late final focusedFontColor = widget.buttonTheme?.focusedFontColor ??
+      DefaultIconButtonTheme.focusedFontColor;
 
-  late final pressedFontColor =
-      widget.buttonTheme?.pressedFontColor ?? DefaultTheme.pressedFontColor;
+  late final pressedFontColor = widget.buttonTheme?.pressedFontColor ??
+      DefaultIconButtonTheme.pressedFontColor;
 
-  late final focusedBorderColor =
-      widget.buttonTheme?.focusedBorderColor ?? DefaultTheme.focusedBorderColor;
+  late final focusedBorderColor = widget.buttonTheme?.focusedBorderColor ??
+      DefaultIconButtonTheme.focusedBorderColor;
 
   bool isFocused = false;
 
@@ -158,11 +134,11 @@ class _BlincIconButtonState extends State<BlincIconButton> {
               widget.iconPresets?.buttonSize ?? DefaultIconPresets.buttonSize,
           child: ElevatedButton(
             clipBehavior: Clip.none,
-            onPressed: () {
-              if (widget.onPressed != null) {
-                widget.onPressed!();
-              }
-            },
+            onPressed: widget.onPressed != null
+                ? () {
+                    widget.onPressed!();
+                  }
+                : null,
             onFocusChange: (value) {
               setState(() {
                 isFocused = value;
@@ -171,7 +147,15 @@ class _BlincIconButtonState extends State<BlincIconButton> {
             style: ButtonStyle(
               padding:
                   const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.zero),
-              backgroundColor: MaterialStatePropertyAll<Color>(defaultColor),
+              backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return disabledColor;
+                  }
+
+                  return defaultColor;
+                },
+              ),
               foregroundColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.focused)) {
@@ -221,7 +205,7 @@ class _BlincIconButtonState extends State<BlincIconButton> {
   }
 }
 
-class DefaultTheme {
+class DefaultIconButtonTheme {
   static const backgroundColor = Color.fromRGBO(67, 67, 66, 1);
   static const hoverColor = Color.fromRGBO(26, 26, 25, 1);
   static const pressedColor = Color.fromRGBO(133, 133, 131, 1);
@@ -272,7 +256,7 @@ abstract class BlincIconButtonTheme {
   });
 }
 
-class PrimaryTheme implements BlincIconButtonTheme {
+class PrimaryIconButtonTheme implements BlincIconButtonTheme {
   @override
   final backgroundColor = const Color.fromRGBO(67, 67, 66, 1);
   @override
@@ -297,7 +281,7 @@ class PrimaryTheme implements BlincIconButtonTheme {
   final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
 }
 
-class SecondaryTheme implements BlincIconButtonTheme {
+class SecondaryIconButtonTheme implements BlincIconButtonTheme {
   @override
   final backgroundColor = const Color.fromRGBO(220, 220, 218, 1);
   @override
@@ -307,7 +291,7 @@ class SecondaryTheme implements BlincIconButtonTheme {
   @override
   final focusColor = const Color.fromRGBO(178, 178, 177, 1);
   @override
-  final disabledColor = const Color.fromRGBO(220, 220, 218, 1);
+  final disabledColor = const Color.fromRGBO(220, 220, 218, 0.4);
   @override
   final backgroundFontColor = const Color.fromRGBO(67, 67, 66, 1);
   @override
@@ -317,12 +301,12 @@ class SecondaryTheme implements BlincIconButtonTheme {
   @override
   final focusedFontColor = const Color.fromRGBO(26, 26, 25, 1);
   @override
-  final disabledFontColor = const Color.fromRGBO(67, 67, 66, 1);
+  final disabledFontColor = const Color.fromRGBO(67, 67, 66, 0.4);
   @override
   final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
 }
 
-class TertiaryTheme implements BlincIconButtonTheme {
+class TertiaryIconButtonTheme implements BlincIconButtonTheme {
   @override
   final backgroundColor = const Color.fromRGBO(255, 255, 255, 1);
   @override
@@ -342,7 +326,7 @@ class TertiaryTheme implements BlincIconButtonTheme {
   @override
   final focusedFontColor = const Color.fromRGBO(26, 26, 25, 1);
   @override
-  final disabledFontColor = const Color.fromRGBO(67, 67, 66, 1);
+  final disabledFontColor = const Color.fromRGBO(67, 67, 66, 0.4);
   @override
   final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
 }

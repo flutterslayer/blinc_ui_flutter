@@ -7,7 +7,7 @@ class BlincButton extends StatefulWidget {
     this.onPressed,
     this.text,
     this.buttonTheme,
-    this.sizePresets,
+    this.blincButtonPresets,
     this.textStyle,
     this.isUnderlined,
     this.padding,
@@ -19,7 +19,7 @@ class BlincButton extends StatefulWidget {
   final String? text;
   final Function? onPressed;
   final BlincButtonTheme? buttonTheme;
-  final SizePresets? sizePresets;
+  final BlincButtonPresets? blincButtonPresets;
   final TextStyle? textStyle;
   final bool? isUnderlined;
   final EdgeInsets? padding;
@@ -30,13 +30,9 @@ class BlincButton extends StatefulWidget {
   BlincButton smallPrimary() {
     return BlincButton(
       text: text,
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: PrimaryTheme(),
-      sizePresets: SmallPresets(),
+      onPressed: onPressed,
+      buttonTheme: PrimaryButtonTheme(),
+      blincButtonPresets: SmallPresets(),
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
@@ -47,13 +43,9 @@ class BlincButton extends StatefulWidget {
   BlincButton smallSecondary() {
     return BlincButton(
       text: text,
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: SecondaryTheme(),
-      sizePresets: SmallPresets(),
+      onPressed: onPressed,
+      buttonTheme: SecondaryButtonTheme(),
+      blincButtonPresets: SmallPresets(),
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
@@ -64,13 +56,9 @@ class BlincButton extends StatefulWidget {
   BlincButton smallTertiary() {
     return BlincButton(
       text: text,
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: TertiaryTheme(),
-      sizePresets: SmallPresets(),
+      onPressed: onPressed,
+      buttonTheme: TertiaryButtonTheme(),
+      blincButtonPresets: SmallPresets(),
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
@@ -82,13 +70,9 @@ class BlincButton extends StatefulWidget {
   BlincButton largePrimary() {
     return BlincButton(
       text: text,
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: PrimaryTheme(),
-      sizePresets: LargePresets(),
+      onPressed: onPressed,
+      buttonTheme: PrimaryButtonTheme(),
+      blincButtonPresets: LargePresets(),
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
@@ -99,13 +83,9 @@ class BlincButton extends StatefulWidget {
   BlincButton largeSecondary() {
     return BlincButton(
       text: text,
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: SecondaryTheme(),
-      sizePresets: LargePresets(),
+      onPressed: onPressed,
+      buttonTheme: SecondaryButtonTheme(),
+      blincButtonPresets: LargePresets(),
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
@@ -116,13 +96,9 @@ class BlincButton extends StatefulWidget {
   BlincButton largeTertiary() {
     return BlincButton(
       text: text,
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed!();
-        }
-      },
-      buttonTheme: TertiaryTheme(),
-      sizePresets: LargePresets(),
+      onPressed: onPressed,
+      buttonTheme: TertiaryButtonTheme(),
+      blincButtonPresets: LargePresets(),
       padding: padding,
       icon: icon,
       isIconInverted: isIconInverted,
@@ -188,9 +164,9 @@ class _BlincButtonState extends State<BlincButton> {
         padding: const EdgeInsets.all(3.0),
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            minWidth:
-                widget.sizePresets?.minimumWidth ?? DefaultPresets.minimumWidth,
-            minHeight: widget.sizePresets?.minimumHeight ??
+            minWidth: widget.blincButtonPresets?.minimumWidth ??
+                DefaultPresets.minimumWidth,
+            minHeight: widget.blincButtonPresets?.minimumHeight ??
                 DefaultPresets.minimumHeight,
           ),
           child: ElevatedButton(
@@ -199,13 +175,21 @@ class _BlincButtonState extends State<BlincButton> {
                 isFocused = value;
               });
             },
-            onPressed: () {
-              if (widget.onPressed != null) {
-                widget.onPressed!();
-              }
-            },
+            onPressed: widget.onPressed != null
+                ? () {
+                    widget.onPressed!();
+                  }
+                : null,
             style: ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll<Color>(defaultColor),
+              backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return disabledColor;
+                  }
+
+                  return defaultColor;
+                },
+              ),
               overlayColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.pressed)) {
@@ -247,15 +231,16 @@ class _BlincButtonState extends State<BlincButton> {
               ),
               foregroundColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return disabledFontColor;
+                  }
                   if (states.contains(MaterialState.focused)) {
                     return focusedFontColor;
                   }
                   if (states.contains(MaterialState.hovered)) {
                     return hoverFontColor;
                   }
-                  if (states.contains(MaterialState.disabled)) {
-                    return disabledFontColor;
-                  }
+
                   if (states.contains(MaterialState.pressed)) {
                     return pressedFontColor;
                   }
@@ -263,12 +248,12 @@ class _BlincButtonState extends State<BlincButton> {
                 },
               ),
               shape: MaterialStatePropertyAll<OutlinedBorder?>(
-                widget.sizePresets?.shape ?? DefaultPresets.shape,
+                widget.blincButtonPresets?.shape ?? DefaultPresets.shape,
               ),
             ),
             child: Padding(
               padding: widget.padding ??
-                  widget.sizePresets?.padding ??
+                  widget.blincButtonPresets?.padding ??
                   DefaultPresets.padding,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -282,8 +267,9 @@ class _BlincButtonState extends State<BlincButton> {
                         child: LoadingSpinner(
                           color: widget.buttonTheme?.loadingSpinnerColor ??
                               DefaultTheme.loadingSpinnerColor,
-                          size: widget.sizePresets?.loadingSpinnerSize ??
-                              DefaultPresets.loadingSpinnerSize,
+                          diameter:
+                              widget.blincButtonPresets?.loadingSpinnerSize ??
+                                  DefaultPresets.loadingSpinnerSize,
                         ))
                   else ...[
                     if (widget.icon != null && widget.isIconInverted != true)
@@ -291,7 +277,7 @@ class _BlincButtonState extends State<BlincButton> {
                         padding: const EdgeInsets.only(right: 5),
                         child: Icon(
                           widget.icon,
-                          size: widget.sizePresets?.iconSize ??
+                          size: widget.blincButtonPresets?.iconSize ??
                               DefaultPresets.iconSize,
                         ),
                       ),
@@ -314,7 +300,7 @@ class _BlincButtonState extends State<BlincButton> {
                         padding: const EdgeInsets.only(left: 1),
                         child: Icon(
                           widget.icon,
-                          size: widget.sizePresets?.iconSize ??
+                          size: widget.blincButtonPresets?.iconSize ??
                               DefaultPresets.iconSize,
                         ),
                       )
@@ -398,7 +384,7 @@ class UnderlineDecoration {
   }
 }
 
-class PrimaryTheme implements BlincButtonTheme {
+class PrimaryButtonTheme implements BlincButtonTheme {
   @override
   final backgroundColor = const Color.fromRGBO(67, 67, 66, 1);
   @override
@@ -425,7 +411,7 @@ class PrimaryTheme implements BlincButtonTheme {
   final loadingSpinnerColor = const Color.fromRGBO(243, 244, 249, 1);
 }
 
-class SecondaryTheme implements BlincButtonTheme {
+class SecondaryButtonTheme implements BlincButtonTheme {
   @override
   final backgroundColor = const Color.fromRGBO(220, 220, 218, 1);
   @override
@@ -435,7 +421,7 @@ class SecondaryTheme implements BlincButtonTheme {
   @override
   final focusColor = const Color.fromRGBO(178, 178, 177, 1);
   @override
-  final disabledColor = const Color.fromRGBO(220, 220, 218, 1);
+  final disabledColor = const Color.fromRGBO(220, 220, 218, 0.4);
   @override
   final backgroundFontColor = const Color.fromRGBO(67, 67, 66, 1);
   @override
@@ -445,14 +431,14 @@ class SecondaryTheme implements BlincButtonTheme {
   @override
   final focusedFontColor = const Color.fromRGBO(26, 26, 25, 1);
   @override
-  final disabledFontColor = const Color.fromRGBO(67, 67, 66, 1);
+  final disabledFontColor = const Color.fromRGBO(67, 67, 66, 0.4);
   @override
   final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
   @override
   final loadingSpinnerColor = const Color.fromRGBO(67, 67, 66, 1);
 }
 
-class TertiaryTheme implements BlincButtonTheme {
+class TertiaryButtonTheme implements BlincButtonTheme {
   @override
   final backgroundColor = const Color.fromRGBO(255, 255, 255, 1);
   @override
@@ -472,14 +458,14 @@ class TertiaryTheme implements BlincButtonTheme {
   @override
   final focusedFontColor = const Color.fromRGBO(26, 26, 25, 1);
   @override
-  final disabledFontColor = const Color.fromRGBO(67, 67, 66, 1);
+  final disabledFontColor = const Color.fromRGBO(67, 67, 66, 0.4);
   @override
   final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
   @override
   final loadingSpinnerColor = const Color.fromRGBO(67, 67, 66, 1);
 }
 
-abstract class SizePresets {
+abstract class BlincButtonPresets {
   final double minimumWidth;
   final double minimumHeight;
   final EdgeInsets padding;
@@ -488,7 +474,7 @@ abstract class SizePresets {
   final double iconSize;
   final double loadingSpinnerSize;
 
-  SizePresets(
+  BlincButtonPresets(
       {required this.minimumWidth,
       required this.minimumHeight,
       required this.padding,
@@ -498,7 +484,7 @@ abstract class SizePresets {
       required this.loadingSpinnerSize});
 }
 
-class SmallPresets implements SizePresets {
+class SmallPresets implements BlincButtonPresets {
   @override
   final minimumWidth = 137;
   @override
@@ -517,7 +503,7 @@ class SmallPresets implements SizePresets {
   final loadingSpinnerSize = 14;
 }
 
-class LargePresets implements SizePresets {
+class LargePresets implements BlincButtonPresets {
   @override
   final minimumWidth = 326;
   @override
