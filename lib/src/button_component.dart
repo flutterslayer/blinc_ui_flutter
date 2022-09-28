@@ -14,6 +14,7 @@ class BlincButton extends StatefulWidget {
     this.icon,
     this.isIconInverted,
     this.isLoading,
+    this.isFluid,
   }) : super(key: key);
 
   final String? text;
@@ -26,6 +27,7 @@ class BlincButton extends StatefulWidget {
   final IconData? icon;
   final bool? isIconInverted;
   final bool? isLoading;
+  final bool? isFluid;
 
   BlincButton smallPrimary() {
     return BlincButton(
@@ -37,6 +39,7 @@ class BlincButton extends StatefulWidget {
       icon: icon,
       isIconInverted: isIconInverted,
       isLoading: isLoading,
+      isFluid: isFluid,
     );
   }
 
@@ -50,6 +53,7 @@ class BlincButton extends StatefulWidget {
       icon: icon,
       isIconInverted: isIconInverted,
       isLoading: isLoading,
+      isFluid: isFluid,
     );
   }
 
@@ -63,6 +67,7 @@ class BlincButton extends StatefulWidget {
       icon: icon,
       isIconInverted: isIconInverted,
       isLoading: isLoading,
+      isFluid: isFluid,
       isUnderlined: true,
     );
   }
@@ -77,6 +82,7 @@ class BlincButton extends StatefulWidget {
       icon: icon,
       isIconInverted: isIconInverted,
       isLoading: isLoading,
+      isFluid: isFluid,
     );
   }
 
@@ -90,6 +96,7 @@ class BlincButton extends StatefulWidget {
       icon: icon,
       isIconInverted: isIconInverted,
       isLoading: isLoading,
+      isFluid: isFluid,
     );
   }
 
@@ -103,6 +110,7 @@ class BlincButton extends StatefulWidget {
       icon: icon,
       isIconInverted: isIconInverted,
       isLoading: isLoading,
+      isFluid: isFluid,
       isUnderlined: true,
     );
   }
@@ -164,10 +172,14 @@ class _BlincButtonState extends State<BlincButton> {
         padding: const EdgeInsets.all(3.0),
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            minWidth: widget.blincButtonPresets?.minimumWidth ??
-                DefaultPresets.minimumWidth,
-            minHeight: widget.blincButtonPresets?.minimumHeight ??
-                DefaultPresets.minimumHeight,
+            minWidth: widget.isFluid == true
+                ? MediaQuery.of(context).size.width
+                : widget.blincButtonPresets?.minimumWidth ??
+                    DefaultPresets.minimumWidth,
+            minHeight: widget.isFluid == true
+                ? MediaQuery.of(context).size.height
+                : widget.blincButtonPresets?.minimumHeight ??
+                    DefaultPresets.minimumHeight,
           ),
           child: ElevatedButton(
             onFocusChange: (value) {
