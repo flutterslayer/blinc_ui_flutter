@@ -299,18 +299,19 @@ class _BlincButtonState extends State<BlincButton> {
                       Text(
                         widget.text!,
                         style: const TextStyle(
-                          height: 1.4,
+                          height: 1.5,
                           decorationThickness: 1.2,
                           color: Colors.transparent,
                         ),
                       ),
                     if (widget.isUnderlined != true && widget.text != null)
-                      Text(
-                        widget.text!,
-                      ),
+                      Text(widget.text!,
+                          style: const TextStyle(
+                            height: 1.42,
+                          )),
                     if (widget.icon != null && widget.isIconInverted == true)
                       Padding(
-                        padding: const EdgeInsets.only(left: 5),
+                        padding: const EdgeInsets.only(left: 1),
                         child: Icon(
                           widget.icon,
                           size: widget.sizePresets?.iconSize ??
