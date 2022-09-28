@@ -8,8 +8,10 @@ class BlincButton extends StatefulWidget {
     this.buttonTheme,
     this.sizePresets,
     this.textStyle,
+    this.isUnderlined,
     this.padding,
     this.icon,
+    this.isIconInverted,
   }) : super(key: key);
 
   final String? text;
@@ -17,8 +19,10 @@ class BlincButton extends StatefulWidget {
   final BlincButtonTheme? buttonTheme;
   final SizePresets? sizePresets;
   final TextStyle? textStyle;
+  final bool? isUnderlined;
   final EdgeInsets? padding;
   final IconData? icon;
+  final bool? isIconInverted;
 
   BlincButton smallPrimary() {
     return BlincButton(
@@ -32,6 +36,7 @@ class BlincButton extends StatefulWidget {
       sizePresets: SmallPresets(),
       padding: padding,
       icon: icon,
+      isIconInverted: isIconInverted,
     );
   }
 
@@ -47,6 +52,7 @@ class BlincButton extends StatefulWidget {
       sizePresets: SmallPresets(),
       padding: padding,
       icon: icon,
+      isIconInverted: isIconInverted,
     );
   }
 
@@ -62,6 +68,8 @@ class BlincButton extends StatefulWidget {
       sizePresets: SmallPresets(),
       padding: padding,
       icon: icon,
+      isIconInverted: isIconInverted,
+      isUnderlined: true,
     );
   }
 
@@ -77,6 +85,7 @@ class BlincButton extends StatefulWidget {
       sizePresets: LargePresets(),
       padding: padding,
       icon: icon,
+      isIconInverted: isIconInverted,
     );
   }
 
@@ -92,6 +101,7 @@ class BlincButton extends StatefulWidget {
       sizePresets: LargePresets(),
       padding: padding,
       icon: icon,
+      isIconInverted: isIconInverted,
     );
   }
 
@@ -107,6 +117,8 @@ class BlincButton extends StatefulWidget {
       sizePresets: LargePresets(),
       padding: padding,
       icon: icon,
+      isIconInverted: isIconInverted,
+      isUnderlined: true,
     );
   }
 
@@ -115,98 +127,164 @@ class BlincButton extends StatefulWidget {
 }
 
 class _BlincButtonState extends State<BlincButton> {
+  late final defaultColor =
+      widget.buttonTheme?.backgroundColor ?? DefaultTheme.backgroundColor;
+
+  late final hoverColor =
+      widget.buttonTheme?.hoverColor ?? DefaultTheme.hoverColor;
+
+  late final disabledColor =
+      widget.buttonTheme?.disabledColor ?? DefaultTheme.disabledColor;
+
+  late final focusedColor =
+      widget.buttonTheme?.focusColor ?? DefaultTheme.focusColor;
+
+  late final pressedColor =
+      widget.buttonTheme?.pressedColor ?? DefaultTheme.pressedColor;
+
+  late final defaultFontColor = widget.buttonTheme?.backgroundFontColor ??
+      DefaultTheme.backgroundFontColor;
+
+  late final hoverFontColor =
+      widget.buttonTheme?.hoverFontColor ?? DefaultTheme.hoverFontColor;
+
+  late final disabledFontColor =
+      widget.buttonTheme?.disabledFontColor ?? DefaultTheme.disabledFontColor;
+
+  late final focusedFontColor =
+      widget.buttonTheme?.focusedFontColor ?? DefaultTheme.focusedFontColor;
+
+  late final pressedFontColor =
+      widget.buttonTheme?.pressedFontColor ?? DefaultTheme.pressedFontColor;
+
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        if (widget.onPressed != null) {
-          widget.onPressed!();
-        }
-      },
-      style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-            if (states.isEmpty) {
-              return widget.buttonTheme?.backgroundFontColor ??
-                  DefaultTheme.backgroundFontColor;
-            }
-            if (states.contains(MaterialState.hovered)) {
-              return widget.buttonTheme?.hoverFontColor ??
-                  DefaultTheme.hoverFontColor;
-            }
-            if (states.contains(MaterialState.disabled)) {
-              return widget.buttonTheme?.disabledColor ??
-                  DefaultTheme.disabledFontColor;
-            }
-            if (states.contains(MaterialState.focused)) {
-              return widget.buttonTheme?.focusedFontColor ??
-                  DefaultTheme.focusedFontColor;
-            }
-            if (states.contains(MaterialState.pressed)) {
-              return widget.buttonTheme?.pressedFontColor ??
-                  DefaultTheme.pressedFontColor;
-            }
-            return DefaultTheme.backgroundFontColor;
-          },
-        ),
-        backgroundColor: MaterialStatePropertyAll<Color>(
-            widget.buttonTheme?.backgroundColor ??
-                DefaultTheme.backgroundColor),
-        overlayColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.focused)) {
-              return widget.buttonTheme?.focusColor ?? DefaultTheme.focusColor;
-            }
-            if (states.contains(MaterialState.pressed)) {
-              return widget.buttonTheme?.pressedColor ??
-                  DefaultTheme.pressedColor;
-            }
-            if (states.contains(MaterialState.hovered)) {
-              return widget.buttonTheme?.hoverColor ?? DefaultTheme.hoverColor;
-            }
-            if (states.contains(MaterialState.disabled)) {
-              return widget.buttonTheme?.disabledColor ??
-                  DefaultTheme.disabledColor;
-            }
-
-            return widget.buttonTheme?.backgroundColor ??
-                DefaultTheme.backgroundColor;
-          },
-        ),
-        minimumSize: MaterialStatePropertyAll<Size?>(
-          widget.sizePresets?.minimumSize ?? DefaultPresets.minimumSize,
-        ),
-        maximumSize: MaterialStatePropertyAll<Size?>(
-          widget.sizePresets?.maximumSize,
-        ),
-        shape: MaterialStatePropertyAll<OutlinedBorder?>(
-          widget.sizePresets?.shape ?? DefaultPresets.shape,
-        ),
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        minWidth:
+            widget.sizePresets?.minimumWidth ?? DefaultPresets.minimumWidth,
+        minHeight:
+            widget.sizePresets?.minimumHeight ?? DefaultPresets.minimumHeight,
       ),
-      child: Padding(
-        padding: widget.padding ??
-            widget.sizePresets?.padding ??
-            DefaultPresets.padding,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ...[
-              if (widget.icon != null)
-                Padding(
-                  padding: const EdgeInsets.only(right: 5),
-                  child: Icon(widget.icon),
-                )
+      child: ElevatedButton(
+        onPressed: () {
+          if (widget.onPressed != null) {
+            widget.onPressed!();
+          }
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll<Color>(defaultColor),
+          overlayColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.focused) &&
+                  widget.textStyle != null) {
+                return focusedColor;
+              }
+              if (states.contains(MaterialState.pressed)) {
+                return pressedColor;
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return hoverColor;
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return disabledColor;
+              }
+
+              return defaultColor;
+            },
+          ),
+          textStyle: MaterialStateProperty.resolveWith<TextStyle?>(
+            (Set<MaterialState> states) {
+              if (widget.isUnderlined == true) {
+                if (states.contains(MaterialState.hovered)) {
+                  return UnderlineDecoration.textStyle(hoverFontColor);
+                }
+                if (states.contains(MaterialState.focused) &&
+                    widget.textStyle != null) {
+                  return UnderlineDecoration.textStyle(focusedFontColor);
+                }
+                if (states.contains(MaterialState.disabled)) {
+                  return UnderlineDecoration.textStyle(disabledFontColor);
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return UnderlineDecoration.textStyle(pressedFontColor);
+                }
+                return UnderlineDecoration.textStyle(defaultFontColor);
+              }
+              return null;
+            },
+          ),
+          foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.hovered)) {
+                return hoverFontColor;
+              }
+              if (states.contains(MaterialState.focused)) {
+                return focusedFontColor;
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return disabledFontColor;
+              }
+              if (states.contains(MaterialState.pressed)) {
+                return pressedFontColor;
+              }
+              return defaultFontColor;
+            },
+          ),
+          shape: MaterialStatePropertyAll<OutlinedBorder?>(
+            widget.sizePresets?.shape ?? DefaultPresets.shape,
+          ),
+        ),
+        child: Padding(
+          padding: widget.padding ??
+              widget.sizePresets?.padding ??
+              DefaultPresets.padding,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ...[
+                if (widget.icon != null && widget.isIconInverted != true)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5),
+                    child: Icon(
+                      widget.icon,
+                      size: widget.sizePresets?.iconSize ??
+                          DefaultPresets.iconSize,
+                    ),
+                  )
+              ],
+              ...[
+                if (widget.isUnderlined == true)
+                  Text(
+                    widget.text!,
+                    style: const TextStyle(
+                      height: 1.4,
+                      decorationThickness: 1.2,
+                      color: Colors.transparent,
+                    ),
+                  ),
+              ],
+              ...[
+                if (widget.isUnderlined != true)
+                  Text(
+                    widget.text!,
+                  ),
+              ],
+              ...[
+                if (widget.icon != null && widget.isIconInverted == true)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Icon(
+                      widget.icon,
+                      size: widget.sizePresets?.iconSize ??
+                          DefaultPresets.iconSize,
+                    ),
+                  )
+              ],
             ],
-            ...[
-              if (widget.text != null)
-                Text(
-                  widget.text!,
-                  style: widget.textStyle,
-                ),
-            ]
-          ],
+          ),
         ),
       ),
     );
@@ -227,7 +305,8 @@ class DefaultTheme {
 }
 
 class DefaultPresets {
-  static const minimumSize = Size(137, 32);
+  static const double minimumWidth = 137;
+  static const double minimumHeight = 32;
   static const padding = EdgeInsets.fromLTRB(0, 16, 0, 16);
   static var shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(8.0),
@@ -235,6 +314,7 @@ class DefaultPresets {
   static const textStyle = TextStyle(
     fontSize: 14,
   );
+  static const double iconSize = 16;
 }
 
 abstract class BlincButtonTheme {
@@ -261,6 +341,16 @@ abstract class BlincButtonTheme {
     required this.focusedFontColor,
     required this.disabledFontColor,
   });
+}
+
+class UnderlineDecoration {
+  static TextStyle textStyle(Color color) {
+    return TextStyle(
+      shadows: [Shadow(color: color, offset: const Offset(0, -1.8))],
+      decoration: TextDecoration.underline,
+      decorationColor: color,
+    );
+  }
 }
 
 class PrimaryTheme implements BlincButtonTheme {
@@ -333,53 +423,53 @@ class TertiaryTheme implements BlincButtonTheme {
 }
 
 abstract class SizePresets {
-  final Size minimumSize;
+  final double minimumWidth;
+  final double minimumHeight;
   final EdgeInsets padding;
   final RoundedRectangleBorder shape;
-  final TextStyle textStyle;
-  final Size? maximumSize;
+  final double fontSize;
+  final double iconSize;
 
   SizePresets({
-    required this.minimumSize,
+    required this.minimumWidth,
+    required this.minimumHeight,
     required this.padding,
     required this.shape,
-    required this.textStyle,
-    this.maximumSize,
+    required this.fontSize,
+    required this.iconSize,
   });
 }
 
 class SmallPresets implements SizePresets {
   @override
-  final minimumSize = const Size(137, 32);
+  final minimumWidth = 137;
+  @override
+  final minimumHeight = 32;
   @override
   final padding = const EdgeInsets.fromLTRB(0, 0, 0, 0);
-
   @override
   final shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(8.0),
   );
   @override
-  final textStyle = const TextStyle(
-    fontSize: 14,
-  );
+  final fontSize = 14;
   @override
-  final maximumSize = null;
+  final iconSize = 16;
 }
 
 class LargePresets implements SizePresets {
   @override
-  final minimumSize = const Size(326, 72);
+  final minimumWidth = 326;
+  @override
+  final minimumHeight = 72;
   @override
   final padding = const EdgeInsets.all(0);
-
   @override
   final shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10.0),
   );
   @override
-  final textStyle = const TextStyle(
-    fontSize: 20,
-  );
+  final fontSize = 20;
   @override
-  final maximumSize = null;
+  final iconSize = 19.5;
 }
