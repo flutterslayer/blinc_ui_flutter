@@ -104,6 +104,8 @@ class _BlincIconButtonState extends State<BlincIconButton> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: widget.iconPresets?.buttonSize ?? DefaultIconPresets.buttonSize,
+      height: widget.iconPresets?.buttonSize ?? DefaultIconPresets.buttonSize,
       child: ElevatedButton(
         clipBehavior: Clip.none,
         onPressed: () {
@@ -160,12 +162,6 @@ class _BlincIconButtonState extends State<BlincIconButton> {
                   DefaultTheme.backgroundColor;
             },
           ),
-          minimumSize: MaterialStatePropertyAll<Size?>(
-            widget.iconPresets?.buttonSize ?? DefaultIconPresets.buttonSize,
-          ),
-          maximumSize: MaterialStatePropertyAll<Size?>(
-            widget.iconPresets?.buttonSize,
-          ),
           shape: MaterialStatePropertyAll<OutlinedBorder?>(
             widget.iconPresets?.shape ?? DefaultIconPresets.shape,
           ),
@@ -193,7 +189,7 @@ class DefaultTheme {
 }
 
 class DefaultIconPresets {
-  static const buttonSize = Size(56, 56);
+  static const double buttonSize = 56;
   static const iconSize = 19.5;
 
   static var shape = RoundedRectangleBorder(
@@ -297,7 +293,7 @@ class TertiaryTheme implements BlincIconButtonTheme {
 }
 
 abstract class IconPresets {
-  final Size buttonSize;
+  final double buttonSize;
   final double iconSize;
   final RoundedRectangleBorder shape;
 
@@ -310,11 +306,9 @@ abstract class IconPresets {
 
 class LargeIconPresets implements IconPresets {
   @override
-  final buttonSize = const Size(56, 56);
-
+  final buttonSize = 56;
   @override
   final iconSize = 19.5;
-
   @override
   final shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(60.0),
@@ -323,7 +317,7 @@ class LargeIconPresets implements IconPresets {
 
 class SmallIconPresets implements IconPresets {
   @override
-  final buttonSize = const Size(24, 24);
+  final buttonSize = 24;
 
   @override
   final iconSize = 10;
