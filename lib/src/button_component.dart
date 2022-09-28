@@ -173,11 +173,11 @@ class _BlincButtonState extends State<BlincButton> {
         child: ConstrainedBox(
           constraints: BoxConstraints(
             minWidth: widget.isFluid == true
-                ? MediaQuery.of(context).size.width
+                ? 0
                 : widget.blincButtonPresets?.minimumWidth ??
                     DefaultPresets.minimumWidth,
             minHeight: widget.isFluid == true
-                ? MediaQuery.of(context).size.height
+                ? 0
                 : widget.blincButtonPresets?.minimumHeight ??
                     DefaultPresets.minimumHeight,
           ),
@@ -208,7 +208,7 @@ class _BlincButtonState extends State<BlincButton> {
                     return pressedColor;
                   }
                   if (states.contains(MaterialState.focused)) {
-                    return widget.buttonTheme?.focusColor;
+                    return focusedColor;
                   }
                   if (states.contains(MaterialState.hovered)) {
                     return hoverColor;
@@ -285,28 +285,38 @@ class _BlincButtonState extends State<BlincButton> {
                         ))
                   else ...[
                     if (widget.icon != null && widget.isIconInverted != true)
-                      Padding(
-                        padding: const EdgeInsets.only(right: 5),
-                        child: Icon(
-                          widget.icon,
-                          size: widget.blincButtonPresets?.iconSize ??
-                              DefaultPresets.iconSize,
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: Icon(
+                            widget.icon,
+                            size: widget.blincButtonPresets?.iconSize ??
+                                DefaultPresets.iconSize,
+                          ),
                         ),
                       ),
                     if (widget.isUnderlined == true && widget.text != null)
-                      Text(
-                        widget.text!,
-                        style: const TextStyle(
-                          height: 1.5,
-                          decorationThickness: 1.2,
-                          color: Colors.transparent,
+                      Flexible(
+                        child: Text(
+                          widget.text!,
+                          style: const TextStyle(
+                            height: 1.5,
+                            decorationThickness: 1.2,
+                            color: Colors.transparent,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     if (widget.isUnderlined != true && widget.text != null)
-                      Text(widget.text!,
+                      Flexible(
+                        child: Text(
+                          widget.text!,
                           style: const TextStyle(
                             height: 1.42,
-                          )),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     if (widget.icon != null && widget.isIconInverted == true)
                       Padding(
                         padding: const EdgeInsets.only(left: 1),
