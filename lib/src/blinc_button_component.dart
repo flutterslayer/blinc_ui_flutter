@@ -1,3 +1,4 @@
+import 'package:blinc_ui_flutter/src/blinc_colors.dart';
 import 'package:blinc_ui_flutter/src/loading_spinner_component.dart';
 import 'package:flutter/material.dart';
 
@@ -529,83 +530,83 @@ class UnderlineDecoration {
 
 class PrimaryButtonTheme implements BlincButtonTheme {
   @override
-  final backgroundColor = const Color.fromRGBO(67, 67, 66, 1);
+  final backgroundColor = AppColors.colorNeutral_800;
   @override
-  final hoverColor = const Color.fromRGBO(26, 26, 25, 1);
+  final hoverColor = AppColors.colorNeutral_900;
   @override
-  final pressedColor = const Color.fromRGBO(133, 133, 131, 1);
+  final pressedColor = AppColors.colorNeutral_600;
   @override
-  final focusColor = const Color.fromRGBO(67, 67, 66, 0.2);
+  final focusColor = AppColors.colorNeutral_800LowOpacity;
   @override
-  final disabledColor = const Color.fromRGBO(67, 67, 66, 0.2);
+  final disabledColor = AppColors.colorNeutral_800LowOpacity;
   @override
-  final backgroundFontColor = const Color.fromARGB(255, 255, 255, 255);
+  final backgroundFontColor = AppColors.colorNeutral_0;
   @override
-  final hoverFontColor = const Color.fromARGB(255, 255, 255, 255);
+  final hoverFontColor = AppColors.colorNeutral_0;
   @override
-  final pressedFontColor = const Color.fromARGB(255, 255, 255, 255);
+  final pressedFontColor = AppColors.colorNeutral_0;
   @override
-  final focusedFontColor = const Color.fromARGB(255, 255, 255, 255);
+  final focusedFontColor = AppColors.colorNeutral_0;
   @override
-  final disabledFontColor = const Color.fromARGB(255, 255, 255, 255);
+  final disabledFontColor = AppColors.colorNeutral_0;
   @override
-  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
+  final focusedBorderColor = AppColors.colorNeutral_600;
   @override
-  final loadingSpinnerColor = const Color.fromRGBO(243, 244, 249, 1);
+  final loadingSpinnerColor = AppColors.colorNeutral_50;
 }
 
 class SecondaryButtonTheme implements BlincButtonTheme {
   @override
-  final backgroundColor = const Color.fromRGBO(220, 220, 218, 1);
+  final backgroundColor = AppColors.colorNeutral_200;
   @override
-  final hoverColor = const Color.fromRGBO(178, 178, 177, 1);
+  final hoverColor = AppColors.colorNeutral_400;
   @override
-  final pressedColor = const Color.fromRGBO(227, 227, 225, 1);
+  final pressedColor = AppColors.colorNeutral_100;
   @override
-  final focusColor = const Color.fromRGBO(178, 178, 177, 1);
+  final focusColor = AppColors.colorNeutral_400;
   @override
-  final disabledColor = const Color.fromRGBO(220, 220, 218, 0.4);
+  final disabledColor = AppColors.colorNeutral_200MediumOpacity;
   @override
-  final backgroundFontColor = const Color.fromRGBO(67, 67, 66, 1);
+  final backgroundFontColor = AppColors.colorNeutral_800;
   @override
-  final hoverFontColor = const Color.fromRGBO(26, 26, 25, 1);
+  final hoverFontColor = AppColors.colorNeutral_900;
   @override
-  final pressedFontColor = const Color.fromRGBO(133, 133, 131, 1);
+  final pressedFontColor = AppColors.colorNeutral_600;
   @override
-  final focusedFontColor = const Color.fromRGBO(26, 26, 25, 1);
+  final focusedFontColor = AppColors.colorNeutral_900;
   @override
-  final disabledFontColor = const Color.fromRGBO(67, 67, 66, 0.4);
+  final disabledFontColor = AppColors.colorNeutral_800MediumOpacity;
   @override
-  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
+  final focusedBorderColor = AppColors.colorNeutral_600;
   @override
-  final loadingSpinnerColor = const Color.fromRGBO(67, 67, 66, 1);
+  final loadingSpinnerColor = AppColors.colorNeutral_800;
 }
 
 class TertiaryButtonTheme implements BlincButtonTheme {
   @override
-  final backgroundColor = const Color.fromRGBO(255, 255, 255, 1);
+  final backgroundColor = AppColors.colorNeutral_0;
   @override
-  final hoverColor = const Color.fromRGBO(242, 242, 239, 1);
+  final hoverColor = AppColors.colorNeutral_50;
   @override
-  final pressedColor = const Color.fromRGBO(255, 255, 255, 1);
+  final pressedColor = AppColors.colorNeutral_0;
   @override
-  final focusColor = const Color.fromRGBO(242, 242, 239, 1);
+  final focusColor = AppColors.colorNeutral_50;
   @override
-  final disabledColor = const Color.fromRGBO(255, 255, 255, 1);
+  final disabledColor = AppColors.colorNeutral_0;
   @override
-  final backgroundFontColor = const Color.fromRGBO(67, 67, 66, 1);
+  final backgroundFontColor = AppColors.colorNeutral_800;
   @override
-  final hoverFontColor = const Color.fromRGBO(26, 26, 25, 1);
+  final hoverFontColor = AppColors.colorNeutral_900;
   @override
-  final pressedFontColor = const Color.fromRGBO(133, 133, 131, 1);
+  final pressedFontColor = AppColors.colorNeutral_600;
   @override
-  final focusedFontColor = const Color.fromRGBO(26, 26, 25, 1);
+  final focusedFontColor = AppColors.colorNeutral_900;
   @override
-  final disabledFontColor = const Color.fromRGBO(67, 67, 66, 0.4);
+  final disabledFontColor = AppColors.colorNeutral_800MediumOpacity;
   @override
-  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
+  final focusedBorderColor = AppColors.colorNeutral_600;
   @override
-  final loadingSpinnerColor = const Color.fromRGBO(67, 67, 66, 1);
+  final loadingSpinnerColor = AppColors.colorNeutral_800;
 }
 
 /// The blueprint to create BlincButton presets and customize shape and size of

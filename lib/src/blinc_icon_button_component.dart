@@ -1,3 +1,4 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
 /// The BlincIconButton creates a button with an icon inside. It accepts an
@@ -369,77 +370,77 @@ abstract class BlincIconButtonTheme {
 
 class PrimaryIconButtonTheme implements BlincIconButtonTheme {
   @override
-  final backgroundColor = const Color.fromRGBO(67, 67, 66, 1);
+  final backgroundColor = AppColors.colorNeutral_800;
   @override
-  final hoverColor = const Color.fromRGBO(26, 26, 25, 1);
+  final hoverColor = AppColors.colorNeutral_900;
   @override
-  final pressedColor = const Color.fromRGBO(133, 133, 131, 1);
+  final pressedColor = AppColors.colorNeutral_600;
   @override
-  final focusColor = const Color.fromRGBO(67, 67, 66, 0.2);
+  final focusColor = AppColors.colorNeutral_800LowOpacity;
   @override
-  final disabledColor = const Color.fromRGBO(67, 67, 66, 0.2);
+  final disabledColor = AppColors.colorNeutral_800LowOpacity;
   @override
-  final backgroundIconColor = const Color.fromARGB(255, 255, 255, 255);
+  final backgroundIconColor = AppColors.colorNeutral_0;
   @override
-  final hoverIconColor = const Color.fromARGB(255, 255, 255, 255);
+  final hoverIconColor = AppColors.colorNeutral_0;
   @override
-  final pressedIconColor = const Color.fromARGB(255, 255, 255, 255);
+  final pressedIconColor = AppColors.colorNeutral_0;
   @override
-  final focusedIconColor = const Color.fromARGB(255, 255, 255, 255);
+  final focusedIconColor = AppColors.colorNeutral_0;
   @override
-  final disabledIconColor = const Color.fromARGB(255, 255, 255, 255);
+  final disabledIconColor = AppColors.colorNeutral_0;
   @override
-  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
+  final focusedBorderColor = AppColors.colorNeutral_600;
 }
 
 class SecondaryIconButtonTheme implements BlincIconButtonTheme {
   @override
-  final backgroundColor = const Color.fromRGBO(220, 220, 218, 1);
+  final backgroundColor = AppColors.colorNeutral_200;
   @override
-  final hoverColor = const Color.fromRGBO(178, 178, 177, 1);
+  final hoverColor = AppColors.colorNeutral_400;
   @override
-  final pressedColor = const Color.fromRGBO(227, 227, 225, 1);
+  final pressedColor = AppColors.colorNeutral_100;
   @override
-  final focusColor = const Color.fromRGBO(178, 178, 177, 1);
+  final focusColor = AppColors.colorNeutral_400;
   @override
-  final disabledColor = const Color.fromRGBO(220, 220, 218, 0.4);
+  final disabledColor = AppColors.colorNeutral_200MediumOpacity;
   @override
-  final backgroundIconColor = const Color.fromRGBO(67, 67, 66, 1);
+  final backgroundIconColor = AppColors.colorNeutral_800;
   @override
-  final hoverIconColor = const Color.fromRGBO(26, 26, 25, 1);
+  final hoverIconColor = AppColors.colorNeutral_900;
   @override
-  final pressedIconColor = const Color.fromRGBO(133, 133, 131, 1);
+  final pressedIconColor = AppColors.colorNeutral_600;
   @override
-  final focusedIconColor = const Color.fromRGBO(26, 26, 25, 1);
+  final focusedIconColor = AppColors.colorNeutral_900;
   @override
-  final disabledIconColor = const Color.fromRGBO(67, 67, 66, 0.4);
+  final disabledIconColor = AppColors.colorNeutral_800MediumOpacity;
   @override
-  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
+  final focusedBorderColor = AppColors.colorNeutral_600;
 }
 
 class TertiaryIconButtonTheme implements BlincIconButtonTheme {
   @override
-  final backgroundColor = const Color.fromRGBO(255, 255, 255, 1);
+  final backgroundColor = AppColors.colorNeutral_0;
   @override
-  final hoverColor = const Color.fromRGBO(242, 242, 239, 1);
+  final hoverColor = AppColors.colorNeutral_50;
   @override
-  final pressedColor = const Color.fromRGBO(255, 255, 255, 1);
+  final pressedColor = AppColors.colorNeutral_0;
   @override
-  final focusColor = const Color.fromRGBO(242, 242, 239, 1);
+  final focusColor = AppColors.colorNeutral_50;
   @override
-  final disabledColor = const Color.fromRGBO(255, 255, 255, 1);
+  final disabledColor = AppColors.colorNeutral_0;
   @override
-  final backgroundIconColor = const Color.fromRGBO(67, 67, 66, 1);
+  final backgroundIconColor = AppColors.colorNeutral_800;
   @override
-  final hoverIconColor = const Color.fromRGBO(26, 26, 25, 1);
+  final hoverIconColor = AppColors.colorNeutral_900;
   @override
-  final pressedIconColor = const Color.fromRGBO(133, 133, 131, 1);
+  final pressedIconColor = AppColors.colorNeutral_600;
   @override
-  final focusedIconColor = const Color.fromRGBO(26, 26, 25, 1);
+  final focusedIconColor = AppColors.colorNeutral_900;
   @override
-  final disabledIconColor = const Color.fromRGBO(67, 67, 66, 0.4);
+  final disabledIconColor = AppColors.colorNeutral_800MediumOpacity;
   @override
-  final focusedBorderColor = const Color.fromRGBO(133, 133, 131, 1);
+  final focusedBorderColor = AppColors.colorNeutral_600;
 }
 
 /// The blueprint to create BlincIconButton presets and customize shape and
