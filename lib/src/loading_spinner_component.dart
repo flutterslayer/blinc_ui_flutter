@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+/// Creates the static Loading Spinner. Requires the [radius], [gradientColors]
+/// and [strokeWidth]
 class _GradientCircularProgressIndicator extends StatelessWidget {
+  /// The radius size of the spinner
   final double radius;
+
+  /// It requires a list of colors to create the gradient
   final List<Color> gradientColors;
+
+  /// The width of the loading wheel
   final double strokeWidth;
   const _GradientCircularProgressIndicator({
     Key? key,
@@ -27,21 +34,36 @@ class _GradientCircularProgressIndicator extends StatelessWidget {
   }
 }
 
+/// Draws the loading wheel through the paint method. Must provide [radius],
+/// [gradientColors]
 class _GradientCircularProgressPainter extends CustomPainter {
   _GradientCircularProgressPainter({
     required this.radius,
     required this.gradientColors,
     required this.strokeWidth,
   });
+
+  /// The radius size of the spinner
   final double radius;
+
+  /// Requires a list of colors to create the gradient
   final List<Color> gradientColors;
+
+  /// The width of the loading wheel
   final double strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
+    /// Size of the wheel
     size = Size.fromRadius(radius);
+
+    /// The distance from the anchor point. Must be zero to center.
     double offset = 0;
+
+    /// The offset and size of the loading wheel
     Rect rect = Offset(offset, offset) & Size(size.width, size.height);
+
+    /// Draws the loading wheel circle
     var paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
@@ -57,14 +79,21 @@ class _GradientCircularProgressPainter extends CustomPainter {
   }
 }
 
+/// LoadingSpinner is an alternate CircularProgressIndicator widget with a
+/// gradient finish. It requires a [color] and the [diameter].
+/// It uses an AnimatorController and spins indefinitely.
 class LoadingSpinner extends StatefulWidget {
   const LoadingSpinner({
     Key? key,
     required this.color,
-    required this.size,
+    required this.diameter,
   }) : super(key: key);
+
+  /// The main color of the gradient
   final Color color;
-  final double size;
+
+  /// The diameter of the loading wheel
+  final double diameter;
   @override
   LoadingSpinnerState createState() => LoadingSpinnerState();
 }
@@ -75,6 +104,7 @@ class LoadingSpinnerState extends State<LoadingSpinner>
 
   @override
   void initState() {
+    /// Starts the animation. Repeat makes sure it spins indefinitely.
     _controller = AnimationController(
       duration: const Duration(milliseconds: 1200),
       vsync: this,
@@ -90,15 +120,19 @@ class LoadingSpinnerState extends State<LoadingSpinner>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _controller.forward(),
-      child: RotationTransition(
-        turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
-        child: _GradientCircularProgressIndicator(
-          radius: widget.size / 2,
-          gradientColors: [widget.color, Colors.transparent],
-          strokeWidth: 4,
-        ),
+    /// Creates the spinning animation. Accepts the spin sprite
+    return RotationTransition(
+      /// The turns of the spin.
+      turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
+      child: _GradientCircularProgressIndicator(
+        /// The radius define the size of the circle
+        radius: widget.diameter / 2,
+
+        /// The list of the color gradient
+        gradientColors: [widget.color, Colors.transparent],
+
+        /// Thickness of the loading wheel
+        strokeWidth: 4,
       ),
     );
   }
