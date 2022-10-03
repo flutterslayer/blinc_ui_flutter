@@ -6,10 +6,15 @@ import 'package:flutter/material.dart';
 /// It can be used to separate layout blocks, for
 /// example: [BlincSpacer.horizontal.huge]
 enum BlincSpacer {
+  /// Sets the horizontal value
   horizontal,
+
+  /// Sets the vertical value
   vertical,
 }
 
+/// The generic spacer component. Creates a widget with defined
+/// width and height
 class _CustomSpaceComponent extends StatelessWidget {
   const _CustomSpaceComponent({
     Key? key,
@@ -17,7 +22,10 @@ class _CustomSpaceComponent extends StatelessWidget {
     this.height,
   }) : super(key: key);
 
+  /// Sets the width
   final double? width;
+
+  /// Sets the height
   final double? height;
 
   @override
@@ -29,6 +37,9 @@ class _CustomSpaceComponent extends StatelessWidget {
   }
 }
 
+/// The extension links the enum with spacing values.
+/// It can be [horizontal] or [vertical], and returns the corresponding
+/// spacing widget.
 extension SelectOrientationAndSize on BlincSpacer {
   /// The [huge] size measures 80px
   Widget get huge {

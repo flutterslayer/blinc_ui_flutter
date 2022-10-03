@@ -25,6 +25,17 @@ class AppColors {
 
   static const Color colorNeutral_0 = Color(0xFFFFFFFF);
 
+  /// Low Opacity
+
+  static const Color colorNeutral_800LowOpacity =
+      Color.fromRGBO(67, 67, 66, 0.2);
+
+  static const Color colorNeutral_800MediumOpacity =
+      Color.fromRGBO(67, 67, 66, 0.4);
+
+  static const Color colorNeutral_200MediumOpacity =
+      Color.fromRGBO(220, 220, 218, 0.4);
+
   ///Brand Blues
   static const Color colorBluePrimary = Color(0xFF2364AE);
   static const Color colorBlueSecondary = Color(0xFF044E81);
