@@ -12,44 +12,35 @@ class SelectScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SizedBox(
-          child: GridView.count(
-            primary: false,
-            padding: const EdgeInsets.all(20),
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            crossAxisCount: 3,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/spacing');
-                },
-                child: const Text(
-                  'Spacing',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/shadows');
-                },
-                child: const Text(
-                  'Shadows',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/borders');
-                },
-                child: const Text(
-                  'Borders',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            ],
-          ),
-        ),
+            child: GridView.count(
+          primary: false,
+          padding: const EdgeInsets.all(20),
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          crossAxisCount: 3,
+          children: [
+            selectBlock(context: context, route: '/spacing', text: 'Spacing'),
+            selectBlock(context: context, route: '/buttons', text: 'Buttons'),
+            selectBlock(context: context, route: '/shadows', text: 'Shadows')
+          ],
+        )),
       ),
     );
   }
+}
+
+Widget selectBlock({
+  required BuildContext context,
+  required String route,
+  required String text,
+}) {
+  return ElevatedButton(
+    onPressed: () {
+      Navigator.pushNamed(context, route);
+    },
+    child: Text(
+      text,
+      style: const TextStyle(fontSize: 16),
+    ),
+  );
 }
