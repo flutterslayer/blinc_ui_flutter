@@ -27,7 +27,6 @@ class InputExample extends StatelessWidget {
               const SizedBox(height: 20),
               BlincInputComponent.textField(
                 label: 'Label',
-                placeholder: 'Placeholder',
               ),
             ],
           ),
