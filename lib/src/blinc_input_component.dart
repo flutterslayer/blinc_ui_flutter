@@ -9,7 +9,7 @@ class BlincInputComponent {
     IconData? prefixIcon,
     IconData? suffixIcon,
     String? descriptionText,
-    bool enabled = true,
+    bool? enabled,
   }) {
     return BlincInputTextField(
       label: label,
@@ -18,6 +18,7 @@ class BlincInputComponent {
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
       descriptionText: descriptionText,
+      enabled: enabled,
     );
   }
 
@@ -33,7 +34,7 @@ class BlincInputTextField extends StatefulWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final String? descriptionText;
-  final bool enabled;
+  final bool? enabled;
 
   const BlincInputTextField({
     Key? key,
@@ -43,7 +44,7 @@ class BlincInputTextField extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.descriptionText,
-    this.enabled = true,
+    this.enabled,
   }) : super(key: key);
 
   @override
@@ -85,6 +86,7 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
       children: [
         Container(
           decoration: BoxDecoration(
+            color: widget.enabled == false ? AppColors.colorNeutral_50 : null,
             border: Border.all(color: _borderColor),
             borderRadius: BorderRadius.circular(8),
           ),
@@ -141,5 +143,4 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
     );
   }
 }
-
 
