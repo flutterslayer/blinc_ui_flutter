@@ -1,4 +1,5 @@
 import 'package:blinc_ui_flutter/examples/lib/pages/borders_example.dart';
+import 'package:blinc_ui_flutter/examples/lib/pages/brand_example.dart';
 import 'package:blinc_ui_flutter/examples/lib/pages/button_example.dart';
 import 'package:blinc_ui_flutter/examples/lib/pages/select_screen.dart';
 import 'package:blinc_ui_flutter/examples/lib/pages/shadows_example.dart';
@@ -16,6 +17,7 @@ void main() {
       '/buttons': (context) => const ButtonExample(),
 
       '/shadows': (context) => const ShadowsExample(),
+      '/brand': (context) => const BrandExample(),
     }),
   );
 }
