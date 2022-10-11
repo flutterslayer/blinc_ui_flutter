@@ -1,3 +1,4 @@
+import 'package:blinc_ui_flutter/examples/lib/pages/borders_example.dart';
 import 'package:blinc_ui_flutter/examples/lib/pages/brand_example.dart';
 import 'package:blinc_ui_flutter/examples/lib/pages/button_example.dart';
 import 'package:blinc_ui_flutter/examples/lib/pages/select_screen.dart';
@@ -10,7 +11,11 @@ void main() {
     MaterialApp(initialRoute: '/', routes: {
       '/': (context) => const SelectScreen(),
       '/spacing': (context) => const SpacingExample(),
+
+      '/borders': (context) => const BordersExample(),
+
       '/buttons': (context) => const ButtonExample(),
+
       '/shadows': (context) => const ShadowsExample(),
       '/brand': (context) => const BrandExample(),
     }),
