@@ -10,6 +10,9 @@ class BlincInputComponent {
     IconData? suffixIcon,
     String? descriptionText,
     bool? enabled,
+    TextEditingController? textEditingController,
+    TextInputType? textInputType,
+    FormFieldValidator<String>? validator,
   }) {
     return BlincInputTextField(
       label: label,
@@ -19,12 +22,27 @@ class BlincInputComponent {
       suffixIcon: suffixIcon,
       descriptionText: descriptionText,
       enabled: enabled,
+      textEditingController: textEditingController,
+      textInputType: textInputType,
+      validator: validator,
     );
   }
 
   static Widget dropdown() {
     return BlincInputTextField();
   }
+
+  static Widget form({
+    required GlobalKey<FormState> globalKey,
+    required Widget child,
+  }) {
+    return BlincForm(
+      globalKey: globalKey,
+      child: child,
+    );
+  }
+
+  static BlincInputValidation get validations => BlincInputValidation();
 }
 
 class BlincInputTextField extends StatefulWidget {
@@ -35,6 +53,9 @@ class BlincInputTextField extends StatefulWidget {
   final IconData? suffixIcon;
   final String? descriptionText;
   final bool? enabled;
+  final TextEditingController? textEditingController;
+  final TextInputType? textInputType;
+  final FormFieldValidator<String>? validator;
 
   const BlincInputTextField({
     Key? key,
@@ -45,6 +66,9 @@ class BlincInputTextField extends StatefulWidget {
     this.suffixIcon,
     this.descriptionText,
     this.enabled,
+    this.textEditingController,
+    this.textInputType,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -54,7 +78,9 @@ class BlincInputTextField extends StatefulWidget {
 class _BlincInputTextFieldState extends State<BlincInputTextField> {
   final FocusNode _focusNode = FocusNode();
 
-  Color _borderColor = Colors.grey;
+  Color _borderColor = AppColors.colorNeutral_400;
+  Color _labelColor = AppColors.colorNeutral_900;
+  String? _errorMessage;
 
   static const boxConstraints = BoxConstraints(
     minWidth: 0,
@@ -69,6 +95,9 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
         _borderColor = _focusNode.hasFocus
             ? AppColors.colorNeutral_800
             : AppColors.colorNeutral_400;
+        _labelColor = _focusNode.hasFocus
+            ? AppColors.colorNeutral_800
+            : AppColors.colorNeutral_900;
       });
     });
   }
@@ -92,8 +121,20 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
           ),
           child: TextFormField(
             focusNode: _focusNode,
-            keyboardType: TextInputType.number,
+            keyboardType: widget.textInputType,
             enabled: widget.enabled,
+            controller: widget.textEditingController,
+            validator: (String? value) {
+              if (widget.validator == null) {
+                return null;
+              }
+
+              setState(() {
+                _errorMessage = widget.validator!(value);
+              });
+
+              return null;
+            },
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(vertical: 24),
               border: InputBorder.none,
@@ -127,6 +168,14 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
                       )
                     : null,
               ),
+              labelStyle: TextStyle(
+                color: _labelColor,
+              ),
+            ),
+            style: TextStyle(
+              color: widget.enabled == false
+                  ? AppColors.colorNeutral_400
+                  : AppColors.colorNeutral_900,
             ),
           ),
         ),
@@ -136,7 +185,12 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
             left: 10,
           ),
           child: Text(
-            widget.descriptionText ?? '',
+            _errorMessage ?? widget.descriptionText ?? '',
+            style: TextStyle(
+              color: _errorMessage != null
+                  ? AppColors.colorRedError_300
+                  : AppColors.colorNeutral_800,
+            ),
           ),
         ),
       ],
@@ -144,3 +198,33 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
   }
 }
 
+class BlincForm extends StatelessWidget {
+  final Widget child;
+  final GlobalKey<FormState> globalKey;
+
+  const BlincForm({
+    Key? key,
+    required this.child,
+    required this.globalKey,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: globalKey,
+      child: child,
+    );
+  }
+}
+
+class BlincInputValidation {
+  String? required(
+    String? value, {
+    String? errorText = 'This field cannot be empty',
+  }) {
+    if (value == null || value.isEmpty) {
+      return errorText;
+    }
+    return null;
+  }
+}

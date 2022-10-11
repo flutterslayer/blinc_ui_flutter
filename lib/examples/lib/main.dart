@@ -12,7 +12,7 @@ void main() {
       '/spacing': (context) => const SpacingExample(),
       '/buttons': (context) => const ButtonExample(),
       '/shadows': (context) => const ShadowsExample(),
-      '/inputs': (context) => const InputExample(),
+      '/inputs': (context) => InputExample(),
     }),
   );
 }
