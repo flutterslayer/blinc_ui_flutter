@@ -21,7 +21,8 @@ class SelectScreen extends StatelessWidget {
           children: [
             selectBlock(context: context, route: '/spacing', text: 'Spacing'),
             selectBlock(context: context, route: '/buttons', text: 'Buttons'),
-            selectBlock(context: context, route: '/shadows', text: 'Shadows')
+            selectBlock(context: context, route: '/shadows', text: 'Shadows'),
+            selectBlock(context: context, route: '/brand', text: 'Brand'),
           ],
         )),
       ),
