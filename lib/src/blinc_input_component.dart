@@ -19,7 +19,7 @@ class BlincInputComponent {
     return BlincInputTextField(
       label: label,
       placeholder: placeholder,
-      obscureText: false,
+      obscureText: obscureText,
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
       descriptionText: descriptionText,
@@ -30,12 +30,27 @@ class BlincInputComponent {
     );
   }
 
-  static Widget dropdown() {
+  static Widget dropdown({
+    required List? dropdownOptions,
+    String? label,
+    String? placeholder,
+    bool obscureText = false,
+    IconData? prefixIcon,
+    String? descriptionText,
+    bool enabled = true,
+    String? currentInputValue,
+    FormFieldValidator<String>? validator,
+  }) {
     return BlincInputDropdown(
-      label: 'Label',
-      placeholder: 'Placeholder',
-      prefixIcon: Icons.phone,
-      descriptionText: 'Description area',
+      dropdownOptions: dropdownOptions,
+      label: label,
+      placeholder: placeholder,
+      obscureText: obscureText,
+      prefixIcon: prefixIcon,
+      descriptionText: descriptionText,
+      enabled: enabled,
+      currentInputValue: currentInputValue,
+      validator: validator,
     );
   }
 
@@ -123,7 +138,7 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
     return _borderColor;
   }
 
-  Widget _iconSytleRule(
+  Widget _iconStyleRule(
     IconData? icon, {
     bool suffixIcon = false,
   }) {
@@ -187,8 +202,8 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
               floatingLabelBehavior: widget.placeholder != null
                   ? FloatingLabelBehavior.always
                   : null,
-              prefixIcon: _iconSytleRule(widget.prefixIcon),
-              suffixIcon: _iconSytleRule(
+              prefixIcon: _iconStyleRule(widget.prefixIcon),
+              suffixIcon: _iconStyleRule(
                 widget.suffixIcon,
                 suffixIcon: true,
               ),

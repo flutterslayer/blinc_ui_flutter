@@ -163,6 +163,16 @@ class InputExample extends StatelessWidget {
                 validator: BlincInputComponent.validations.required,
               ),
               const SizedBox(height: 20),
+              BlincInputComponent.dropdown(
+                dropdownOptions: ['1'],
+                prefixIcon: Icons.phone_outlined,
+                enabled: false,
+                validator: (value) {
+                  return 'Description area';
+                },
+              ),
+              BlincInputComponent.dropdown(dropdownOptions: []),
+              BlincInputComponent.dropdown(dropdownOptions: []),
             ],
           ),
         ),
