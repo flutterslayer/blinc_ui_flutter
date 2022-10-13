@@ -28,6 +28,8 @@ class InputExample extends StatelessWidget {
               BlincInputComponent.textField(
                 label: 'Label',
               ),
+              const SizedBox(height: 20),
+              BlincInputComponent.dropdown(),
             ],
           ),
         ),

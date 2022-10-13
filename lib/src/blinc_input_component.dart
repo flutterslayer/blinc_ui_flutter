@@ -1,4 +1,5 @@
 import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
+import 'package:blinc_ui_flutter/src/rodolfo.dart';
 import 'package:flutter/material.dart';
 
 class BlincInputComponent {
@@ -23,7 +24,12 @@ class BlincInputComponent {
   }
 
   static Widget dropdown() {
-    return BlincInputTextField();
+    return BlincInputDropdown(
+      label: 'Label',
+      placeholder: 'Placeholder',
+      prefixIcon: Icons.phone,
+      descriptionText: 'Description area',
+    );
   }
 }
 
@@ -143,4 +149,3 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
     );
   }
 }
-
