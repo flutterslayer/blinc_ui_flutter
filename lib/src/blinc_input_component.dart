@@ -4,6 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BlincInputComponent {
+  /// [label] label text
+  ///
+  /// [placeholder] placeholder text
+  ///
+  /// [obscureText] hide the inserted content
+  ///
+  /// [prefixIcon] left icon
+  ///
+  /// [suffixIcon] right icon
+  ///
+  /// [descriptionText] text below input
+  ///
+  /// [enabled] on or off
+  ///
+  /// [textEditingController] controller
+  ///
+  /// [textInputType] keyboard type (Mobile)
+  ///
+  /// [validator]  Validation (Ex.: BlincInputComponent.validations.required)
   static Widget textField({
     String? label,
     String? placeholder,
@@ -54,6 +73,9 @@ class BlincInputComponent {
     );
   }
 
+  /// [globalKey] key to controller form
+  ///
+  /// [child] widget
   static Widget form({
     required GlobalKey<FormState> globalKey,
     required Widget child,
@@ -338,7 +360,7 @@ class BlincInputValidation {
 
   String? validateMail(String? value) {
     final valid = RegExp(
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
+      r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
     ).hasMatch(value ?? '');
 
     if (!valid) {
@@ -349,7 +371,8 @@ class BlincInputValidation {
 
   bool isValidEmail(String value) {
     return RegExp(
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
+      r'''
+^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$''',
     ).hasMatch(value);
   }
 }
