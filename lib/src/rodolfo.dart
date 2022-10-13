@@ -42,6 +42,7 @@ class _BlincInputDropdownState extends State<BlincInputDropdown> {
     if (_errorMessage != null) {
       return AppColors.colorRedError_300;
     }
+
     return _borderColor;
   }
 
