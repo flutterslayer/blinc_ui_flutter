@@ -3,6 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BlincInputComponent {
+  /// [label] label text
+  ///
+  /// [placeholder] placeholder text
+  ///
+  /// [obscureText] hide the inserted content
+  ///
+  /// [prefixIcon] left icon
+  ///
+  /// [suffixIcon] right icon
+  ///
+  /// [descriptionText] text below input
+  ///
+  /// [enabled] on or off
+  ///
+  /// [textEditingController] controller
+  ///
+  /// [textInputType] keyboard type (Mobile)
+  ///
+  /// [validator]  Validation (Ex.: BlincInputComponent.validations.required)
   static Widget textField({
     String? label,
     String? placeholder,
@@ -33,6 +52,9 @@ class BlincInputComponent {
     return BlincInputTextField();
   }
 
+  /// [globalKey] key to controller form
+  ///
+  /// [child] widget
   static Widget form({
     required GlobalKey<FormState> globalKey,
     required Widget child,
