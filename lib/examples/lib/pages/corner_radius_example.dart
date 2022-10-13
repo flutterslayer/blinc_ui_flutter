@@ -14,13 +14,14 @@ class CornerRadiusExample extends StatelessWidget {
       body: SafeArea(
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('BlincCornerRadius.zero'),
+                  const Text('BlincCornerRadius.sharp'),
                   const SizedBox(height: 15),
                   block(BlincCornerRadius.sharp),
                 ],
@@ -47,6 +48,14 @@ class CornerRadiusExample extends StatelessWidget {
                   const Text('BlincCornerRadius.lg'),
                   const SizedBox(height: 15),
                   block(BlincCornerRadius.lg),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('BlincCornerRadius.circle'),
+                  const SizedBox(height: 15),
+                  block(BlincCornerRadius.circle),
                 ],
               ),
             ],
