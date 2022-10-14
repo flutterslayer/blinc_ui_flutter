@@ -16,7 +16,7 @@ class TextExample extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           children: [
             const SizedBox(height: 20),
-            BlincText('Proxima Nova').weightThin().heightSM(),
+            BlincText('Proxima Nova').weightBlack().heightXXS().sizeXS(),
           ],
         ),
       ),

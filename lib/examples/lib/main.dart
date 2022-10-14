@@ -18,7 +18,7 @@ void main() {
       '/shadows': (context) => const ShadowsExample(),
       '/inputs': (context) => InputExample(),
       '/brand': (context) => const BrandExample(),
-      '/text': (context) => TextExample(),
+      '/text': (context) => const TextExample(),
     }),
   );
 }
