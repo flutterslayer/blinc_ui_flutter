@@ -20,6 +20,7 @@ class SelectScreen extends StatelessWidget {
           crossAxisCount: 3,
           children: [
             selectBlock(context: context, route: '/spacing', text: 'Spacing'),
+            selectBlock(context: context, route: '/borders', text: 'Borders'),
             selectBlock(context: context, route: '/buttons', text: 'Buttons'),
             selectBlock(context: context, route: '/shadows', text: 'Shadows'),
             selectBlock(context: context, route: '/inputs', text: 'Inputs'),
