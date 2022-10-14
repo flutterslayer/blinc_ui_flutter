@@ -9,3 +9,4 @@ export 'src/blinc_input_component.dart' show BlincInputComponent;
 export 'src/blinc_brand.dart';
 export 'src/space_component.dart';
 export 'src/loading_spinner_component.dart';
+export 'src/blinc_text.dart' show BlincText;

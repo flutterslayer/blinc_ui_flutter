@@ -5,6 +5,7 @@ import 'package:blinc_ui_flutter/examples/lib/pages/input_example.dart';
 import 'package:blinc_ui_flutter/examples/lib/pages/select_screen.dart';
 import 'package:blinc_ui_flutter/examples/lib/pages/shadows_example.dart';
 import 'package:blinc_ui_flutter/examples/lib/pages/spacing_example.dart';
+import 'package:blinc_ui_flutter/examples/lib/pages/text_example.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,6 +18,7 @@ void main() {
       '/shadows': (context) => const ShadowsExample(),
       '/inputs': (context) => InputExample(),
       '/brand': (context) => const BrandExample(),
+      '/text': (context) => TextExample(),
     }),
   );
 }
