@@ -1,55 +1,40 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
 class BlincProgressBar extends StatelessWidget {
-  /// The progress indicator's color
-  final Color color;
-
-  /// Defines the progress indicator's width
-  final double width;
-
-  /// Defines the progress indicator's height
-  final double height;
-
-  /// Defines the progress indicator's radius
-  final double radius;
-
-  /// Defines the loading ratio of the progress bar
-  final double percent;
-
   const BlincProgressBar({
     Key? key,
-    required this.color,
-    required this.width,
-    required this.height,
-    required this.radius,
-    required this.percent,
-  }) : super(key: key);
+    required this.value,
+    this.dark = true,
+  })  : assert(value <= 1.0),
+        super(key: key);
+
+  /// [dark] set the color scheme
+  final bool dark;
+
+  /// [value] progress percentage, maximum value is 1.0
+  final double value;
+
+  Color _getColor() {
+    return dark ? AppColors.colorNeutral_800 : AppColors.colorNeutral_50;
+  }
+
+  Color _getBackgroundColor() {
+    return dark ? AppColors.colorNeutral_400 : AppColors.colorNeutral_600;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: width,
-          height: height,
-
-          /// Allows to draw a progress bar in different ways
-          decoration: BoxDecoration(
-            color: color,
-            border: Border.all(),
-            borderRadius: BorderRadius.circular(radius),
-          ),
-        ),
-        Positioned(
-            child: Container(
-          /// Shows the loading percentage
-          width: width * percent,
-          height: height,
-          decoration: BoxDecoration(
-            color: color,
-          ),
-        )),
-      ],
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(99),
+      ),
+      child: LinearProgressIndicator(
+        value: value,
+        minHeight: 4,
+        color: _getColor(),
+        backgroundColor: _getBackgroundColor(),
+      ),
     );
   }
 }

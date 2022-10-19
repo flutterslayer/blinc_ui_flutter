@@ -8,4 +8,5 @@ export 'src/blinc_icon_button_component.dart';
 export 'src/space_component.dart';
 export 'src/loading_spinner_component.dart';
 export 'src/blinc_brand.dart';
+export 'src/blinc_progress_bar.dart';
 
