@@ -363,3 +363,62 @@ Widget block(BoxShadow blincShadow, String size) {
 }
 ```
 
+## Borders
+The BlincBorders component creates pre-defined borders for Container's BoxDecoration. The available styles are:
+
+* zero: no border
+* sm: thin border
+* md: medium border
+* lg: thick border
+
+### Example
+
+<img src="https://user-images.githubusercontent.com/103216807/197021560-93d01cb1-9847-49c2-94d0-1f13c55cba38.png" align = "right" width = "300px">
+
+
+
+```dart
+SafeArea(
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          block(BlincBorders.zero, 'zero'),
+          block(BlincBorders.sm, 'sm'),
+        ],
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          block(BlincBorders.md, 'md'),
+          block(BlincBorders.lg, 'lg'),
+        ],
+      ),
+    ],
+  ),
+),
+
+Widget block(BoxBorder blincBorder, String size) {
+  return Padding(
+    padding: const EdgeInsets.all(12.0),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('BlincBorders.$size'),
+        const SizedBox(height: 15),
+        Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 242, 242, 239),
+            border: blincBorder,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+```
+
