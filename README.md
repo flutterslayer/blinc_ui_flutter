@@ -1,39 +1,106 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<p>&nbsp;</p>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/103216807/196970171-ad426a42-dccf-48ec-bcfa-499ccde51ecf.png" height="100" alt="Blinc UI Flutter" />
+</p>
+<p>&nbsp;</p>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+<p align="center">Blinc UI Flutter provides pre-built, ready-to-use flutter components.  <br /> It includes buttons, typography, spacing, decorations, and more. </p>
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# Installing
 
-## Features
+### 1. Depend on it
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Add this to your package's `pubspec.yaml` file:
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  blinc_ui_flutter: ^1.0.0
 ```
 
-## Additional information
+### 2. Install it
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+You can install packages from the command line:
+
+```
+$ flutter pub get blinc_ui_flutter
+```
+
+
+### 3. Import it
+
+Now in your `Dart` code, you can use:
+
+```dart
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
+```
+
+# Usage
+
+## Spacings
+You can easily create your spacings by using the BlincSpacer component. You can choose if it's vertical or horizontal and then the size, ranging from xxxs, the smallest size, to huge:
+* xxxs
+* xxs
+* xs
+* sm
+* md
+* lg
+* xl
+* xxl
+* xxxl
+* huge
+
+<img src="https://user-images.githubusercontent.com/103216807/196975750-65ca6823-8877-427d-b3fc-621c5cff7681.png" align = "right" height = "300px">
+
+```dart
+SizedBox(
+  width: MediaQuery.of(context).size.width,
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      BlincSpacer.vertical.xxs,
+      BlincButton(
+        text: "I'm a BlincUIButton",
+        onPressed: () {},
+      ).largePrimary(),
+      BlincSpacer.vertical.xxs,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            children: [
+              BlincButton(
+                text: 'Another Button',
+                onPressed: () {},
+              ).smallPrimary(),
+              BlincSpacer.vertical.xxxs,
+              BlincButton(
+                text: 'Another Button',
+                onPressed: () {},
+              ).smallPrimary(),
+              BlincSpacer.vertical.xxxs,
+              BlincButton(
+                text: 'Another Button',
+                onPressed: () {},
+              ).smallPrimary(),
+            ],
+          ),
+          BlincSpacer.horizontal.xxxs,
+          SizedBox(
+            width: 180,
+            height: 142,
+            child: BlincButton(
+              text: 'Fluid Large Secondary',
+              isFluid: true,
+              onPressed: () {},
+            ).largeSecondary(),
+          ),
+        ],
+      )
+    ],
+  ),
+),
+```
+
+
