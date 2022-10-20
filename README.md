@@ -49,7 +49,7 @@ You can easily create your spacings by using the BlincSpacer component. You can 
 * xxl
 * xxxl
 * huge
-
+### Example
 <img src="https://user-images.githubusercontent.com/103216807/196975750-65ca6823-8877-427d-b3fc-621c5cff7681.png" align = "right" height = "300px">
 
 ```dart
@@ -117,9 +117,8 @@ You can create buttons with BlincButton component. There are fixed button sizes 
 
 You can access the presets with the function .smallSecondary, for example. It will create a small button with secondary style.
 
-
+### Example
 <img src="https://user-images.githubusercontent.com/103216807/197005540-299dc346-19aa-4ba0-be55-7a7ce6f6b772.gif" align = "right" width = "350px">
-
 
 
 ```dart
@@ -230,7 +229,7 @@ You can create buttons with IconBlincButton component. Just as the BlincButton c
 
 You can access the presets with the function .smallSecondary, for example. It will create a small button with secondary style.
 
-
+### Example
 <img src="https://user-images.githubusercontent.com/103216807/197007974-a4117f09-9a14-431f-9f60-d7b8043f7596.png" align = "right" width = "300px">
 
 ```dart
@@ -275,5 +274,92 @@ You can access the presets with the function .smallSecondary, for example. It wi
       ]
     ),
   ),
+```
+
+## Shadows
+The BlincShadow component creates pre-defined styles for Container shadows. It has a variety of sizes:
+
+* zero: provides a Container with no shadow
+* sm: provides a Container with a small shadow
+* md: provides a Container with a medium shadow
+* lg: provides a Container with a large shadow
+* xl: provides a Container with an extra large shadow
+* huge: provides a Container with a huge shadow
+
+It should be placed inside the boxShadow method inside the BoxDecoration:
+```dart
+ Container(
+    width: 60,
+    height: 60,
+    decoration: BoxDecoration(
+      color: const Color.fromARGB(255, 227, 227, 225),
+      boxShadow: [
+        blincShadow,
+      ],
+    ),
+  );
+  ```
+  
+### Example
+
+<img src="https://user-images.githubusercontent.com/103216807/197018679-d75a9847-fffa-40b3-9db4-50d012af72d3.png" align = "right" width = "300px">
+
+
+
+```dart
+ SafeArea(
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      BlincSpacer.vertical.lg,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          block(BlincShadow.zero, 'zero'),
+          block(BlincShadow.sm, 'sm')
+        ],
+      ),
+      BlincSpacer.vertical.md,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          block(BlincShadow.md, 'md'),
+          block(BlincShadow.lg, 'lg')
+        ],
+      ),
+      BlincSpacer.vertical.md,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          block(BlincShadow.xl, 'xl'),
+          block(BlincShadow.huge, 'huge')
+        ],
+      ),
+    ],
+  ),
+),
+
+Widget block(BoxShadow blincShadow, String size) {
+  return SizedBox(
+    width: 150,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('BlincShadow.$size'),
+        BlincSpacer.vertical.xxs,
+        Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 227, 227, 225),
+            boxShadow: [
+              blincShadow,
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
 ```
 
