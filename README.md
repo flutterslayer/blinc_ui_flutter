@@ -6,6 +6,20 @@
 
 <p align="center">Blinc UI Flutter provides pre-built, ready-to-use flutter components.  <br /> It includes buttons, typography, spacing, decorations, and more. </p>
 
+## Table of contents
+
+- [Installing](#installing)
+- [Usage](#usage)
+    - [Spacings](#spacings)
+    - [Buttons](#buttons)
+    - [IconButtons](#iconbuttons)
+    - [Shadows](#shadows)
+    - [Borders](#borders)
+    - [AppColors](#appcolors)
+
+
+
+<p>&nbsp;</p>
 
 # Installing
 
