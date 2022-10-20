@@ -422,3 +422,107 @@ Widget block(BoxBorder blincBorder, String size) {
 }
 ```
 
+
+## AppColors
+The AppColors is a class that provides a color palette for general use. It can be accessed through static methods.
+
+### Example
+
+<img src="https://user-images.githubusercontent.com/103216807/197027349-d9005bae-13cc-4e39-81e2-dbd73cc68478.png" align = "right" width = "300px">
+
+
+
+```dart
+SafeArea(
+  child: SizedBox(
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        block(
+          context,
+          width: 50,
+          height: MediaQuery.of(context).size.height,
+          color: AppColors.colorBlueInfo_200,
+        ),
+        BlincSpacer.horizontal.xxs,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            BlincSpacer.vertical.xxxs,
+            block(
+              context,
+              width: 280,
+              height: 90,
+              color: AppColors.colorBlueSecondary,
+            ),
+            BlincSpacer.vertical.xs,
+            block(
+              context,
+              width: 280,
+              height: 90,
+              color: AppColors.colorBlueSecondary,
+            ),
+            BlincSpacer.vertical.sm,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                block(
+                  context,
+                  width: 80,
+                  height: 250,
+                  color: AppColors.colorNeutral_600,
+                ),
+                BlincSpacer.horizontal.xxs,
+                Column(
+                  children: [
+                    BlincSpacer.vertical.sm,
+                    block(
+                      context,
+                      width: 180,
+                      height: 218,
+                      color: AppColors.colorOrangePrimary,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            BlincSpacer.vertical.xs,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                block(
+                  context,
+                  width: 180,
+                  height: 50,
+                  color: AppColors.colorGreenSecondary,
+                ),
+                BlincSpacer.horizontal.xxs,
+                block(
+                  context,
+                  width: 80,
+                  height: 50,
+                  color: AppColors.colorOrangeAlert_300,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    ),
+  ),
+),
+
+Widget block(
+  context, {
+  required double width,
+  required double height,
+  required Color color,
+}) {
+  return Container(
+    width: width,
+    height: height,
+    color: color,
+  );
+}
+```
+
