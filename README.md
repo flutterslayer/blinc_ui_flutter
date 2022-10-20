@@ -103,4 +103,177 @@ SizedBox(
 ),
 ```
 
+## Buttons
+You can create buttons with BlincButton component. There are fixed button sizes and styles to use. It's possible to create themes and different sizings passing properties:
+* text: sets the buttons' text
+* textStyle: sets the text style
+* isUnderlined: if true will create a text underline
+* buttonTheme: accepts a BlincButtonTheme, where you can create your customized preset settings
+* padding: the padding space inside the button
+* icon: here you can pass an IconData with your icon
+* isIconInverted: if true, the icon will be placed at the right size. The default is on the left.
+* isLoading: if true will show a progress indicator component
+* isFluid: if true the button will take all the available space around
+
+You can access the presets with the function .smallSecondary, for example. It will create a small button with secondary style.
+
+
+<img src="https://user-images.githubusercontent.com/103216807/197005540-299dc346-19aa-4ba0-be55-7a7ce6f6b772.gif" align = "right" width = "350px">
+
+
+
+```dart
+SizedBox(
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      BlincButton(
+        text: 'Large Primary',
+        icon: Icons.add_a_photo,
+        onPressed: () {},
+      ).largePrimary(),
+      SizedBox(
+        child: BlincButton(
+          text: 'Large Secondary',
+          onPressed: () {},
+        ).largeSecondary(),
+      ),
+      BlincButton(
+        text: 'Large Tertiary',
+        onPressed: () {},
+        icon: Icons.location_on,
+      ).largeTertiary(),
+      Padding(
+        padding: const EdgeInsets.only(bottom: 5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BlincButton(
+              text: 'Small Primary',
+              icon: Icons.person_pin_circle_outlined,
+              onPressed: () {},
+            ).smallPrimary(),
+            BlincButton(
+              text: 'Small Tertiary',
+              icon: Icons.person_pin_circle_outlined,
+              onPressed: () {},
+              isIconInverted: true,
+            ).smallTertiary(),
+          ],
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(bottom: 5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BlincButton(
+              isLoading: true,
+              onPressed: () {},
+            ).smallSecondary(),
+            BlincButton(
+              isLoading: true,
+              onPressed: () {},
+            ).smallPrimary(),
+          ],
+        ),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 220,
+            height: 150,
+            child: BlincButton(
+              text: 'Fluid Large Primary',
+              isFluid: true,
+              onPressed: () {},
+            ).largePrimary(),
+          ),
+          Column(
+            children: [
+              SizedBox(
+                width: 110,
+                height: 60,
+                child: BlincButton(
+                  text: 'Large Secondary',
+                  isFluid: true,
+                  onPressed: () {},
+                ).largeSecondary(),
+              ),
+              SizedBox(
+                width: 110,
+                height: 90,
+                child: BlincButton(
+                  text: 'Large Tertiary',
+                  isFluid: true,
+                  onPressed: () {},
+                ).largeTertiary(),
+              ),
+            ],
+          ),
+        ],
+      )
+    ],
+  ),
+  ),
+```
+
+
+
+## IconButtons
+You can create buttons with IconBlincButton component. Just as the BlincButton component, there are fixed button sizes and styles to use. It's possible to create themes and different sizings passing properties:
+* child: support child components
+* buttonTheme: accepts a BlincIconButtonTheme, where you can create your customized preset settings
+* iconPresets: accepts an IconPresets, to customize the button sizing, shape and border
+* icon: here you can pass an IconData with your icon
+
+You can access the presets with the function .smallSecondary, for example. It will create a small button with secondary style.
+
+
+<img src="https://user-images.githubusercontent.com/103216807/197007974-a4117f09-9a14-431f-9f60-d7b8043f7596.png" align = "right" width = "300px">
+
+```dart
+ SizedBox(
+  child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BlincIconButton(
+              icon: Icons.facebook,
+              onPressed: () {},
+            ).iconLargePrimary(),
+            BlincIconButton(
+              onPressed: () {},
+              icon: Icons.whatsapp,
+            ).iconLargeSecondary(),
+            BlincIconButton(
+              onPressed: () {},
+              icon: Icons.accessibility_new_sharp,
+            ).iconLargeTertiary(),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BlincIconButton(
+              onPressed: () {},
+              icon: Icons.arrow_back_ios_new,
+            ).iconSmallPrimary(),
+            BlincIconButton(
+              onPressed: () {},
+              icon: Icons.subdirectory_arrow_left_sharp,
+            ).iconSmallSecondary(),
+            BlincIconButton(
+              onPressed: () {},
+              icon: Icons.arrow_forward_ios,
+            ).iconSmallTertiary(),
+          ],
+        ),
+      ]
+    ),
+  ),
+```
 
