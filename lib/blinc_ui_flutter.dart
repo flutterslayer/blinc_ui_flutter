@@ -5,8 +5,10 @@ export 'src/blinc_shadows.dart';
 export 'src/blinc_borders.dart';
 export 'src/blinc_button_component.dart';
 export 'src/blinc_icon_button_component.dart';
+export 'src/blinc_input_component.dart' show BlincInputComponent;
+export 'src/blinc_brand.dart';
 export 'src/space_component.dart';
 export 'src/loading_spinner_component.dart';
 export 'src/blinc_brand.dart';
 export 'src/blinc_progress_bar.dart';
-
+export 'src/blinc_text.dart' show BlincText;
