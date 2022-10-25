@@ -16,6 +16,7 @@
     - [Shadows](#shadows)
     - [Borders](#borders)
     - [AppColors](#appcolors)
+    - [ProgressBar](#progressbar)
 
 
 
@@ -540,3 +541,72 @@ Widget block(
 }
 ```
 
+## ProgressBar
+The BlincProgressBar component creates a progress bar. 
+
+* value: the percentage of the current progress. The value can range from 0.0 to 1.0
+* dark: if true, switches to the dark theme.
+
+```dart
+BlincProgressBar(
+  value: 0.1 //10%,
+  dark: isDarkMode,
+),
+```
+
+### Example
+<img src="https://user-images.githubusercontent.com/103216807/197848945-2643e670-38e4-418e-bd5a-fe74c10878bc.gif" align = "right" width = "350px">
+
+
+
+```dart
+  SafeArea(
+    child: Padding(
+      padding: const EdgeInsets.only(top: 35.0),
+      child: Container(
+        alignment: Alignment.center,
+        child: SizedBox(
+          width: 350,
+          child: Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Dark Mode',
+                      style: TextStyle(
+                        color: isDarkMode
+                            ? AppColors.colorNeutral_0
+                            : AppColors.colorNeutral_900,
+                      ),
+                    ),
+                    Switch(
+                      value: isDarkMode,
+                      onChanged: ((value) {
+                        setState(() {
+                          isDarkMode = !isDarkMode;
+                        });
+                      }),
+                    ),
+                  ],
+                ),
+                BlincSpacer.vertical.xxs,
+                BlincLogo(
+                  logoTheme:
+                      isDarkMode ? LogoTheme.white : LogoTheme.standard,
+                ),
+                BlincSpacer.vertical.xs,
+                BlincProgressBar(
+                  value: value,
+                  dark: isDarkMode,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+```
