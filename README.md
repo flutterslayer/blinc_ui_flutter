@@ -18,6 +18,7 @@
     - [AppColors](#appcolors)
     - [ProgressBar](#progressbar)
     - [Typography](#typography)
+    - [Inputs](#inputs)
 
 
 
@@ -681,4 +682,128 @@ The Typography component creates a text, where you can customize with a series o
       ],
     ),
   ),
+```
+
+## Inputs
+The BlincInputComponent can create forms and inputs and has pre-built validators.
+To use it, you must wrap a BlincInputComponent.input inside a BlincInputComponent.form.
+
+To create a BlincInputComponent.form you must provide the key and the child:
+
+```dart
+  final _globalKey = GlobalKey<FormState>();
+  BlincInputComponent.form(
+    globalKey: _globalKey,
+    child: Container(
+      ...
+    )
+  )
+```
+
+To customize a BlincInputComponent.input you can provide:
+- label: the label text
+- placeholder - the placeholder text
+- obscureText - if true, will hide the inserted content (for passwords, for example)
+- prefixIcon - adds an icon to the left
+- suffixIcon - adds an icon to the right
+- descriptionText - the description text below the input
+- enabled - if set to false the input gets disabled
+- textEditingController - controls the text inside the input
+- textInputType - keyboard type (Mobile for example)
+- validator - pre-built validations (E.g.: BlincInputComponent.validations.required)
+
+
+### Example
+<img src="https://user-images.githubusercontent.com/103216807/197883657-8df99d02-b9a1-42b2-962e-4e53ce987408.png" align = "right" width = "400px">
+
+
+
+```dart
+  class InputExample extends StatelessWidget {
+  InputExample({Key? key}) : super(key: key);
+
+  final _globalKey = GlobalKey<FormState>();
+
+  void _validateForm() {
+    _globalKey.currentState?.validate();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black87,
+        title: const Text('Input component example'),
+      ),
+      body: SafeArea(
+        child: BlincInputComponent.form(
+          globalKey: _globalKey,
+          child: Container(
+            alignment: Alignment.center,
+            child: SizedBox(
+              width: 400,
+              child: ListView(
+                padding: const EdgeInsets.all(8.0),
+                children: [
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    obscureText: true,
+                    label: 'Label',
+                    descriptionText: 'Common Input',
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    placeholder: 'My Placeholder',
+                    descriptionText: 'Input with placeholder',
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    placeholder: 'Placeholder',
+                    descriptionText: 'Input with placeholder and default text',
+                    textEditingController:
+                        TextEditingController(text: 'Default Text'),
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    placeholder: 'Placeholder',
+                    descriptionText: 'Disabled Input',
+                    textEditingController: TextEditingController(text: 'Input'),
+                    enabled: false,
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    placeholder: 'Placeholder',
+                    descriptionText: 'Required field',
+                    validator: BlincInputComponent.validations.required,
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    descriptionText: 'Field with suffixIcon',
+                    suffixIcon: Icons.remove_red_eye_outlined,
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    descriptionText: 'Field with both icons',
+                    suffixIcon: Icons.remove_red_eye_outlined,
+                    prefixIcon: Icons.phone_outlined,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _validateForm,
+        child: const Icon(Icons.send),
+      ),
+    );
+  }
+}
 ```
