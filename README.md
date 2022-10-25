@@ -610,3 +610,74 @@ BlincProgressBar(
     ),
   ),
 ```
+
+## Typography
+The Typography component creates a text, where you can customize with a series of methods.
+
+### Weight
+- weightThin
+- weightLight
+- weightRegular
+- weightMedium
+- weightSemiBold
+- weightBold
+- weightExtraBold
+- weightBlack
+
+### Size
+- sizeXXXS
+- sizeXXS
+- sizeXS
+- sizeSM
+- sizeMD
+- sizeLG
+- sizeXL
+- sizeXXL
+- sizeXXXL
+- sizeHuge
+- sizeXHuge
+- sizeXXHuge
+
+### Line Height
+- heightXXXS
+- heightXXS
+- heightXS
+- heightSM
+- heightMD
+- heightLG
+- heightXL
+- heightXXL
+- heightXXXL
+- heightHuge
+- heightXHuge
+
+
+### Example
+<img src="https://user-images.githubusercontent.com/103216807/197858549-0c64e663-6e50-4abe-a77b-2ade11574ff5.png" align = "right" width = "350px">
+
+
+
+
+```dart
+  SafeArea(
+    child: ListView(
+      padding: const EdgeInsets.all(8.0),
+      children: [
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightThin.heightXXS.sizeXXXS,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightLight.heightXS.sizeXS,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightRegular.heightSM.sizeMD,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightMedium.heightMD.sizeLG,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightSemiBold.heightXXL.sizeHuge,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightExtraBold.heightHuge.sizeXHuge,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightBlack.heightXHuge.sizeXXHuge,
+      ],
+    ),
+  ),
+```
