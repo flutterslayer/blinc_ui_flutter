@@ -17,6 +17,7 @@
     - [Borders](#borders)
     - [AppColors](#appcolors)
     - [ProgressBar](#progressbar)
+    - [Typography](#typography)
 
 
 
