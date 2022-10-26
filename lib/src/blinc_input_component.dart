@@ -37,7 +37,7 @@ class BlincInputComponent {
     return BlincInputTextField(
       label: label,
       placeholder: placeholder,
-      obscureText: false,
+      obscureText: obscureText,
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
       descriptionText: descriptionText,
@@ -52,9 +52,8 @@ class BlincInputComponent {
     return BlincInputTextField();
   }
 
-  /// [globalKey] key to controller form
-  ///
-  /// [child] widget
+  /// The form method creates a form to wrap the BlincInputComponent.input.
+  /// It requires a [globalKey] key and a [child] widget.
   static Widget form({
     required GlobalKey<FormState> globalKey,
     required Widget child,
@@ -69,15 +68,34 @@ class BlincInputComponent {
 }
 
 class BlincInputTextField extends StatefulWidget {
+  /// Adds a label text
   final String? label;
+
+  /// Adds a placeholder text
   final String? placeholder;
+
+  /// If true, hides the text for passwords for example
   final bool obscureText;
+
+  /// Sets the icon on the left side
   final IconData? prefixIcon;
+
+  /// Sets the icon on the right side
   final IconData? suffixIcon;
+
+  /// Sets the description text
   final String? descriptionText;
+
+  /// If true, the field is enabled
   final bool? enabled;
+
   final TextEditingController? textEditingController;
+
+  /// The type of information of the text input control.
   final TextInputType? textInputType;
+
+  /// Signature for validating a form field.
+  ///Returns an error string to display if the input is invalid, or null otherwise.
   final FormFieldValidator<String>? validator;
 
   const BlincInputTextField({
@@ -175,6 +193,7 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: TextFormField(
+            obscureText: widget.obscureText,
             focusNode: _focusNode,
             keyboardType: widget.textInputType,
             enabled: widget.enabled,
