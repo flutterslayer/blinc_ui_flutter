@@ -1,6 +1,14 @@
 import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
+/// The BlincProgressBar is a widget that shows loading progress. It requires a
+/// [value], that can range from 0 to 1 indicating the percentage of the progress.
+/// The style can be switched to dark mode if [dark] is set to true.
+/// Example:
+/// BlincProgressBar(
+///     value: 0.2,
+///     dark: true,
+/// ),
 class BlincProgressBar extends StatelessWidget {
   const BlincProgressBar({
     Key? key,

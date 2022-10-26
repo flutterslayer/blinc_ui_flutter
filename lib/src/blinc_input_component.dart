@@ -2,6 +2,37 @@ import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+/// The BlincInputComponent is responsible for creating Forms and Inputs.
+/// BlincInputComponent.form() will create a form to wrap the inputs.
+/// BlincInputComponent.input() will create an input that should be inside the form.
+///
+/// It accepts a [textEditingController] to control the form's content, a
+/// [textInputType] to set the input tipe (e.g Mobile)
+///
+/// Pre-built validation functions can be added with [validator], for example
+/// BlincInputComponent.validations.required
+///
+/// [label] will create the input's label, [placeholder] creates a placeholder
+/// text inside. If set to true, [obscureText] will hide the content of the input.
+///
+/// Icons can be added with [prefixIcon], which will add an icon to the left,
+/// or [suffixIcon], to the right.
+///
+/// The [descriptionText] is a text that will be placed below the input.
+///
+/// If [enabled] is false, the input will be disabled.
+///
+/// Example:
+/// ```dart
+/// BlincInputComponent.textField(
+///     label: 'Label',
+///     placeholder: 'Placeholder',
+///     descriptionText: 'Description area',
+///     suffixIcon: Icons.remove_red_eye_outlined,
+///     prefixIcon: Icons.phone_outlined,
+///     validator: BlincInputComponent.validations.required,
+/// )
+/// ```
 class BlincInputComponent {
   /// [label] label text
   ///
@@ -49,7 +80,7 @@ class BlincInputComponent {
   }
 
   static Widget dropdown() {
-    return BlincInputTextField();
+    return const BlincInputTextField();
   }
 
   /// The form method creates a form to wrap the BlincInputComponent.input.
