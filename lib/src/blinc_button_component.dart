@@ -2,6 +2,26 @@ import 'package:blinc_ui_flutter/src/blinc_colors.dart';
 import 'package:blinc_ui_flutter/src/loading_spinner_component.dart';
 import 'package:flutter/material.dart';
 
+/// The BlincButton widgets creates a styled button.
+/// You can choose between presets with BlincButton().largePrimary for example:
+/// ```dart
+///BlincButton(
+///    text: 'My Button',
+///    icon: Icons.person_pin_circle_outlined,
+///    onPressed: () {},
+///    isIconInverted: true,
+///).largePrimary(),
+/// ```
+/// The presets can be chosen between small, large and combined with primary,
+/// secondary and tertiary
+///
+/// The [text] property will add the text inside, which can be styled
+/// with [textStyle]. If [isUnderlined] is set to true, will show an underlined
+/// decoration. [padding] will create a padding inside the button. With [icon]
+/// you can add an icon to the left side of the button, and switch it's position to
+/// right with [isIconInverted] set to true. If [isLoading] is true, the content
+/// of the button will be replaced by a loading wheel. If [isFLuid] is set to true
+/// it will take all the available space around.
 class BlincButton extends StatefulWidget {
   const BlincButton({
     Key? key,
