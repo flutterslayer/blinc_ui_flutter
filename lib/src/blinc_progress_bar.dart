@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 /// [value], that can range from 0 to 1 indicating the percentage of the progress.
 /// The style can be switched to dark mode if [dark] is set to true.
 /// Example:
+/// ```dart
 /// BlincProgressBar(
 ///     value: 0.2,
 ///     dark: true,
 /// ),
+///```
 class BlincProgressBar extends StatelessWidget {
   const BlincProgressBar({
     Key? key,
