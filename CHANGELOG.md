@@ -1,6 +1,6 @@
 ## 0.0.1
 
-### Added
+Initial Version of the library.
 
 - Add borders, gradients and shadows
 - Add standard spacing, colors and typography
