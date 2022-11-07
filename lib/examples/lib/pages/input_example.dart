@@ -42,7 +42,7 @@ class InputExample extends StatelessWidget {
                 placeholder: 'Placeholder',
                 descriptionText: 'Description area',
               ),
-              const SizedBox(height: 20),
+              /*const SizedBox(height: 20),
               BlincInputComponent.textField(
                 label: 'Label',
                 placeholder: 'Placeholder',
@@ -143,6 +143,7 @@ class InputExample extends StatelessWidget {
                 prefixIcon: Icons.phone_outlined,
                 textEditingController: TextEditingController(text: 'Input'),
               ),
+              */
               const SizedBox(height: 20),
               BlincInputComponent.textField(
                 label: 'Label',
@@ -164,15 +165,50 @@ class InputExample extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
-                dropdownOptions: ['1'],
+                label: 'Label',
+                descriptionText: 'Description area',
+                dropdownOptions: ['aihfbfgba'],
+                initialValue: 'Initial Value',
+                placeholder: 'Placeholder',
                 prefixIcon: Icons.phone_outlined,
-                enabled: false,
+                enabled: true,
                 validator: (value) {
                   return 'Description area';
                 },
+                optionBuilder: (index) {
+                  return Row(
+                    children: [
+                      Text(['aihfbfgba'][index])
+                    ],
+                  );
+                },
+                onChanged: (value) {
+                  print(value);
+                },
               ),
-              BlincInputComponent.dropdown(dropdownOptions: []),
-              BlincInputComponent.dropdown(dropdownOptions: []),
+              BlincInputComponent.dropdown(
+                dropdownOptions: ['ss', 'daijd'],
+                optionBuilder: (index) {
+                  return Row(
+                    children: [
+                      Text(['aihfbfgba'][index])
+                    ],
+                  );
+                },
+                label: 'Label',
+                placeholder: 'Placeholder',
+              ),
+              BlincInputComponent.dropdown(
+                optionBuilder: (index) {
+                  return Row(
+                    children: [
+                      Text(['aihfbfgba'][index])
+                    ],
+                  );
+                },
+                dropdownOptions: ['afijafi'],
+                placeholder: 'Placeholder',
+              ),
             ],
           ),
         ),

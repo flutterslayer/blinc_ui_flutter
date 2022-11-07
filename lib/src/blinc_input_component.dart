@@ -51,25 +51,27 @@ class BlincInputComponent {
 
   static Widget dropdown({
     required List? dropdownOptions,
+    required Widget Function(int index) optionBuilder,
     String? label,
     String? placeholder,
-    bool obscureText = false,
+    String? initialValue,
     IconData? prefixIcon,
     String? descriptionText,
     bool enabled = true,
-    String? currentInputValue,
     FormFieldValidator<String>? validator,
+    void Function(String value)? onChanged,
   }) {
     return BlincInputDropdown(
       dropdownOptions: dropdownOptions,
+      optionBuilder: optionBuilder,
       label: label,
       placeholder: placeholder,
-      obscureText: obscureText,
+      initialValue: initialValue,
       prefixIcon: prefixIcon,
       descriptionText: descriptionText,
       enabled: enabled,
-      currentInputValue: currentInputValue,
       validator: validator,
+      onChanged: onChanged,
     );
   }
 
