@@ -49,9 +49,10 @@ class BlincInputComponent {
     );
   }
 
-  static Widget dropdown({
+  static Widget dropdown<T>({
     required List? dropdownOptions,
     required Widget Function(int index) optionBuilder,
+    required void Function(T) onChanged,
     String? label,
     String? placeholder,
     String? initialValue,
@@ -59,7 +60,6 @@ class BlincInputComponent {
     String? descriptionText,
     bool enabled = true,
     FormFieldValidator<String>? validator,
-    void Function(String value)? onChanged,
   }) {
     return BlincInputDropdown(
       dropdownOptions: dropdownOptions,

@@ -5,6 +5,11 @@ class InputExample extends StatelessWidget {
   InputExample({Key? key}) : super(key: key);
 
   final _globalKey = GlobalKey<FormState>();
+  final _listModel = [
+    ModelTest(name: 'name 1', id: 1),
+    ModelTest(name: 'name 2', id: 2),
+    ModelTest(name: 'name 3', id: 3),
+  ];
 
   void _validateForm() {
     _globalKey.currentState?.validate();
@@ -164,10 +169,10 @@ class InputExample extends StatelessWidget {
                 validator: BlincInputComponent.validations.required,
               ),
               const SizedBox(height: 20),
-              BlincInputComponent.dropdown(
+              BlincInputComponent.dropdown<ModelTest>(
                 label: 'Label',
                 descriptionText: 'Description area',
-                dropdownOptions: ['aihfbfgba'],
+                dropdownOptions: _listModel,
                 initialValue: 'Initial Value',
                 placeholder: 'Placeholder',
                 prefixIcon: Icons.phone_outlined,
@@ -176,17 +181,11 @@ class InputExample extends StatelessWidget {
                   return 'Description area';
                 },
                 optionBuilder: (index) {
-                  return Row(
-                    children: [
-                      Text(['aihfbfgba'][index])
-                    ],
-                  );
+                  return Text(_listModel[index].name);
                 },
-                onChanged: (value) {
-                  print(value);
-                },
+                onChanged: (ModelTest value) {},
               ),
-              BlincInputComponent.dropdown(
+              /* BlincInputComponent.dropdown(
                 dropdownOptions: ['ss', 'daijd'],
                 optionBuilder: (index) {
                   return Row(
@@ -208,7 +207,7 @@ class InputExample extends StatelessWidget {
                 },
                 dropdownOptions: ['afijafi'],
                 placeholder: 'Placeholder',
-              ),
+              ),*/
             ],
           ),
         ),
@@ -219,4 +218,14 @@ class InputExample extends StatelessWidget {
       ),
     );
   }
+}
+
+class ModelTest {
+  final String name;
+  final int id;
+
+  ModelTest({
+    required this.name,
+    required this.id,
+  });
 }

@@ -1,7 +1,7 @@
 import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
-class BlincInputDropdown extends StatefulWidget {
+class BlincInputDropdown<T> extends StatefulWidget {
   List? dropdownOptions;
   Widget Function(int index) optionBuilder;
   final String? label;
@@ -11,19 +11,19 @@ class BlincInputDropdown extends StatefulWidget {
   final String? descriptionText;
   bool enabled;
   FormFieldValidator<String>? validator;
-  void Function(String value)? onChanged;
+  void Function(T) onChanged;
 
   BlincInputDropdown({
     Key? key,
     required this.dropdownOptions,
     required this.optionBuilder,
+    required this.onChanged,
     this.label,
     this.placeholder,
     this.initialValue,
     this.prefixIcon,
     this.descriptionText,
     this.enabled = true,
-    this.onChanged,
     this.validator,
   }) : super(key: key);
 
@@ -207,10 +207,13 @@ class _BlincInputDropdownState extends State<BlincInputDropdown> {
               InkWell(
                 onTap: () {
                   _selectOption(index);
-                  if (widget.onChanged != null &&
+
+                  print(widget.onChanged);
+
+                  /*if (widget.onChanged != null &&
                       widget.dropdownOptions != null) {
-                    widget.onChanged!(widget.dropdownOptions![index]);
-                  }
+                    */ /*widget.onChanged!(widget.dropdownOptions![index] as T);*/ /*
+                  }*/
                 },
                 child: SizedBox(
                   height: 53,
