@@ -1,6 +1,6 @@
 ## 0.0.1
 
-Initial Version of the library.
+Initial Version of the package.
 
 - Add borders, gradients and shadows
 - Add standard spacing, colors and typography
