@@ -1,5 +1,5 @@
 name: blinc_ui_flutter
-description: A new Flutter package project.
+description: User-friendly custom widget pack. Including inputs, button, progress bar, typography, borders, gradient and other useful widgets.
 version: 0.0.1
 homepage: https://oneblinc.com/
 repository: https://github.com/flutterslayer/blinc_ui_flutter

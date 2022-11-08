@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 /// ```dart
 /// BlincText('Proxima Nova').weightThin.heightXXS.sizeXXXS,
 /// ```
+//ignore: must_be_immutable
 class BlincText extends BaseBlincText {
   BlincText(
     this.text, {
@@ -29,6 +30,7 @@ class BlincText extends BaseBlincText {
   }
 }
 
+//ignore: must_be_immutable
 abstract class BaseBlincText extends StatelessWidget {
   BaseBlincText({super.key});
 

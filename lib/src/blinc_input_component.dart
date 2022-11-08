@@ -319,7 +319,7 @@ class BlincInputValidation {
   }
 
   String? validatePasscode(String? value) {
-    if (value == null) {
+    if (value == null || value.isEmpty) {
       return 'Passcode required';
     }
     if (value.isNotEmpty) {

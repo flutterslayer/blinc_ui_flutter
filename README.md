@@ -16,6 +16,9 @@
     - [Shadows](#shadows)
     - [Borders](#borders)
     - [AppColors](#appcolors)
+    - [ProgressBar](#progressbar)
+    - [Typography](#typography)
+    - [Inputs](#inputs)
 
 
 
@@ -540,3 +543,267 @@ Widget block(
 }
 ```
 
+## ProgressBar
+The BlincProgressBar component creates a progress bar. 
+
+* value: the percentage of the current progress. The value can range from 0.0 to 1.0
+* dark: if true, switches to the dark theme.
+
+```dart
+BlincProgressBar(
+  value: 0.1 //10%,
+  dark: isDarkMode,
+),
+```
+
+### Example
+<img src="https://user-images.githubusercontent.com/103216807/197848945-2643e670-38e4-418e-bd5a-fe74c10878bc.gif" align = "right" width = "350px">
+
+
+
+```dart
+  SafeArea(
+    child: Padding(
+      padding: const EdgeInsets.only(top: 35.0),
+      child: Container(
+        alignment: Alignment.center,
+        child: SizedBox(
+          width: 350,
+          child: Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Dark Mode',
+                      style: TextStyle(
+                        color: isDarkMode
+                            ? AppColors.colorNeutral_0
+                            : AppColors.colorNeutral_900,
+                      ),
+                    ),
+                    Switch(
+                      value: isDarkMode,
+                      onChanged: ((value) {
+                        setState(() {
+                          isDarkMode = !isDarkMode;
+                        });
+                      }),
+                    ),
+                  ],
+                ),
+                BlincSpacer.vertical.xxs,
+                BlincLogo(
+                  logoTheme:
+                      isDarkMode ? LogoTheme.white : LogoTheme.standard,
+                ),
+                BlincSpacer.vertical.xs,
+                BlincProgressBar(
+                  value: value,
+                  dark: isDarkMode,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+```
+
+## Typography
+The Typography component creates a text, where you can customize with a series of methods.
+
+### Weight
+- weightThin
+- weightLight
+- weightRegular
+- weightMedium
+- weightSemiBold
+- weightBold
+- weightExtraBold
+- weightBlack
+
+### Size
+- sizeXXXS
+- sizeXXS
+- sizeXS
+- sizeSM
+- sizeMD
+- sizeLG
+- sizeXL
+- sizeXXL
+- sizeXXXL
+- sizeHuge
+- sizeXHuge
+- sizeXXHuge
+
+### Line Height
+- heightXXXS
+- heightXXS
+- heightXS
+- heightSM
+- heightMD
+- heightLG
+- heightXL
+- heightXXL
+- heightXXXL
+- heightHuge
+- heightXHuge
+
+
+### Example
+<img src="https://user-images.githubusercontent.com/103216807/197858549-0c64e663-6e50-4abe-a77b-2ade11574ff5.png" align = "right" width = "350px">
+
+
+
+
+```dart
+  SafeArea(
+    child: ListView(
+      padding: const EdgeInsets.all(8.0),
+      children: [
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightThin.heightXXS.sizeXXXS,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightLight.heightXS.sizeXS,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightRegular.heightSM.sizeMD,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightMedium.heightMD.sizeLG,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightSemiBold.heightXXL.sizeHuge,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightExtraBold.heightHuge.sizeXHuge,
+        BlincSpacer.vertical.xxs,
+        BlincText('Proxima Nova').weightBlack.heightXHuge.sizeXXHuge,
+      ],
+    ),
+  ),
+```
+
+## Inputs
+The BlincInputComponent can create forms and inputs and has pre-built validators.
+To use it, you must wrap a BlincInputComponent.input inside a BlincInputComponent.form.
+
+To create a BlincInputComponent.form you must provide the key and the child:
+
+```dart
+  final _globalKey = GlobalKey<FormState>();
+  BlincInputComponent.form(
+    globalKey: _globalKey,
+    child: Container(
+      ...
+    )
+  )
+```
+
+To customize a BlincInputComponent.input you can provide:
+- label: the label text
+- placeholder - the placeholder text
+- obscureText - if true, will hide the inserted content (for passwords, for example)
+- prefixIcon - adds an icon to the left
+- suffixIcon - adds an icon to the right
+- descriptionText - the description text below the input
+- enabled - if set to false the input gets disabled
+- textEditingController - controls the text inside the input
+- textInputType - keyboard type (Mobile for example)
+- validator - pre-built validations (E.g.: BlincInputComponent.validations.required)
+
+
+### Example
+<img src="https://user-images.githubusercontent.com/103216807/197883657-8df99d02-b9a1-42b2-962e-4e53ce987408.png" align = "right" width = "400px">
+
+
+
+```dart
+  class InputExample extends StatelessWidget {
+  InputExample({Key? key}) : super(key: key);
+
+  final _globalKey = GlobalKey<FormState>();
+
+  void _validateForm() {
+    _globalKey.currentState?.validate();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black87,
+        title: const Text('Input component example'),
+      ),
+      body: SafeArea(
+        child: BlincInputComponent.form(
+          globalKey: _globalKey,
+          child: Container(
+            alignment: Alignment.center,
+            child: SizedBox(
+              width: 400,
+              child: ListView(
+                padding: const EdgeInsets.all(8.0),
+                children: [
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    obscureText: true,
+                    label: 'Label',
+                    descriptionText: 'Common Input',
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    placeholder: 'My Placeholder',
+                    descriptionText: 'Input with placeholder',
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    placeholder: 'Placeholder',
+                    descriptionText: 'Input with placeholder and default text',
+                    textEditingController:
+                        TextEditingController(text: 'Default Text'),
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    placeholder: 'Placeholder',
+                    descriptionText: 'Disabled Input',
+                    textEditingController: TextEditingController(text: 'Input'),
+                    enabled: false,
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    placeholder: 'Placeholder',
+                    descriptionText: 'Required field',
+                    validator: BlincInputComponent.validations.required,
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    descriptionText: 'Field with suffixIcon',
+                    suffixIcon: Icons.remove_red_eye_outlined,
+                  ),
+                  BlincSpacer.vertical.xxs,
+                  BlincInputComponent.textField(
+                    label: 'Label',
+                    descriptionText: 'Field with both icons',
+                    suffixIcon: Icons.remove_red_eye_outlined,
+                    prefixIcon: Icons.phone_outlined,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _validateForm,
+        child: const Icon(Icons.send),
+      ),
+    );
+  }
+}
+```
