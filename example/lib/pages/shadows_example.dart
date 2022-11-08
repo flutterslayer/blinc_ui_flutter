@@ -1,5 +1,5 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:blinc_ui_flutter/src/blinc_shadows.dart';
 
 class ShadowsExample extends StatelessWidget {
   const ShadowsExample({super.key});
