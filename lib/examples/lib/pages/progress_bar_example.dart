@@ -1,116 +1,92 @@
+import 'dart:async';
+
 import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
-class ProgressBarExample extends StatelessWidget {
+class ProgressBarExample extends StatefulWidget {
   const ProgressBarExample({Key? key}) : super(key: key);
+
+  @override
+  State<ProgressBarExample> createState() => _ProgressBarExampleState();
+}
+
+class _ProgressBarExampleState extends State<ProgressBarExample> {
+  double value = 0;
+  bool isDarkMode = false;
+
+  late Timer timer;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(milliseconds: 200), (timer) {
+      updateValue();
+    });
+  }
+
+  void updateValue() {
+    final addedValue = (value + 0.05);
+    if (addedValue >= 1) {
+      setState(() {
+        value = 0;
+      });
+      return;
+    }
+    setState(() {
+      value = addedValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          isDarkMode ? AppColors.colorNeutral_900 : AppColors.colorNeutral_0,
       appBar: AppBar(
         backgroundColor: Colors.black87,
         title: const Text('Progress component example'),
       ),
-      body: Container(
-        height: double.maxFinite,
-        color: AppColors.colorNeutral_100,
-        child: SafeArea(
-          child: SingleChildScrollView(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 35.0),
+          child: Container(
+            alignment: Alignment.center,
             child: SizedBox(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+              width: 350,
+              child: Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.1,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Dark Mode',
+                          style: TextStyle(
+                            color: isDarkMode
+                                ? AppColors.colorNeutral_0
+                                : AppColors.colorNeutral_900,
+                          ),
+                        ),
+                        Switch(
+                          value: isDarkMode,
+                          onChanged: ((value) {
+                            setState(() {
+                              isDarkMode = !isDarkMode;
+                            });
+                          }),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.2,
+                    BlincSpacer.vertical.xxs,
+                    BlincLogo(
+                      logoTheme:
+                          isDarkMode ? LogoTheme.white : LogoTheme.standard,
                     ),
-                    SizedBox(height: 20),
+                    BlincSpacer.vertical.xs,
                     BlincProgressBar(
-                      value: 0.3,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.4,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.5,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.6,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.7,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.8,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.9,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 1.0,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.1,
-                      dark: false,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.2,
-                      dark: false,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.3,
-                      dark: false,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.4,
-                      dark: false,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.5,
-                      dark: false,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.6,
-                      dark: false,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.7,
-                      dark: false,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.8,
-                      dark: false,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 0.9,
-                      dark: false,
-                    ),
-                    SizedBox(height: 20),
-                    BlincProgressBar(
-                      value: 1.0,
-                      dark: false,
+                      value: value,
+                      dark: isDarkMode,
                     ),
                   ],
                 ),
