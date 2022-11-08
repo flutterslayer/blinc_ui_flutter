@@ -37,7 +37,7 @@ dependencies:
 You can install packages from the command line:
 
 ```
-$ flutter pub get blinc_ui_flutter
+$ flutter pub add blinc_ui_flutter
 ```
 
 
