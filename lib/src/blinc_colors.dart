@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// The AppColors class provides pre defined colors for general use.
+/// Example:
+/// ```dart
+/// AppColors.colorNeutral_900
+/// ```
 class AppColors {
   AppColors();
 
