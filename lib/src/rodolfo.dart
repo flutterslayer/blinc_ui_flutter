@@ -1,29 +1,32 @@
 import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
-class BlincInputDropdown<T> extends StatefulWidget {
+class BlincInputDropdown extends StatefulWidget {
+  ///tesst
   List? dropdownOptions;
-  Widget Function(int index) optionBuilder;
-  final String? label;
-  final String? placeholder;
-  final String? initialValue;
-  final IconData? prefixIcon;
+  void Function(String? value, int? index) onChanged;
+  Widget Function(int index)? customOptionBuilder;
   final String? descriptionText;
   bool enabled;
+  bool hasBlankOption;
+  final String? initialValue;
+  final String? label;
+  final String? placeholder;
+  final IconData? prefixIcon;
   FormFieldValidator<String>? validator;
-  void Function(T) onChanged;
 
   BlincInputDropdown({
     Key? key,
     required this.dropdownOptions,
-    required this.optionBuilder,
     required this.onChanged,
-    this.label,
-    this.placeholder,
-    this.initialValue,
-    this.prefixIcon,
+    this.customOptionBuilder,
     this.descriptionText,
     this.enabled = true,
+    this.hasBlankOption = false,
+    this.initialValue,
+    this.label,
+    this.placeholder,
+    this.prefixIcon,
     this.validator,
   }) : super(key: key);
 
@@ -32,12 +35,12 @@ class BlincInputDropdown<T> extends StatefulWidget {
 }
 
 class _BlincInputDropdownState extends State<BlincInputDropdown> {
-  String? _errorMessage;
   Color _borderColor = Colors.grey;
-  bool _showOptionsList = false;
-  bool _hasSelected = false;
   String _currentInputValue = '';
+  String? _errorMessage;
+  bool _hasSelected = false;
   Color _labelColor = AppColors.colorNeutral_800;
+  bool _showOptionsList = false;
 
   Color _borderStyleRule() {
     if (_errorMessage != null) {
@@ -80,93 +83,115 @@ class _BlincInputDropdownState extends State<BlincInputDropdown> {
     });
   }
 
+  Color? _enabledWidgetColorRule() {
+    return widget.enabled ? null : AppColors.colorNeutral_400;
+  }
+
+  Color _initialValueColorRule() {
+    return widget.initialValue == null
+        ? AppColors.colorNeutral_600
+        : AppColors.colorNeutral_900;
+  }
+
+  Widget _onlyLabelRule() {
+    return _hasSelected
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.label!,
+                style: TextStyle(
+                  color: _labelColor,
+                  fontSize: 12,
+                ),
+              ),
+              Text(
+                _currentInputValue,
+                style: TextStyle(
+                  color: _enabledWidgetColorRule(),
+                ),
+              ),
+            ],
+          )
+        : Text(
+            widget.label!,
+            style: TextStyle(
+              fontSize: 16,
+              color: _enabledWidgetColorRule(),
+            ),
+          );
+  }
+
+  List<Widget> _labelAndOtherTextRule() {
+    return [
+      Text(
+        widget.label!,
+        style: TextStyle(
+          color: _labelColor,
+          fontSize: _hasSelected ||
+                  widget.placeholder != null ||
+                  widget.initialValue != null
+              ? 12
+              : null,
+        ),
+      ),
+      _hasSelected
+          ? BlincText(_currentInputValue).sizeXS.heightSM
+          : Text(
+              widget.initialValue ?? widget.placeholder!,
+              style: TextStyle(
+                fontSize: 16,
+                color: _initialValueColorRule(),
+                height: 1.5,
+              ),
+            )
+    ];
+  }
+
+  Widget _noLabelRule() {
+    return _hasSelected
+        ? Text(
+            _currentInputValue,
+            style: TextStyle(
+              color: _enabledWidgetColorRule(),
+            ),
+          )
+        : widget.placeholder != null || widget.initialValue != null
+            ? Text(
+                widget.initialValue ?? widget.placeholder!,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: _initialValueColorRule(),
+                  height: 1.5,
+                ),
+              )
+            : Container();
+  }
+
+  bool _hasLabelAndOtherText() {
+    return widget.label != null &&
+        (widget.placeholder != null || widget.initialValue != null);
+  }
+
+  bool _hasOnlyLabel() {
+    return widget.label != null &&
+        (widget.placeholder == null && widget.initialValue == null);
+  }
+
   Widget _textColumn() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: widget.label != null &&
-              (widget.placeholder == null && widget.initialValue == null)
+      children: _hasOnlyLabel()
           ? [
-              !_hasSelected
-                  ? Text(
-                      widget.label!,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color:
-                            widget.enabled ? null : AppColors.colorNeutral_400,
-                      ),
-                    )
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.label!,
-                          style: TextStyle(
-                            color: _labelColor,
-                            fontSize: 12,
-                          ),
-                        ),
-                        Text(
-                          _currentInputValue,
-                          style: TextStyle(
-                            color: widget.enabled
-                                ? null
-                                : AppColors.colorNeutral_400,
-                          ),
-                        ),
-                      ],
-                    ),
+              _onlyLabelRule(),
             ]
-          : widget.label != null &&
-                  (widget.placeholder != null || widget.initialValue != null)
+          : _hasLabelAndOtherText()
               ? [
-                  Text(
-                    widget.label!,
-                    style: TextStyle(
-                      color: _labelColor,
-                      fontSize: _hasSelected ||
-                              widget.placeholder != null ||
-                              widget.initialValue != null
-                          ? 12
-                          : null,
-                    ),
-                  ),
-                  _hasSelected
-                      ? BlincText(_currentInputValue).sizeXS.heightSM
-                      : Text(
-                          widget.initialValue ?? widget.placeholder!,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: widget.initialValue == null
-                                ? AppColors.colorNeutral_600
-                                : AppColors.colorNeutral_900,
-                            height: 1.5,
-                          ),
-                        ),
+                  ..._labelAndOtherTextRule(),
                 ]
               : [
-                  _hasSelected
-                      ? Text(
-                          _currentInputValue,
-                          style: TextStyle(
-                            color: widget.enabled
-                                ? null
-                                : AppColors.colorNeutral_400,
-                          ),
-                        )
-                      : widget.placeholder != null ||
-                              widget.initialValue != null
-                          ? Text(
-                              widget.initialValue ?? widget.placeholder!,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: widget.initialValue == null
-                                    ? AppColors.colorNeutral_600
-                                    : AppColors.colorNeutral_900,
-                                height: 1.5,
-                              ),
-                            )
-                          : Container()
+                  _noLabelRule(),
                 ],
     );
   }
@@ -183,47 +208,70 @@ class _BlincInputDropdownState extends State<BlincInputDropdown> {
     _onDropDownTap();
   }
 
-  Widget optionBuilder(int index) {
-    if (widget.dropdownOptions == null) throw Error();
-    return Text('${widget.dropdownOptions![index]}');
+  void _selectBlankOption() {
+    _hasSelected = false;
+    _currentInputValue = '';
+    _onDropDownTap();
+  }
+
+  Widget _optionBuilder(int index) {
+    return Row(
+      children: [
+        Text('${widget.dropdownOptions![index]}'),
+      ],
+    );
   }
 
   Widget _optionsList() {
-    return ListView.builder(
+    return ListView(
       shrinkWrap: true,
-      itemCount: widget.dropdownOptions!.length,
-      itemBuilder: (context, index) {
-        return Container(
-          padding: const EdgeInsets.only(
-            left: 24,
-            right: 24,
+      children: [
+        if (widget.hasBlankOption)
+          InkWell(
+            onTap: () {
+              _selectBlankOption();
+
+              widget.onChanged(null, null);
+            },
+            child: const SizedBox(
+              width: 24,
+              height: 53,
+            ),
           ),
-          child: Column(
-            children: [
-              Container(
-                height: 0.25,
-                color: AppColors.colorNeutral_200,
-              ),
-              InkWell(
-                onTap: () {
-                  _selectOption(index);
+        ...widget.dropdownOptions!.asMap().entries.map((entry) {
+          int index = entry.key;
 
-                  print(widget.onChanged);
-
-                  /*if (widget.onChanged != null &&
-                      widget.dropdownOptions != null) {
-                    */ /*widget.onChanged!(widget.dropdownOptions![index] as T);*/ /*
-                  }*/
-                },
-                child: SizedBox(
-                  height: 53,
-                  child: widget.optionBuilder(index),
+          return Container(
+            padding: const EdgeInsets.only(
+              left: 24,
+              right: 24,
+            ),
+            child: Column(
+              children: [
+                Container(
+                  height: 0.25,
+                  color: AppColors.colorNeutral_200,
                 ),
-              ),
-            ],
-          ),
-        );
-      },
+                InkWell(
+                  onTap: () {
+                    _selectOption(index);
+
+                    if (widget.dropdownOptions != null) {
+                      widget.onChanged(widget.dropdownOptions![index], index);
+                    }
+                  },
+                  child: SizedBox(
+                    height: 53,
+                    child: widget.customOptionBuilder == null
+                        ? _optionBuilder(index)
+                        : widget.customOptionBuilder!(index),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }).toList()
+      ],
     );
   }
 

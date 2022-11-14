@@ -5,6 +5,7 @@ class InputExample extends StatelessWidget {
   InputExample({Key? key}) : super(key: key);
 
   final _globalKey = GlobalKey<FormState>();
+  final ModelTest sla = ModelTest(name: 'name 1', id: 1);
   final _listModel = [
     ModelTest(name: 'name 1', id: 1),
     ModelTest(name: 'name 2', id: 2),
@@ -169,25 +170,25 @@ class InputExample extends StatelessWidget {
                 validator: BlincInputComponent.validations.required,
               ),
               const SizedBox(height: 20),
-              BlincInputComponent.dropdown<ModelTest>(
+              BlincInputComponent.dropdown(
                 label: 'Label',
                 descriptionText: 'Description area',
-                dropdownOptions: _listModel,
-                initialValue: 'Initial Value',
+                dropdownOptions: _listModel.map((e) => e.name).toList(),
                 placeholder: 'Placeholder',
                 prefixIcon: Icons.phone_outlined,
                 enabled: true,
                 validator: (value) {
                   return 'Description area';
                 },
-                optionBuilder: (index) {
-                  return Text(_listModel[index].name);
+                onChanged: (String? value, int? index) {
+                  if (index == null) return;
+                  _listModel[index].id;
                 },
-                onChanged: (ModelTest value) {},
               ),
-              /* BlincInputComponent.dropdown(
-                dropdownOptions: ['ss', 'daijd'],
-                optionBuilder: (index) {
+              BlincInputComponent.dropdown(
+                onChanged: (value, index) {},
+                dropdownOptions: ['ss'],
+                customOptionBuilder: (index) {
                   return Row(
                     children: [
                       Text(['aihfbfgba'][index])
@@ -198,7 +199,9 @@ class InputExample extends StatelessWidget {
                 placeholder: 'Placeholder',
               ),
               BlincInputComponent.dropdown(
-                optionBuilder: (index) {
+                hasBlankOption: true,
+                onChanged: (value, index) {},
+                customOptionBuilder: (index) {
                   return Row(
                     children: [
                       Text(['aihfbfgba'][index])
@@ -206,8 +209,8 @@ class InputExample extends StatelessWidget {
                   );
                 },
                 dropdownOptions: ['afijafi'],
-                placeholder: 'Placeholder',
-              ),*/
+                label: 'Placeholder',
+              ),
             ],
           ),
         ),
