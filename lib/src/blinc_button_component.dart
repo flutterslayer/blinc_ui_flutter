@@ -1,5 +1,6 @@
 import 'package:blinc_ui_flutter/src/blinc_colors.dart';
 import 'package:blinc_ui_flutter/src/loading_spinner_component.dart';
+import 'package:blinc_ui_flutter/src/spacing.dart';
 import 'package:flutter/material.dart';
 
 /// The BlincButton widgets creates a styled button.
@@ -160,6 +161,72 @@ class BlincButton extends StatefulWidget {
       isLoading: isLoading,
       isFluid: isFluid,
       isUnderlined: true,
+    );
+  }
+
+  BlincButton _doubleSecondary() {
+    return BlincButton(
+      text: text,
+      onPressed: onPressed,
+      buttonTheme: SecondaryButtonTheme(),
+      blincButtonPresets: DoubleSecondaryPresets(),
+      padding: padding,
+      icon: icon,
+      isIconInverted: isIconInverted,
+      isLoading: isLoading,
+      isFluid: isFluid,
+    );
+  }
+
+  BlincButton _doublePrimary() {
+    return BlincButton(
+      text: text,
+      onPressed: onPressed,
+      buttonTheme: PrimaryButtonTheme(),
+      blincButtonPresets: DoublePrimaryPresets(),
+      padding: padding,
+      icon: icon,
+      isIconInverted: isIconInverted,
+      isLoading: isLoading,
+      isFluid: isFluid,
+    );
+  }
+
+  static Widget doubleButton({
+    required String textLeft,
+    Function? onPressedLeft,
+    required String textRight,
+    Function? onPressedRight,
+  }) {
+    return Expanded(
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return Stack(
+            children: [
+              Align(
+                alignment: const Alignment(-0.7, 0),
+                child: SizedBox(
+                  width: constraints.maxWidth / 2,
+                  child: BlincButton(
+                    text: textLeft,
+                    onPressed: onPressedLeft,
+                  )._doubleSecondary(),
+                ),
+              ),
+              Align(
+                alignment: const Alignment(0.8, 0),
+                child: SizedBox(
+                  width: constraints.maxWidth / 2,
+                  child: BlincButton(
+                    text: textRight,
+                    onPressed: onPressedRight,
+                  )._doublePrimary(),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -409,10 +476,11 @@ class _BlincButtonState extends State<BlincButton> {
                     Flexible(
                       child: Text(
                         widget.text!,
-                        style: const TextStyle(
+                        style: TextStyle(
                           height: 1.5,
                           decorationThickness: 1.2,
                           color: Colors.transparent,
+                          fontSize: widget.blincButtonPresets?.fontSize,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -422,8 +490,10 @@ class _BlincButtonState extends State<BlincButton> {
                     Flexible(
                       child: Text(
                         widget.text!,
-                        style: const TextStyle(
+                        style: TextStyle(
                           height: 1.42,
+                          fontWeight: null,
+                          fontSize: widget.blincButtonPresets?.fontSize,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -690,6 +760,53 @@ class LargePresets implements BlincButtonPresets {
   @override
   final shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10.0),
+  );
+  @override
+  final fontSize = 20;
+  @override
+  final iconSize = 19.5;
+  @override
+  final loadingSpinnerSize = 19;
+}
+
+class DoublePrimaryPresets implements BlincButtonPresets {
+  @override
+  final minimumWidth = 0;
+  @override
+  final minimumHeight = 72;
+  @override
+  final padding = const EdgeInsets.only(
+    left: Spacing.xs,
+    right: Spacing.xs,
+  );
+  @override
+  final shape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10.0),
+  );
+  @override
+  final fontSize = 20;
+  @override
+  final iconSize = 19.5;
+  @override
+  final loadingSpinnerSize = 19;
+}
+
+class DoubleSecondaryPresets implements BlincButtonPresets {
+  @override
+  final minimumWidth = 0;
+  @override
+  final minimumHeight = 72;
+  @override
+  final padding = const EdgeInsets.only(
+    left: Spacing.xs,
+    right: Spacing.xs,
+  );
+  @override
+  final shape = const RoundedRectangleBorder(
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(10),
+      bottomLeft: Radius.circular(10),
+    ),
   );
   @override
   final fontSize = 20;
