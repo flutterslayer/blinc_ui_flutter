@@ -167,7 +167,10 @@ class InputExample extends StatelessWidget {
                 descriptionText: 'Description area',
                 suffixIcon: Icons.remove_red_eye_outlined,
                 prefixIcon: Icons.phone_outlined,
-                validator: BlincInputComponent.validations.required,
+                validator: (value) {
+                  return 'dfa';
+                },
+                errorMessage: 'error deu bommm',
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
@@ -176,10 +179,8 @@ class InputExample extends StatelessWidget {
                 dropdownOptions: _listModel.map((e) => e.name).toList(),
                 placeholder: 'Placeholder',
                 prefixIcon: Icons.phone_outlined,
-                enabled: true,
-                validator: (value) {
-                  return 'Description area';
-                },
+                validator: BlincInputComponent.validations.required,
+                errorMessage: 'sddad',
                 onChanged: (String? value, int? index) {
                   if (index == null) return;
                   _listModel[index].id;
