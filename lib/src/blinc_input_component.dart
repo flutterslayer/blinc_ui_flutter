@@ -299,17 +299,17 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
 
 class BlincInputDropdown extends StatefulWidget {
   List? dropdownOptions;
-  void Function(String? value, int? index) onChanged;
-  Widget Function(int index)? customOptionBuilder;
+  final void Function(String? value, int? index) onChanged;
+  final Widget Function(int index)? customOptionBuilder;
   final String? descriptionText;
   bool enabled;
-  bool hasBlankOption;
+  final String? errorMessage;
+  final bool hasBlankOption;
   final String? initialValue;
   final String? label;
   final String? placeholder;
   final IconData? prefixIcon;
-  FormFieldValidator<String>? validator;
-  final String? errorMessage;
+  final FormFieldValidator<String>? validator;
 
   BlincInputDropdown({
     Key? key,
@@ -318,13 +318,13 @@ class BlincInputDropdown extends StatefulWidget {
     this.customOptionBuilder,
     this.descriptionText,
     this.enabled = true,
+    this.errorMessage,
     this.hasBlankOption = false,
     this.initialValue,
     this.label,
     this.placeholder,
     this.prefixIcon,
     this.validator,
-    this.errorMessage,
   }) : super(key: key);
 
   @override
