@@ -3,27 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BlincInputComponent {
-  /// [label] label text
+  ///A method from [BlincInputComponent] that renders a text field with Blinc's style.
+  ///All the parameters are optional.
   ///
-  /// [placeholder] placeholder text
+  /// [label] Label text.
   ///
-  /// [obscureText] hide the inserted content
+  /// [placeholder] Placeholder text.
   ///
-  /// [prefixIcon] left icon
+  /// [obscureText] Hide the inserted content.
   ///
-  /// [suffixIcon] right icon
+  /// [prefixIcon] Left icon.
   ///
-  /// [descriptionText] text below input
+  /// [suffixIcon] Right icon
   ///
-  /// [enabled] on or off
+  /// [descriptionText] Text below input.
+  ///
+  /// [enabled] On or off.
   ///
   /// [textEditingController] Controls the text being edited.
   ///
-  /// [textInputType] keyboard type (Mobile)
+  /// [textInputType] Keyboard type (Mobile).
   ///
-  /// [validator]  Validation (Ex.: BlincInputComponent.validations.required)
+  /// [validator]  Validation (Ex.: BlincInputComponent.validations.required).
   ///
-  /// [errorMessage]
+  /// [errorMessage] Error message displayed below the input, with proper styling.
   static Widget textField({
     String? label,
     String? placeholder,
@@ -52,6 +55,9 @@ class BlincInputComponent {
     );
   }
 
+  ///A method from [BlincInputComponent] that renders a dropdown with Blinc's style.
+  ///It requires two parameters, a list of options and onChanged callback.
+  ///
   ///[dropdownOptions] A list of items that the user can select.
   ///
   ///[onChanged] Called when the user selects an item.
@@ -62,7 +68,7 @@ class BlincInputComponent {
   ///
   ///[placeholder] An optional text positioned at the center-start of the input. Usually used to transport information.
   ///
-  ///[initialValue] Initiates with null, An optional value to initialize the dropdown value field to, or null otherwise
+  ///[initialValue] Initiates with null, An optional value to initialize the dropdown value field to, or null otherwise.
   ///
   ///[prefixIcon] Leading icon, positioned inside the input at left.
   ///
@@ -72,7 +78,9 @@ class BlincInputComponent {
   ///
   ///[hasBlankOption] Initiates with false, if true, a blank option is added as first option to dropdown's options.
   ///
-  ///[validator] Function that receives any validation and is executed on a submit action. (Ex.: BlincInputComponent.validations.required)
+  ///[validator] Function that receives any validation and is executed on a submit action. (Ex.: BlincInputComponent.validations.required).
+  ///
+  ///[errorMessage] Error message displayed below the input, with proper styling.
   static Widget dropdown({
     required List? dropdownOptions,
     required void Function(String? value, int? index) onChanged,
@@ -185,7 +193,7 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
   }
 
   Color _borderStyleRule() {
-    if (_errorMessage != null) {
+    if (_errorMessage != null || widget.errorMessage != null) {
       return AppColors.colorRedError_300;
     }
 
@@ -203,10 +211,12 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
       ),
       child: icon != null
           ? Icon(
-              hasSuffixIcon && _errorMessage != null
+              (hasSuffixIcon && _errorMessage != null) ||
+                      (hasSuffixIcon && widget.errorMessage != null)
                   ? Icons.new_releases_outlined
                   : icon,
-              color: (hasSuffixIcon && _errorMessage != null
+              color: ((hasSuffixIcon && _errorMessage != null) ||
+                      (hasSuffixIcon && widget.errorMessage != null)
                   ? AppColors.colorRedError_300
                   : AppColors.colorNeutral_800),
             )
@@ -233,19 +243,16 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
             enabled: widget.enabled,
             controller: widget.textEditingController,
             validator: (String? value) {
-              if (widget.errorMessage != null) {
+              if (widget.validator != null && widget.enabled) {
                 setState(() {
-                  _errorMessage = widget.errorMessage;
+                  _errorMessage = widget.validator!(value);
                 });
+                return _errorMessage;
+              }
+              if (widget.errorMessage != null) {
                 return widget.errorMessage;
               }
-              if (widget.validator == null) {
-                return null;
-              }
-              setState(() {
-                _errorMessage = widget.validator!(value);
-              });
-              return _errorMessage;
+              return null;
             },
             decoration: InputDecoration(
               errorMaxLines: 1,
@@ -284,11 +291,14 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
             left: 10,
           ),
           child: Text(
-            _errorMessage ?? widget.descriptionText ?? '',
+            _errorMessage ??
+                widget.errorMessage ??
+                widget.descriptionText ??
+                '',
             style: TextStyle(
-              color: _errorMessage != null
-                  ? AppColors.colorRedError_300
-                  : AppColors.colorNeutral_800,
+              color: _errorMessage == null && widget.errorMessage == null
+                  ? AppColors.colorNeutral_800
+                  : AppColors.colorRedError_300,
             ),
           ),
         ),
@@ -385,6 +395,7 @@ class _BlincInputDropdownState extends State<BlincInputDropdown> {
   }
 
   Color _initialValueColorRule() {
+    if (!widget.enabled) return AppColors.colorNeutral_400;
     return widget.initialValue == null
         ? AppColors.colorNeutral_600
         : AppColors.colorNeutral_900;
@@ -658,9 +669,9 @@ class _BlincInputDropdownState extends State<BlincInputDropdown> {
                 widget.descriptionText ??
                 '',
             style: TextStyle(
-              color: _errorMessage != null || widget.errorMessage != null
-                  ? AppColors.colorRedError_300
-                  : AppColors.colorNeutral_800,
+              color: _errorMessage == null && widget.errorMessage == null
+                  ? AppColors.colorNeutral_800
+                  : AppColors.colorRedError_300,
             ),
           ),
         ),
