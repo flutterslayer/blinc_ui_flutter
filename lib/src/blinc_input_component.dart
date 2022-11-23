@@ -84,7 +84,7 @@ class BlincInputComponent {
   static Widget dropdown({
     required List? dropdownOptions,
     required void Function(String? value, int? index) onChanged,
-    Widget Function(int index)? customOptionBuilder,
+    Widget Function(String value, int index)? customOptionBuilder,
     String? label,
     String? placeholder,
     String? initialValue,
@@ -310,7 +310,8 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
 class BlincInputDropdown extends StatefulWidget {
   List? dropdownOptions;
   final void Function(String? value, int? index) onChanged;
-  final Widget Function(int index)? customOptionBuilder;
+  final Widget Function(String currentInputValue, int index)?
+      customOptionBuilder;
   final String? descriptionText;
   bool enabled;
   final String? errorMessage;
@@ -572,7 +573,8 @@ class _BlincInputDropdownState extends State<BlincInputDropdown> {
                     height: 53,
                     child: widget.customOptionBuilder == null
                         ? _optionBuilder(index)
-                        : widget.customOptionBuilder!(index),
+                        : widget.customOptionBuilder!(
+                            _currentInputValue, index),
                   ),
                 ),
               ],
