@@ -15,10 +15,12 @@ class _InputExampleState extends State<InputExample> {
     ModelTest(name: 'name 2', id: 2),
     ModelTest(name: 'name 3', id: 3),
   ];
-  final String _descriptionText = 'Description area';
-  String _onChangedDescriptionText = 'Select any option to change this text';
+  final String _descriptionText = "Description area";
+  String _onChangedDescriptionText = "Select any option to change this text";
   final String _blankOptionDescriptionText =
-      'This dropdown has the blank option, try it out!';
+      "This dropdown has the blank option, try it out!";
+  final String _customBuilderDescriptionText =
+      "You can customize the option's Widget by yourself!";
 
   void _validateForm() {
     _globalKey.currentState?.validate();
@@ -240,10 +242,11 @@ class _InputExampleState extends State<InputExample> {
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
-                onChanged: (value, index) {},
                 label: 'Label',
+                placeholder: 'Placeholder',
                 descriptionText: _descriptionText,
                 dropdownOptions: _listModel.map((e) => e.name).toList(),
+                onChanged: (value, index) {},
                 customOptionBuilder: (value, index) {
                   return Row(
                     children: [
@@ -251,13 +254,10 @@ class _InputExampleState extends State<InputExample> {
                     ],
                   );
                 },
-                placeholder: 'Placeholder',
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
-                hasBlankOption: true,
                 label: 'Label',
-                placeholder: 'Placeholder',
                 initialValue: 'Input',
                 onChanged: (value, index) {},
                 customOptionBuilder: (value, index) {
@@ -272,11 +272,11 @@ class _InputExampleState extends State<InputExample> {
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
-                hasBlankOption: true,
+                label: 'Label',
+                initialValue: 'Input',
+                descriptionText: _descriptionText,
+                dropdownOptions: _listModel.map((e) => e.name).toList(),
                 enabled: false,
-                label: 'Label',
-                placeholder: 'Placeholder',
-                initialValue: 'Input',
                 onChanged: (value, index) {},
                 customOptionBuilder: (value, index) {
                   return Row(
@@ -285,17 +285,15 @@ class _InputExampleState extends State<InputExample> {
                     ],
                   );
                 },
-                dropdownOptions: _listModel.map((e) => e.name).toList(),
-                descriptionText: _descriptionText,
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
-                hasBlankOption: true,
                 label: 'Label',
-                placeholder: 'Placeholder',
                 initialValue: 'Input',
-                onChanged: (value, index) {},
+                descriptionText: _descriptionText,
+                dropdownOptions: _listModel.map((e) => e.name).toList(),
                 errorMessage: "That's the error message parameter",
+                onChanged: (value, index) {},
                 customOptionBuilder: (value, index) {
                   return Row(
                     children: [
@@ -303,14 +301,13 @@ class _InputExampleState extends State<InputExample> {
                     ],
                   );
                 },
-                dropdownOptions: _listModel.map((e) => e.name).toList(),
-                descriptionText: _descriptionText,
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
                 label: 'Label',
-                placeholder: 'Placeholder',
                 initialValue: 'Input',
+                descriptionText: _descriptionText,
+                dropdownOptions: _listModel.map((e) => e.name).toList(),
                 onChanged: (value, index) {},
                 validator: (value) {
                   return "Before returning this message you can do any validation";
@@ -320,14 +317,13 @@ class _InputExampleState extends State<InputExample> {
                     children: [Text(_listModel[index].name)],
                   );
                 },
-                dropdownOptions: _listModel.map((e) => e.name).toList(),
-                descriptionText: _descriptionText,
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
                 label: 'Label',
-                placeholder: 'Placeholder',
                 initialValue: 'Input',
+                descriptionText: _onChangedDescriptionText,
+                dropdownOptions: _listModel.map((e) => e.name).toList(),
                 onChanged: (value, index) {
                   setState(() {
                     _onChangedDescriptionText = 'On Changed was called';
@@ -338,22 +334,40 @@ class _InputExampleState extends State<InputExample> {
                     children: [Text(_listModel[index].name)],
                   );
                 },
-                dropdownOptions: _listModel.map((e) => e.name).toList(),
-                descriptionText: _onChangedDescriptionText,
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
-                hasBlankOption: true,
                 label: 'Label',
                 placeholder: 'Placeholder',
+                descriptionText: _blankOptionDescriptionText,
+                dropdownOptions: _listModel.map((e) => e.name).toList(),
+                hasBlankOption: true,
                 onChanged: (value, index) {},
                 customOptionBuilder: (value, index) {
                   return Row(
                     children: [Text(_listModel[index].name)],
                   );
                 },
+              ),
+              const SizedBox(height: 20),
+              BlincInputComponent.dropdown(
+                label: 'Label',
+                placeholder: 'Placeholder',
+                descriptionText: _customBuilderDescriptionText,
                 dropdownOptions: _listModel.map((e) => e.name).toList(),
-                descriptionText: _blankOptionDescriptionText,
+                onChanged: (value, index) {},
+                customOptionBuilder: (value, index) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(_listModel[index].name),
+                      const Icon(
+                        Icons.check,
+                        color: AppColors.colorNeutral_800,
+                      ),
+                    ],
+                  );
+                },
               ),
               const SizedBox(height: 20),
               const Align(
@@ -365,9 +379,9 @@ class _InputExampleState extends State<InputExample> {
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
-                prefixIcon: Icons.phone_outlined,
                 label: 'Label',
                 descriptionText: _descriptionText,
+                prefixIcon: Icons.phone_outlined,
                 dropdownOptions: _listModel.map((e) => e.name).toList(),
                 onChanged: (String? value, int? index) {
                   if (index == null) return;
@@ -376,11 +390,12 @@ class _InputExampleState extends State<InputExample> {
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
-                prefixIcon: Icons.phone_outlined,
                 onChanged: (value, index) {},
                 label: 'Label',
+                placeholder: 'Placeholder',
                 descriptionText: _descriptionText,
                 dropdownOptions: _listModel.map((e) => e.name).toList(),
+                prefixIcon: Icons.phone_outlined,
                 customOptionBuilder: (value, index) {
                   return Row(
                     children: [
@@ -388,15 +403,15 @@ class _InputExampleState extends State<InputExample> {
                     ],
                   );
                 },
-                placeholder: 'Placeholder',
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
                 prefixIcon: Icons.phone_outlined,
                 hasBlankOption: true,
                 label: 'Label',
-                placeholder: 'Placeholder',
                 initialValue: 'Input',
+                descriptionText: _descriptionText,
+                dropdownOptions: _listModel.map((e) => e.name).toList(),
                 onChanged: (value, index) {},
                 customOptionBuilder: (value, index) {
                   return Row(
@@ -405,53 +420,50 @@ class _InputExampleState extends State<InputExample> {
                     ],
                   );
                 },
-                dropdownOptions: _listModel.map((e) => e.name).toList(),
-                descriptionText: _descriptionText,
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
-                prefixIcon: Icons.phone_outlined,
-                hasBlankOption: true,
                 enabled: false,
                 label: 'Label',
-                placeholder: 'Placeholder',
                 initialValue: 'Input',
-                onChanged: (value, index) {},
-                customOptionBuilder: (value, index) {
-                  return Row(
-                    children: [
-                      Text(_listModel[index].name),
-                    ],
-                  );
-                },
-                dropdownOptions: _listModel.map((e) => e.name).toList(),
                 descriptionText: _descriptionText,
-              ),
-              const SizedBox(height: 20),
-              BlincInputComponent.dropdown(
-                prefixIcon: Icons.phone_outlined,
-                label: 'Label',
-                placeholder: 'Placeholder',
-                initialValue: 'Input',
-                onChanged: (value, index) {},
-                errorMessage: "That's the error message parameter",
-                customOptionBuilder: (value, index) {
-                  return Row(
-                    children: [
-                      Text(_listModel[index].name),
-                    ],
-                  );
-                },
                 dropdownOptions: _listModel.map((e) => e.name).toList(),
-                descriptionText: _descriptionText,
-              ),
-              const SizedBox(height: 20),
-              BlincInputComponent.dropdown(
-                prefixIcon: Icons.phone_outlined,
                 hasBlankOption: true,
+                prefixIcon: Icons.phone_outlined,
+                onChanged: (value, index) {},
+                customOptionBuilder: (value, index) {
+                  return Row(
+                    children: [
+                      Text(_listModel[index].name),
+                    ],
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              BlincInputComponent.dropdown(
                 label: 'Label',
-                placeholder: 'Placeholder',
                 initialValue: 'Input',
+                errorMessage: "That's the error message parameter",
+                descriptionText: _descriptionText,
+                dropdownOptions: _listModel.map((e) => e.name).toList(),
+                prefixIcon: Icons.phone_outlined,
+                onChanged: (value, index) {},
+                customOptionBuilder: (value, index) {
+                  return Row(
+                    children: [
+                      Text(_listModel[index].name),
+                    ],
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              BlincInputComponent.dropdown(
+                label: 'Label',
+                initialValue: 'Input',
+                descriptionText: _descriptionText,
+                dropdownOptions: _listModel.map((e) => e.name).toList(),
+                hasBlankOption: true,
+                prefixIcon: Icons.phone_outlined,
                 onChanged: (value, index) {},
                 validator: (value) {
                   return "Before returning this message you can do any validation";
@@ -463,15 +475,14 @@ class _InputExampleState extends State<InputExample> {
                     ],
                   );
                 },
-                dropdownOptions: _listModel.map((e) => e.name).toList(),
-                descriptionText: _descriptionText,
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
-                prefixIcon: Icons.phone_outlined,
                 label: 'Label',
-                placeholder: 'Placeholder',
                 initialValue: 'Input',
+                descriptionText: _onChangedDescriptionText,
+                dropdownOptions: _listModel.map((e) => e.name).toList(),
+                prefixIcon: Icons.phone_outlined,
                 onChanged: (value, index) {
                   setState(() {
                     _onChangedDescriptionText = 'On Changed was called';
@@ -482,23 +493,42 @@ class _InputExampleState extends State<InputExample> {
                     children: [Text(_listModel[index].name)],
                   );
                 },
-                dropdownOptions: _listModel.map((e) => e.name).toList(),
-                descriptionText: _onChangedDescriptionText,
               ),
               const SizedBox(height: 20),
               BlincInputComponent.dropdown(
-                prefixIcon: Icons.phone_outlined,
-                hasBlankOption: true,
                 label: 'Label',
                 placeholder: 'Placeholder',
+                descriptionText: _blankOptionDescriptionText,
+                dropdownOptions: _listModel.map((e) => e.name).toList(),
+                hasBlankOption: true,
+                prefixIcon: Icons.phone_outlined,
                 onChanged: (value, index) {},
                 customOptionBuilder: (value, index) {
                   return Row(
                     children: [Text(_listModel[index].name)],
                   );
                 },
+              ),
+              const SizedBox(height: 20),
+              BlincInputComponent.dropdown(
+                label: 'Label',
+                placeholder: 'Placeholder',
+                descriptionText: _customBuilderDescriptionText,
                 dropdownOptions: _listModel.map((e) => e.name).toList(),
-                descriptionText: _blankOptionDescriptionText,
+                prefixIcon: Icons.phone_outlined,
+                onChanged: (value, index) {},
+                customOptionBuilder: (value, index) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(_listModel[index].name),
+                      const Icon(
+                        Icons.check,
+                        color: AppColors.colorNeutral_800,
+                      ),
+                    ],
+                  );
+                },
               ),
               const SizedBox(height: 20),
             ],
