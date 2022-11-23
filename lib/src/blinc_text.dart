@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// BlincText will create a text widget with pre-built styles. They can be
+/// composed with weight, size and height.
+///
+/// Example:
+/// ```dart
+/// BlincText('Proxima Nova').weightThin.heightXXS.sizeXXXS,
+/// ```
+//ignore: must_be_immutable
 class BlincText extends BaseBlincText {
   BlincText(
     this.text, {
@@ -22,6 +30,7 @@ class BlincText extends BaseBlincText {
   }
 }
 
+//ignore: must_be_immutable
 abstract class BaseBlincText extends StatelessWidget {
   BaseBlincText({super.key});
 

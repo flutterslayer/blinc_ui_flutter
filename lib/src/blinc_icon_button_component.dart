@@ -1,12 +1,21 @@
 import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
-/// The BlincIconButton creates a button with an icon inside. It accepts an
-/// [onPressed] function to be activated when pressed. The [buttonTheme] accepts
+/// The BlincIconButton creates a button with an icon inside.
+///
+/// It accepts an [onPressed] function to be activated when pressed. The [buttonTheme]
 /// allows customization of colors. The [iconPresets] allows customization of
 /// shape and sizes. The [icon] accepts the IconData with icon information.
-/// BlincIconButton can be extended with prebuilt options such as
-/// BlincIconButton().iconSmallPrimary()
+///
+///
+/// BlincIconButton can be extended with prebuilt options, combining small or large
+/// with palette presets as primary, secondary and tertiary:
+/// ```dart
+/// BlincIconButton(
+///     icon: Icons.facebook,
+///     onPressed: () {},
+/// ).iconLargePrimary(),
+/// ```
 class BlincIconButton extends StatefulWidget {
   const BlincIconButton({
     Key? key,

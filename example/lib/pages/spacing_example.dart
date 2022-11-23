@@ -1,5 +1,5 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:blinc_ui_flutter/src/space_component.dart';
 
 class SpacingExample extends StatelessWidget {
   const SpacingExample({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:blinc_ui_flutter/src/blinc_borders.dart';
 
 class BordersExample extends StatelessWidget {
   const BordersExample({Key? key}) : super(key: key);

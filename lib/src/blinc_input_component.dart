@@ -2,6 +2,37 @@ import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+/// The BlincInputComponent is responsible for creating Forms and Inputs.
+/// BlincInputComponent.form() will create a form to wrap the inputs.
+/// BlincInputComponent.input() will create an input that should be inside the form.
+///
+/// It accepts a [textEditingController] to control the form's content, a
+/// [textInputType] to set the input tipe (e.g Mobile)
+///
+/// Pre-built validation functions can be added with [validator], for example
+/// BlincInputComponent.validations.required
+///
+/// [label] will create the input's label, [placeholder] creates a placeholder
+/// text inside. If set to true, [obscureText] will hide the content of the input.
+///
+/// Icons can be added with [prefixIcon], which will add an icon to the left,
+/// or [suffixIcon], to the right.
+///
+/// The [descriptionText] is a text that will be placed below the input.
+///
+/// If [enabled] is false, the input will be disabled.
+///
+/// Example:
+/// ```dart
+/// BlincInputComponent.textField(
+///     label: 'Label',
+///     placeholder: 'Placeholder',
+///     descriptionText: 'Description area',
+///     suffixIcon: Icons.remove_red_eye_outlined,
+///     prefixIcon: Icons.phone_outlined,
+///     validator: BlincInputComponent.validations.required,
+/// )
+/// ```
 class BlincInputComponent {
   ///A method from [BlincInputComponent] that renders a text field with Blinc's style.
   ///All the parameters are optional.
@@ -111,9 +142,8 @@ class BlincInputComponent {
     );
   }
 
-  /// [globalKey] key to controller form
-  ///
-  /// [child] widget
+  /// The form method creates a form to wrap the BlincInputComponent.input.
+  /// It requires a [globalKey] key and a [child] widget.
   static Widget form({
     required GlobalKey<FormState> globalKey,
     required Widget child,
@@ -128,15 +158,31 @@ class BlincInputComponent {
 }
 
 class BlincInputTextField extends StatefulWidget {
+  /// Adds a label text
   final String? label;
+
+  /// Adds a placeholder text
   final String? placeholder;
+
+  /// If true, hides the text for passwords for example
   final bool obscureText;
+
+  /// Sets the icon on the left side
   final IconData? prefixIcon;
+
+  /// Sets the icon on the right side
   final IconData? suffixIcon;
+
+  /// Sets the description text
   final String? descriptionText;
   final bool enabled;
   final TextEditingController? textEditingController;
+
+  /// The type of information of the text input control.
   final TextInputType? textInputType;
+
+  /// Signature for validating a form field.
+  ///Returns an error string to display if the input is invalid, or null otherwise.
   final FormFieldValidator<String>? validator;
   final String? errorMessage;
 
@@ -238,6 +284,7 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: TextFormField(
+            obscureText: widget.obscureText,
             focusNode: _focusNode,
             keyboardType: widget.textInputType,
             enabled: widget.enabled,
@@ -713,7 +760,7 @@ class BlincInputValidation {
   }
 
   String? validatePasscode(String? value) {
-    if (value == null) {
+    if (value == null || value.isEmpty) {
       return 'Passcode required';
     }
     if (value.isNotEmpty) {
