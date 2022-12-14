@@ -86,6 +86,40 @@ class BlincInputComponent {
     );
   }
 
+  static Widget passwordField({
+    String? label,
+    String? placeholder,
+    bool obscureText = true,
+    bool changeableObscureText = true,
+    IconData? prefixIcon,
+    IconData? suffixIcon = Icons.visibility_off_outlined,
+    IconData? secondSuffixIcon = Icons.visibility_outlined,
+    IconData? errorIcon = Icons.visibility_off_outlined,
+    String? descriptionText,
+    bool enabled = true,
+    TextEditingController? textEditingController,
+    TextInputType? textInputType,
+    FormFieldValidator<String>? validator,
+    String? errorMessage,
+  }) {
+    return BlincInputTextField(
+      label: label,
+      placeholder: placeholder,
+      obscureText: obscureText,
+      changeableObscureText: changeableObscureText,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      secondSuffixIcon: secondSuffixIcon,
+      errorIcon: errorIcon,
+      descriptionText: descriptionText,
+      enabled: enabled,
+      textEditingController: textEditingController,
+      textInputType: textInputType,
+      validator: validator,
+      errorMessage: errorMessage,
+    );
+  }
+
   ///A method from [BlincInputComponent] that renders a dropdown with Blinc's style.
   ///It requires two parameters, a list of options and onChanged callback.
   ///
@@ -165,13 +199,22 @@ class BlincInputTextField extends StatefulWidget {
   final String? placeholder;
 
   /// If true, hides the text for passwords for example
-  final bool obscureText;
+  bool obscureText;
+
+  /// If true, inverts obscure text when click on suffix icon
+  final bool changeableObscureText;
 
   /// Sets the icon on the left side
   final IconData? prefixIcon;
 
   /// Sets the icon on the right side
-  final IconData? suffixIcon;
+  IconData? suffixIcon;
+
+  /// Sets the icon on the right side when obscure text is false
+  IconData? secondSuffixIcon;
+
+  /// Sets the error state icon
+  IconData? errorIcon;
 
   /// Sets the description text
   final String? descriptionText;
@@ -186,13 +229,16 @@ class BlincInputTextField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final String? errorMessage;
 
-  const BlincInputTextField({
+  BlincInputTextField({
     Key? key,
     this.label,
     this.placeholder,
     this.obscureText = false,
+    this.changeableObscureText = false,
     this.prefixIcon,
     this.suffixIcon,
+    this.secondSuffixIcon = Icons.new_releases_outlined,
+    this.errorIcon = Icons.new_releases_outlined,
     this.descriptionText,
     this.enabled = true,
     this.textEditingController,
@@ -256,15 +302,39 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
         right: 10,
       ),
       child: icon != null
-          ? Icon(
-              (hasSuffixIcon && _errorMessage != null) ||
-                      (hasSuffixIcon && widget.errorMessage != null)
-                  ? Icons.new_releases_outlined
-                  : icon,
-              color: ((hasSuffixIcon && _errorMessage != null) ||
-                      (hasSuffixIcon && widget.errorMessage != null)
-                  ? AppColors.colorRedError_300
-                  : AppColors.colorNeutral_800),
+          ? GestureDetector(
+              onTap: () {
+                if (widget.changeableObscureText) {
+                  final tempIcon = widget.suffixIcon;
+                  widget.suffixIcon = widget.secondSuffixIcon;
+                  widget.errorIcon = widget.secondSuffixIcon;
+                  widget.secondSuffixIcon = tempIcon;
+                  widget.obscureText = !widget.obscureText;
+                  setState(() {});
+                }
+              },
+              child: GestureDetector(
+                onTap: () {
+                  if (widget.changeableObscureText) {
+                    final tempIcon = widget.suffixIcon;
+                    widget.suffixIcon = widget.secondSuffixIcon;
+                    widget.errorIcon = widget.secondSuffixIcon;
+                    widget.secondSuffixIcon = tempIcon;
+                    widget.obscureText = !widget.obscureText;
+                    setState(() {});
+                  }
+                },
+                child: Icon(
+                  (hasSuffixIcon && _errorMessage != null) ||
+                          (hasSuffixIcon && widget.errorMessage != null)
+                      ? widget.errorIcon
+                      : icon,
+                  color: ((hasSuffixIcon && _errorMessage != null) ||
+                          (hasSuffixIcon && widget.errorMessage != null)
+                      ? AppColors.colorRedError_300
+                      : AppColors.colorNeutral_800),
+                ),
+              ),
             )
           : null,
     );
