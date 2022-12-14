@@ -24,6 +24,11 @@ class SelectScreen extends StatelessWidget {
             selectBlock(context: context, route: '/shadows', text: 'Shadows'),
             selectBlock(context: context, route: '/inputs', text: 'Inputs'),
             selectBlock(context: context, route: '/brand', text: 'Brand'),
+            selectBlock(
+              context: context,
+              route: '/progress_bar',
+              text: 'Progress Bar',
+            ),
             selectBlock(context: context, route: '/text', text: 'Text'),
           ],
         )),
@@ -43,7 +48,10 @@ Widget selectBlock({
     },
     child: Text(
       text,
-      style: const TextStyle(fontSize: 16),
+      textAlign: TextAlign.center,
+      style: const TextStyle(
+        fontSize: 16,
+      ),
     ),
   );
 }

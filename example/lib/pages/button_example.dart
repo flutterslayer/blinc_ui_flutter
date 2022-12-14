@@ -140,7 +140,19 @@ class ButtonExample extends StatelessWidget {
                       ],
                     ),
                   ],
-                )
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    BlincButton.doubleButton(
+                      textLeft: 'Left',
+                      onPressedLeft: () {},
+                      textRight: 'Right',
+                      onPressedRight: () {},
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

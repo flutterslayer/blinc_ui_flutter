@@ -1,7 +1,28 @@
 import 'package:blinc_ui_flutter/src/blinc_colors.dart';
 import 'package:blinc_ui_flutter/src/loading_spinner_component.dart';
+import 'package:blinc_ui_flutter/src/spacing.dart';
 import 'package:flutter/material.dart';
 
+/// The BlincButton widgets creates a styled button.
+/// You can choose between presets with BlincButton().largePrimary for example:
+/// ```dart
+///BlincButton(
+///    text: 'My Button',
+///    icon: Icons.person_pin_circle_outlined,
+///    onPressed: () {},
+///    isIconInverted: true,
+///).largePrimary(),
+/// ```
+/// The presets can be chosen between small, large and combined with primary,
+/// secondary and tertiary
+///
+/// The [text] property will add the text inside, which can be styled
+/// with [textStyle]. If [isUnderlined] is set to true, will show an underlined
+/// decoration. [padding] will create a padding inside the button. With [icon]
+/// you can add an icon to the left side of the button, and switch it's position to
+/// right with [isIconInverted] set to true. If [isLoading] is true, the content
+/// of the button will be replaced by a loading wheel. If [isFLuid] is set to true
+/// it will take all the available space around.
 class BlincButton extends StatefulWidget {
   const BlincButton({
     Key? key,
@@ -143,6 +164,72 @@ class BlincButton extends StatefulWidget {
     );
   }
 
+  BlincButton _doubleSecondary() {
+    return BlincButton(
+      text: text,
+      onPressed: onPressed,
+      buttonTheme: SecondaryButtonTheme(),
+      blincButtonPresets: DoubleSecondaryPresets(),
+      padding: padding,
+      icon: icon,
+      isIconInverted: isIconInverted,
+      isLoading: isLoading,
+      isFluid: isFluid,
+    );
+  }
+
+  BlincButton _doublePrimary() {
+    return BlincButton(
+      text: text,
+      onPressed: onPressed,
+      buttonTheme: PrimaryButtonTheme(),
+      blincButtonPresets: DoublePrimaryPresets(),
+      padding: padding,
+      icon: icon,
+      isIconInverted: isIconInverted,
+      isLoading: isLoading,
+      isFluid: isFluid,
+    );
+  }
+
+  static Widget doubleButton({
+    required String textLeft,
+    Function? onPressedLeft,
+    required String textRight,
+    Function? onPressedRight,
+  }) {
+    return Expanded(
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return Stack(
+            children: [
+              Align(
+                alignment: const Alignment(-0.7, 0),
+                child: SizedBox(
+                  width: constraints.maxWidth / 2,
+                  child: BlincButton(
+                    text: textLeft,
+                    onPressed: onPressedLeft,
+                  )._doubleSecondary(),
+                ),
+              ),
+              Align(
+                alignment: const Alignment(0.8, 0),
+                child: SizedBox(
+                  width: constraints.maxWidth / 2,
+                  child: BlincButton(
+                    text: textRight,
+                    onPressed: onPressedRight,
+                  )._doublePrimary(),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
   @override
   State<BlincButton> createState() => _BlincButtonState();
 }
@@ -220,209 +307,209 @@ class _BlincButtonState extends State<BlincButton> {
       // Prevents dislocating the widget when the container border is added
       padding:
           isFocused == true ? const EdgeInsets.all(0) : const EdgeInsets.all(2),
-      child: Padding(
-        padding: const EdgeInsets.all(3.0),
-        child: ConstrainedBox(
-          // Limits the button size if it's not fluid
-          constraints: BoxConstraints(
-            // minWidth of the button. If not defined will take the standard
-            minWidth: widget.isFluid == true
-                ? 0
-                : widget.blincButtonPresets?.minimumWidth ??
-                    DefaultPresets.minimumWidth,
-            // minHeight of the button. If not defined will take the standard
-            minHeight: widget.isFluid == true
-                ? 0
-                : widget.blincButtonPresets?.minimumHeight ??
-                    DefaultPresets.minimumHeight,
-          ),
-          child: ElevatedButton(
-            // Changes the state when the button focus changes
-            onFocusChange: (value) {
-              setState(() {
-                isFocused = value;
-              });
-            },
-            onPressed: widget.onPressed != null
-                ? () {
-                    widget.onPressed!();
-                  }
-                : null,
+      child: ConstrainedBox(
+        // Limits the button size if it's not fluid
+        constraints: BoxConstraints(
+          // minWidth of the button. If not defined will take the standard
+          minWidth: widget.isFluid == true
+              ? 0
+              : widget.blincButtonPresets?.minimumWidth ??
+                  DefaultPresets.minimumWidth,
+          // minHeight of the button. If not defined will take the standard
+          minHeight: widget.isFluid == true
+              ? 0
+              : widget.blincButtonPresets?.minimumHeight ??
+                  DefaultPresets.minimumHeight,
+        ),
+        child: ElevatedButton(
+          // Changes the state when the button focus changes
+          onFocusChange: (value) {
+            setState(() {
+              isFocused = value;
+            });
+          },
+          onPressed: widget.onPressed != null
+              ? () {
+                  widget.onPressed!();
+                }
+              : null,
 
-            /// The ButtonStyle controls the button style using MaterialState.
-            /// It can listen to the button states and assign corresponding styles
-            /// when hovered, focused, disabled, etc.
-            style: ButtonStyle(
-              /// Defines the background color
-              backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                (Set<MaterialState> states) {
-                  /// Assigns a color to disabled background
-                  if (states.contains(MaterialState.disabled)) {
-                    return disabledColor;
-                  }
+          /// The ButtonStyle controls the button style using MaterialState.
+          /// It can listen to the button states and assign corresponding styles
+          /// when hovered, focused, disabled, etc.
+          style: ButtonStyle(
+            /// Defines the background color
+            backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+                /// Assigns a color to disabled background
+                if (states.contains(MaterialState.disabled)) {
+                  return disabledColor;
+                }
 
-                  /// returns the standard background color
-                  return defaultColor;
-                },
-              ),
-
-              /// Overlay colors adds a color layer over the background
-              /// when it's pressed, focused, etc.
-              overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                (Set<MaterialState> states) {
-                  /// Assigns overlay colors when it's pressed
-                  if (states.contains(MaterialState.pressed)) {
-                    return pressedColor;
-                  }
-
-                  /// Assigns overlay colors when it's focused
-                  if (states.contains(MaterialState.focused)) {
-                    return focusedColor;
-                  }
-
-                  /// Assigns overlay colors when it's hovered
-                  if (states.contains(MaterialState.hovered)) {
-                    return hoverColor;
-                  }
-
-                  /// Assigns overlay colors when it's disabled
-                  if (states.contains(MaterialState.disabled)) {
-                    return disabledColor;
-                  }
-
-                  /// Returns default overlay color
-                  return defaultColor;
-                },
-              ),
-              textStyle: MaterialStateProperty.resolveWith<TextStyle?>(
-                (Set<MaterialState> states) {
-                  if (widget.isUnderlined == true) {
-                    if (states.contains(MaterialState.hovered)) {
-                      return UnderlineDecoration.textStyle(hoverFontColor);
-                    }
-                    if (states.contains(MaterialState.focused) &&
-                        widget.textStyle != null) {
-                      return UnderlineDecoration.textStyle(focusedFontColor);
-                    }
-                    if (states.contains(MaterialState.disabled)) {
-                      return UnderlineDecoration.textStyle(disabledFontColor);
-                    }
-                    if (states.contains(MaterialState.pressed)) {
-                      return UnderlineDecoration.textStyle(pressedFontColor);
-                    }
-                    return UnderlineDecoration.textStyle(defaultFontColor);
-                  }
-                  return null;
-                },
-              ),
-
-              /// Foreground colors will define the font and icon colors,
-              /// but it can't change the underline colors.
-              foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-                (Set<MaterialState> states) {
-                  /// Assigns text and icon colors when it's disabled
-                  if (states.contains(MaterialState.disabled)) {
-                    return disabledFontColor;
-                  }
-
-                  /// Assigns text and icon colors when it's focused
-                  if (states.contains(MaterialState.focused)) {
-                    return focusedFontColor;
-                  }
-
-                  /// Assigns text and icon colors when it's hovered
-                  if (states.contains(MaterialState.hovered)) {
-                    return hoverFontColor;
-                  }
-
-                  /// Assigns text and icon colors when it's pressed
-                  if (states.contains(MaterialState.pressed)) {
-                    return pressedFontColor;
-                  }
-
-                  /// Returns standard text and icon colors
-                  return defaultFontColor;
-                },
-              ),
-
-              /// Defines the shape and border. When not defined it will take
-              /// the standard shape.
-              shape: MaterialStatePropertyAll<OutlinedBorder?>(
-                widget.blincButtonPresets?.shape ?? DefaultPresets.shape,
-              ),
+                /// returns the standard background color
+                return defaultColor;
+              },
             ),
-            child: Padding(
-              /// Adds padding. If not available, will take the default value.
-              padding: widget.padding ??
-                  widget.blincButtonPresets?.padding ??
-                  DefaultPresets.padding,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // If isLoading is true will return only the loading widget
-                  if (widget.isLoading == true)
-                    SizedBox(
-                        width: 25,
-                        height: 25,
-                        child: LoadingSpinner(
-                          color: widget.buttonTheme?.loadingSpinnerColor ??
-                              DefaultTheme.loadingSpinnerColor,
-                          diameter:
-                              widget.blincButtonPresets?.loadingSpinnerSize ??
-                                  DefaultPresets.loadingSpinnerSize,
-                        ))
-                  else ...[
-                    // Returns an icon at the left side of the button
-                    if (widget.icon != null && widget.isIconInverted != true)
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 5),
-                          child: Icon(
-                            widget.icon,
-                            size: widget.blincButtonPresets?.iconSize ??
-                                DefaultPresets.iconSize,
-                          ),
-                        ),
-                      ),
-                    // Creates underlined text
-                    if (widget.isUnderlined == true && widget.text != null)
-                      Flexible(
-                        child: Text(
-                          widget.text!,
-                          style: const TextStyle(
-                            height: 1.5,
-                            decorationThickness: 1.2,
-                            color: Colors.transparent,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    // Creates text without underline decoration
-                    if (widget.isUnderlined != true && widget.text != null)
-                      Flexible(
-                        child: Text(
-                          widget.text!,
-                          style: const TextStyle(
-                            height: 1.42,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    // Returns an icon at the right side of the button
-                    if (widget.icon != null && widget.isIconInverted == true)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 1),
+
+            /// Overlay colors adds a color layer over the background
+            /// when it's pressed, focused, etc.
+            overlayColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+                /// Assigns overlay colors when it's pressed
+                if (states.contains(MaterialState.pressed)) {
+                  return pressedColor;
+                }
+
+                /// Assigns overlay colors when it's focused
+                if (states.contains(MaterialState.focused)) {
+                  return focusedColor;
+                }
+
+                /// Assigns overlay colors when it's hovered
+                if (states.contains(MaterialState.hovered)) {
+                  return hoverColor;
+                }
+
+                /// Assigns overlay colors when it's disabled
+                if (states.contains(MaterialState.disabled)) {
+                  return disabledColor;
+                }
+
+                /// Returns default overlay color
+                return defaultColor;
+              },
+            ),
+            textStyle: MaterialStateProperty.resolveWith<TextStyle?>(
+              (Set<MaterialState> states) {
+                if (widget.isUnderlined == true) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return UnderlineDecoration.textStyle(hoverFontColor);
+                  }
+                  if (states.contains(MaterialState.focused) &&
+                      widget.textStyle != null) {
+                    return UnderlineDecoration.textStyle(focusedFontColor);
+                  }
+                  if (states.contains(MaterialState.disabled)) {
+                    return UnderlineDecoration.textStyle(disabledFontColor);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return UnderlineDecoration.textStyle(pressedFontColor);
+                  }
+                  return UnderlineDecoration.textStyle(defaultFontColor);
+                }
+                return null;
+              },
+            ),
+
+            /// Foreground colors will define the font and icon colors,
+            /// but it can't change the underline colors.
+            foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+                /// Assigns text and icon colors when it's disabled
+                if (states.contains(MaterialState.disabled)) {
+                  return disabledFontColor;
+                }
+
+                /// Assigns text and icon colors when it's focused
+                if (states.contains(MaterialState.focused)) {
+                  return focusedFontColor;
+                }
+
+                /// Assigns text and icon colors when it's hovered
+                if (states.contains(MaterialState.hovered)) {
+                  return hoverFontColor;
+                }
+
+                /// Assigns text and icon colors when it's pressed
+                if (states.contains(MaterialState.pressed)) {
+                  return pressedFontColor;
+                }
+
+                /// Returns standard text and icon colors
+                return defaultFontColor;
+              },
+            ),
+
+            /// Defines the shape and border. When not defined it will take
+            /// the standard shape.
+            shape: MaterialStatePropertyAll<OutlinedBorder?>(
+              widget.blincButtonPresets?.shape ?? DefaultPresets.shape,
+            ),
+          ),
+          child: Padding(
+            /// Adds padding. If not available, will take the default value.
+            padding: widget.padding ??
+                widget.blincButtonPresets?.padding ??
+                DefaultPresets.padding,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // If isLoading is true will return only the loading widget
+                if (widget.isLoading == true)
+                  SizedBox(
+                      width: 25,
+                      height: 25,
+                      child: LoadingSpinner(
+                        color: widget.buttonTheme?.loadingSpinnerColor ??
+                            DefaultTheme.loadingSpinnerColor,
+                        diameter:
+                            widget.blincButtonPresets?.loadingSpinnerSize ??
+                                DefaultPresets.loadingSpinnerSize,
+                      ))
+                else ...[
+                  // Returns an icon at the left side of the button
+                  if (widget.icon != null && widget.isIconInverted != true)
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 5),
                         child: Icon(
                           widget.icon,
                           size: widget.blincButtonPresets?.iconSize ??
                               DefaultPresets.iconSize,
                         ),
-                      )
-                  ]
-                ],
-              ),
+                      ),
+                    ),
+                  // Creates underlined text
+                  if (widget.isUnderlined == true && widget.text != null)
+                    Flexible(
+                      child: Text(
+                        widget.text!,
+                        style: TextStyle(
+                          height: 1.5,
+                          decorationThickness: 1.2,
+                          color: Colors.transparent,
+                          fontSize: widget.blincButtonPresets?.fontSize,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  // Creates text without underline decoration
+                  if (widget.isUnderlined != true && widget.text != null)
+                    Flexible(
+                      child: Text(
+                        widget.text!,
+                        style: TextStyle(
+                          height: 1.42,
+                          fontWeight: null,
+                          fontSize: widget.blincButtonPresets?.fontSize,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  // Returns an icon at the right side of the button
+                  if (widget.icon != null && widget.isIconInverted == true)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 1),
+                      child: Icon(
+                        widget.icon,
+                        size: widget.blincButtonPresets?.iconSize ??
+                            DefaultPresets.iconSize,
+                      ),
+                    )
+                ]
+              ],
             ),
           ),
         ),
@@ -673,6 +760,53 @@ class LargePresets implements BlincButtonPresets {
   @override
   final shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10.0),
+  );
+  @override
+  final fontSize = 20;
+  @override
+  final iconSize = 19.5;
+  @override
+  final loadingSpinnerSize = 19;
+}
+
+class DoublePrimaryPresets implements BlincButtonPresets {
+  @override
+  final minimumWidth = 0;
+  @override
+  final minimumHeight = 72;
+  @override
+  final padding = const EdgeInsets.only(
+    left: Spacing.xs,
+    right: Spacing.xs,
+  );
+  @override
+  final shape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10.0),
+  );
+  @override
+  final fontSize = 20;
+  @override
+  final iconSize = 19.5;
+  @override
+  final loadingSpinnerSize = 19;
+}
+
+class DoubleSecondaryPresets implements BlincButtonPresets {
+  @override
+  final minimumWidth = 0;
+  @override
+  final minimumHeight = 72;
+  @override
+  final padding = const EdgeInsets.only(
+    left: Spacing.xs,
+    right: Spacing.xs,
+  );
+  @override
+  final shape = const RoundedRectangleBorder(
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(10),
+      bottomLeft: Radius.circular(10),
+    ),
   );
   @override
   final fontSize = 20;
