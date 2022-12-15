@@ -37,6 +37,7 @@ class BlincButton extends StatefulWidget {
     this.isIconInverted,
     this.isLoading,
     this.isFluid,
+    this.disabled = false,
   }) : super(key: key);
 
   /// The button's text.
@@ -72,6 +73,9 @@ class BlincButton extends StatefulWidget {
   /// If true the button will take any space available
   final bool? isFluid;
 
+  /// If true the button will be disabled
+  final bool disabled;
+
   /// Creates a small button with primary theme
   BlincButton smallPrimary() {
     return BlincButton(
@@ -84,6 +88,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -99,6 +104,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -114,6 +120,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
       isUnderlined: true,
     );
   }
@@ -130,6 +137,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -145,6 +153,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -160,6 +169,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
       isUnderlined: true,
     );
   }
@@ -175,6 +185,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -189,6 +200,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -328,7 +340,7 @@ class _BlincButtonState extends State<BlincButton> {
               isFocused = value;
             });
           },
-          onPressed: widget.onPressed != null
+          onPressed: widget.onPressed != null && !widget.disabled
               ? () {
                   widget.onPressed!();
                 }
