@@ -11,20 +11,26 @@ import 'package:flutter/material.dart';
 class BlincText extends BaseBlincText {
   BlincText(
     this.text, {
+    this.textAlign,
+    this.style,
     Key? key,
   }) : super(key: key);
 
   final String text;
+  final TextAlign? textAlign;
+  final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: textAlign,
       style: TextStyle(
         fontFamily: 'proxima_nova_font',
         fontWeight: fontWeight,
         fontSize: fontSize,
         height: fontHeight,
+        color: style == null ? null : style!.color,
       ),
     );
   }
