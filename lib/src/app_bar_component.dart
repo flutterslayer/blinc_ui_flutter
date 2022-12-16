@@ -8,8 +8,9 @@ class BlincAppBar extends AppBar with PreferredSizeWidget {
   /// Sets the icon
   final IconData? icon;
 
-  /// Sets the
+  /// Sets the icon route
   final void Function()? iconOnPressed;
+  /// Sets the back button route
   final void Function()? backOnPressed;
 
   /// Sets the background color of appbar
@@ -71,7 +72,7 @@ class BlincAppBar extends AppBar with PreferredSizeWidget {
             builder: (BuildContext context) {
               return IconButton(
                 icon: const Icon(Icons.arrow_back_ios_new),
-                onPressed: backOnPressed,
+                onPressed: backOnPressed ?? () => Navigator.pop(context),
               );
             },
           ),

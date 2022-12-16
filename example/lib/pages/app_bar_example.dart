@@ -8,14 +8,13 @@ class AppBarExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BlincAppBar(
-        title: const Text('Error',
+        title: const Text('Password Recover',
         style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
           color: AppColors.colorNeutral_800,
         ),),
-        backOnPressed:() => Navigator.pop(context),
-      
+        backOnPressed: () => Navigator.pop(context),
       ),
     );
   }
