@@ -58,6 +58,8 @@ class BlincInputComponent {
   /// [validator]  Validation (Ex.: BlincInputComponent.validations.required).
   ///
   /// [errorMessage] Error message displayed below the input, with proper styling.
+  ///
+  /// [onChanged] Calls the function whenever the user edit the text
   static Widget textField({
     String? label,
     String? placeholder,
@@ -70,6 +72,7 @@ class BlincInputComponent {
     TextInputType? textInputType,
     FormFieldValidator<String>? validator,
     String? errorMessage,
+    void Function(String?)? onChanged,
   }) {
     return BlincInputTextField(
       label: label,
@@ -83,6 +86,7 @@ class BlincInputComponent {
       textInputType: textInputType,
       validator: validator,
       errorMessage: errorMessage,
+      onChanged: onChanged,
     );
   }
 
@@ -101,6 +105,7 @@ class BlincInputComponent {
     TextInputType? textInputType,
     FormFieldValidator<String>? validator,
     String? errorMessage,
+    void Function(String?)? onChanged,
   }) {
     return BlincInputTextField(
       label: label,
@@ -117,6 +122,7 @@ class BlincInputComponent {
       textInputType: textInputType,
       validator: validator,
       errorMessage: errorMessage,
+      onChanged: onChanged,
     );
   }
 
@@ -229,6 +235,9 @@ class BlincInputTextField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final String? errorMessage;
 
+  /// Calls the function whenever the user edits the text
+  final void Function(String? value)? onChanged;
+
   BlincInputTextField({
     Key? key,
     this.label,
@@ -245,6 +254,7 @@ class BlincInputTextField extends StatefulWidget {
     this.textInputType,
     this.validator,
     this.errorMessage,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -388,6 +398,7 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
                   ? AppColors.colorNeutral_400
                   : AppColors.colorNeutral_900,
             ),
+            onChanged: widget.onChanged,
           ),
         ),
         Padding(
