@@ -313,27 +313,15 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
                   setState(() {});
                 }
               },
-              child: GestureDetector(
-                onTap: () {
-                  if (widget.changeableObscureText) {
-                    final tempIcon = widget.suffixIcon;
-                    widget.suffixIcon = widget.secondSuffixIcon;
-                    widget.errorIcon = widget.secondSuffixIcon;
-                    widget.secondSuffixIcon = tempIcon;
-                    widget.obscureText = !widget.obscureText;
-                    setState(() {});
-                  }
-                },
-                child: Icon(
-                  (hasSuffixIcon && _errorMessage != null) ||
-                          (hasSuffixIcon && widget.errorMessage != null)
-                      ? widget.errorIcon
-                      : icon,
-                  color: ((hasSuffixIcon && _errorMessage != null) ||
-                          (hasSuffixIcon && widget.errorMessage != null)
-                      ? AppColors.colorRedError_300
-                      : AppColors.colorNeutral_800),
-                ),
+              child: Icon(
+                (hasSuffixIcon && _errorMessage != null) ||
+                        (hasSuffixIcon && widget.errorMessage != null)
+                    ? widget.errorIcon
+                    : icon,
+                color: ((hasSuffixIcon && _errorMessage != null) ||
+                        (hasSuffixIcon && widget.errorMessage != null)
+                    ? AppColors.colorRedError_300
+                    : AppColors.colorNeutral_800),
               ),
             )
           : null,
