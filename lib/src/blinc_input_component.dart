@@ -1,5 +1,6 @@
 import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 /// The BlincInputComponent is responsible for creating Forms and Inputs.
@@ -59,7 +60,11 @@ class BlincInputComponent {
   ///
   /// [errorMessage] Error message displayed below the input, with proper styling.
   ///
-  /// [onChanged] Calls the function whenever the user edit the text
+  /// [onChanged] Calls the function whenever the user edit the text.
+  ///
+  /// [focusNode] An object that can be used by a stateful widget to obtain the keyboard focus and to handle keyboard events.
+  ///
+  /// [inputFormatters] Sets a list of input formatters for the field.
   static Widget textField({
     String? label,
     String? placeholder,
@@ -73,6 +78,8 @@ class BlincInputComponent {
     FormFieldValidator<String>? validator,
     String? errorMessage,
     void Function(String?)? onChanged,
+    FocusNode? focusNode,
+    List<TextInputFormatter>? inputFormatters,
   }) {
     return BlincInputTextField(
       label: label,
@@ -87,6 +94,8 @@ class BlincInputComponent {
       validator: validator,
       errorMessage: errorMessage,
       onChanged: onChanged,
+      focusNode: focusNode,
+      inputFormatters: inputFormatters,
     );
   }
 
@@ -106,6 +115,8 @@ class BlincInputComponent {
     FormFieldValidator<String>? validator,
     String? errorMessage,
     void Function(String?)? onChanged,
+    FocusNode? focusNode,
+    List<TextInputFormatter>? inputFormatters,
   }) {
     return BlincInputTextField(
       label: label,
@@ -123,6 +134,8 @@ class BlincInputComponent {
       validator: validator,
       errorMessage: errorMessage,
       onChanged: onChanged,
+      focusNode: focusNode,
+      inputFormatters: inputFormatters,
     );
   }
 
@@ -238,6 +251,12 @@ class BlincInputTextField extends StatefulWidget {
   /// Calls the function whenever the user edits the text
   final void Function(String? value)? onChanged;
 
+  /// An object that can be used by a stateful widget to obtain the keyboard focus and to handle keyboard events.
+  final FocusNode? focusNode;
+
+  /// Sets the input formatters
+  final List<TextInputFormatter>? inputFormatters;
+
   BlincInputTextField({
     Key? key,
     this.label,
@@ -255,6 +274,8 @@ class BlincInputTextField extends StatefulWidget {
     this.validator,
     this.errorMessage,
     this.onChanged,
+    this.focusNode,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -262,7 +283,7 @@ class BlincInputTextField extends StatefulWidget {
 }
 
 class _BlincInputTextFieldState extends State<BlincInputTextField> {
-  final FocusNode _focusNode = FocusNode();
+  late final FocusNode _focusNode;
 
   Color _borderColor = AppColors.colorNeutral_400;
   Color _labelColor = AppColors.colorNeutral_900;
@@ -276,6 +297,7 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
   @override
   void initState() {
     super.initState();
+    _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(() {
       setState(() {
         _borderColor = _focusNode.hasFocus
@@ -352,6 +374,7 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: TextFormField(
+            inputFormatters: widget.inputFormatters,
             obscureText: widget.obscureText,
             focusNode: _focusNode,
             keyboardType: widget.textInputType,

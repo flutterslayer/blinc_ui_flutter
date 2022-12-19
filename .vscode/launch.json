@@ -23,9 +23,9 @@
 		},
 		{
 			"name": "examples",
+			"cwd": "lib\\examples",
 			"request": "launch",
-			"type": "dart",
-			"program": "example/lib/main.dart"
+			"type": "dart"
 		},
 		{
 			"name": "examples (profile mode)",
