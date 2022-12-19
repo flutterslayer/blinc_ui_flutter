@@ -70,9 +70,12 @@ class BlincAppBar extends AppBar with PreferredSizeWidget {
           ],
           leading: Builder(
             builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new),
-                onPressed: backOnPressed ?? () => Navigator.pop(context),
+              return Visibility(
+                visible: Navigator.of(context).canPop(),
+                  child: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios_new),
+                  onPressed: backOnPressed ?? () => Navigator.pop(context),
+                ),
               );
             },
           ),
