@@ -13,3 +13,4 @@ export 'src/blinc_brand.dart';
 export 'src/blinc_progress_bar.dart';
 export 'src/blinc_text.dart' show BlincText;
 export 'src/app_bar_component.dart';
+export 'src/app_responsive/app_responsive_ext.dart';

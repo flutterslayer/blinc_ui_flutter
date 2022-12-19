@@ -57,12 +57,12 @@ class BlincAppBar extends AppBar with PreferredSizeWidget {
           iconTheme: const IconThemeData(color: AppColors.colorNeutral_800),
           title: title,
           centerTitle: true,
-          toolbarHeight: height,
+          toolbarHeight: height.hsp,
           actions: [
             GestureDetector(
               onTap: iconOnPressed,
               child: Padding(
-                  padding: const EdgeInsets.only(right: 14),
+                  padding: EdgeInsets.only(right: 14.hsp),
                   child: Icon(
                     icon,
                   )),

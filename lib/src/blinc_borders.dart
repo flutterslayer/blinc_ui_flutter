@@ -1,3 +1,4 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
 /// Creates pre defined styles for [Container] borders.
@@ -23,18 +24,18 @@ class BlincBorders {
   ///The [sm] border size measures 0.5px
   static BoxBorder sm = Border.all(
     color: _color,
-    width: 0.5,
+    width: 0.5.wsp,
   );
 
   ///The [md] border size measures 1px
   static BoxBorder md = Border.all(
     color: _color,
-    width: 1,
+    width: 1.wsp,
   );
 
   ///The [lg] border size measures 2px
   static BoxBorder lg = Border.all(
     color: _color,
-    width: 2,
+    width: 2.wsp,
   );
 }

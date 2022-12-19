@@ -1,3 +1,4 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
 /// Aligns the logo vertically or horizontally
@@ -36,7 +37,7 @@ class BlincSymbol extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       // Assigns the custom width or the standard
-      width: width ?? 80,
+      width: width?.wsp ?? 80.wsp,
       child: Image(
         fit: BoxFit.contain,
         image: AssetImage(
@@ -86,7 +87,7 @@ class BlincLogo extends StatelessWidget {
     if (logoOrientation == LogoOrientation.vertical) {
       return _verticalLogo(
         logoTheme: logoTheme,
-        width: width,
+        width: width?.wsp,
       );
     }
     // Checks if it's horizontal
