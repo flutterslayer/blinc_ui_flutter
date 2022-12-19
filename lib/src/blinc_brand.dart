@@ -94,14 +94,14 @@ class BlincLogo extends StatelessWidget {
     if (logoOrientation == LogoOrientation.horizontal) {
       return _horizontalLogo(
         logoTheme: logoTheme,
-        width: width,
+        width: width?.wsp,
       );
     }
 
     // Returns default (horizontal)
     return _horizontalLogo(
       logoTheme: logoTheme,
-      width: width,
+      width: width?.wsp,
     );
   }
 }
@@ -112,7 +112,7 @@ Widget _horizontalLogo({
 }) {
   return SizedBox(
     // Assigns the custom width or the standard
-    width: width ?? 288,
+    width: width?.wsp ?? 288.wsp,
     child: Image(
       fit: BoxFit.contain,
       image: AssetImage(
@@ -132,7 +132,7 @@ Widget _verticalLogo({
 }) {
   return SizedBox(
     // Assigns the custom width or the standard
-    width: width ?? 187,
+    width: width?.wsp ?? 187.wsp,
     child: Image(
       fit: BoxFit.contain,
       image: AssetImage(

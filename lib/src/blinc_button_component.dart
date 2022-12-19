@@ -1,3 +1,4 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:blinc_ui_flutter/src/blinc_colors.dart';
 import 'package:blinc_ui_flutter/src/loading_spinner_component.dart';
 import 'package:blinc_ui_flutter/src/spacing.dart';
@@ -204,9 +205,9 @@ class BlincButton extends StatefulWidget {
           return Stack(
             children: [
               Align(
-                alignment: const Alignment(-0.7, 0),
+                alignment: Alignment(-0.7.wsp, 0.hsp),
                 child: SizedBox(
-                  width: constraints.maxWidth / 2,
+                  width: constraints.maxWidth / 2.wsp,
                   child: BlincButton(
                     text: textLeft,
                     onPressed: onPressedLeft,
@@ -214,9 +215,9 @@ class BlincButton extends StatefulWidget {
                 ),
               ),
               Align(
-                alignment: const Alignment(0.8, 0),
+                alignment: Alignment(0.8.wsp, 0.hsp),
                 child: SizedBox(
-                  width: constraints.maxWidth / 2,
+                  width: constraints.maxWidth / 2.wsp,
                   child: BlincButton(
                     text: textRight,
                     onPressed: onPressedRight,
@@ -299,7 +300,7 @@ class _BlincButtonState extends State<BlincButton> {
       decoration: BoxDecoration(
         // Checks if the button is focused. If true, returns the custom border
         border: isFocused == true
-            ? Border.all(color: focusedBorderColor, width: 2)
+            ? Border.all(color: focusedBorderColor, width: 2.wsp)
             : null,
         borderRadius: BorderRadius.circular(10),
       ),
@@ -313,13 +314,13 @@ class _BlincButtonState extends State<BlincButton> {
           // minWidth of the button. If not defined will take the standard
           minWidth: widget.isFluid == true
               ? 0
-              : widget.blincButtonPresets?.minimumWidth ??
-                  DefaultPresets.minimumWidth,
+              : widget.blincButtonPresets?.minimumWidth.wsp ??
+                  DefaultPresets.minimumWidth.wsp,
           // minHeight of the button. If not defined will take the standard
           minHeight: widget.isFluid == true
               ? 0
-              : widget.blincButtonPresets?.minimumHeight ??
-                  DefaultPresets.minimumHeight,
+              : widget.blincButtonPresets?.minimumHeight.hsp ??
+                  DefaultPresets.minimumHeight.hsp,
         ),
         child: ElevatedButton(
           // Changes the state when the button focus changes
@@ -449,8 +450,8 @@ class _BlincButtonState extends State<BlincButton> {
                 // If isLoading is true will return only the loading widget
                 if (widget.isLoading == true)
                   SizedBox(
-                      width: 25,
-                      height: 25,
+                      width: 25.wsp,
+                      height: 25.hsp,
                       child: LoadingSpinner(
                         color: widget.buttonTheme?.loadingSpinnerColor ??
                             DefaultTheme.loadingSpinnerColor,
@@ -463,7 +464,7 @@ class _BlincButtonState extends State<BlincButton> {
                   if (widget.icon != null && widget.isIconInverted != true)
                     Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 5),
+                        padding: EdgeInsets.only(right: 5.wsp),
                         child: Icon(
                           widget.icon,
                           size: widget.blincButtonPresets?.iconSize ??
@@ -477,7 +478,7 @@ class _BlincButtonState extends State<BlincButton> {
                       child: Text(
                         widget.text!,
                         style: TextStyle(
-                          height: 1.5,
+                          height: 1.5.hsp,
                           decorationThickness: 1.2,
                           color: Colors.transparent,
                           fontSize: widget.blincButtonPresets?.fontSize,
@@ -491,7 +492,7 @@ class _BlincButtonState extends State<BlincButton> {
                       child: Text(
                         widget.text!,
                         style: TextStyle(
-                          height: 1.42,
+                          height: 1.42.hsp,
                           fontWeight: null,
                           fontSize: widget.blincButtonPresets?.fontSize,
                         ),
@@ -501,7 +502,7 @@ class _BlincButtonState extends State<BlincButton> {
                   // Returns an icon at the right side of the button
                   if (widget.icon != null && widget.isIconInverted == true)
                     Padding(
-                      padding: const EdgeInsets.only(left: 1),
+                      padding: EdgeInsets.only(left: 1.wsp),
                       child: Icon(
                         widget.icon,
                         size: widget.blincButtonPresets?.iconSize ??
@@ -537,8 +538,8 @@ class DefaultTheme {
 /// The default presets used when the button shape and sizes are not
 /// explicitly defined
 class DefaultPresets {
-  static const double minimumWidth = 137;
-  static const double minimumHeight = 32;
+  static double minimumWidth = 137.wsp;
+  static double minimumHeight = 32.hsp;
   static const padding = EdgeInsets.fromLTRB(0, 16, 0, 16);
   static var shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(8.0),
@@ -733,9 +734,9 @@ abstract class BlincButtonPresets {
 
 class SmallPresets implements BlincButtonPresets {
   @override
-  final minimumWidth = 137;
+  final minimumWidth = 137.wsp;
   @override
-  final minimumHeight = 32;
+  final minimumHeight = 32.hsp;
   @override
   final padding = const EdgeInsets.fromLTRB(0, 0, 0, 0);
   @override
@@ -752,9 +753,9 @@ class SmallPresets implements BlincButtonPresets {
 
 class LargePresets implements BlincButtonPresets {
   @override
-  final minimumWidth = 326;
+  final minimumWidth = 326.wsp;
   @override
-  final minimumHeight = 72;
+  final minimumHeight = 72.hsp;
   @override
   final padding = const EdgeInsets.all(0);
   @override
@@ -771,9 +772,9 @@ class LargePresets implements BlincButtonPresets {
 
 class DoublePrimaryPresets implements BlincButtonPresets {
   @override
-  final minimumWidth = 0;
+  final minimumWidth = 0.wsp;
   @override
-  final minimumHeight = 72;
+  final minimumHeight = 72.hsp;
   @override
   final padding = const EdgeInsets.only(
     left: Spacing.xs,
@@ -793,9 +794,9 @@ class DoublePrimaryPresets implements BlincButtonPresets {
 
 class DoubleSecondaryPresets implements BlincButtonPresets {
   @override
-  final minimumWidth = 0;
+  final minimumWidth = 0.wsp;
   @override
-  final minimumHeight = 72;
+  final minimumHeight = 72.hsp;
   @override
   final padding = const EdgeInsets.only(
     left: Spacing.xs,

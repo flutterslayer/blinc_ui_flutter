@@ -1,3 +1,4 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
 /// BlincText will create a text widget with pre-built styles. They can be
@@ -36,7 +37,7 @@ abstract class BaseBlincText extends StatelessWidget {
 
   FontWeight fontWeight = FontWeight.w400;
   double fontSize = 16;
-  double fontHeight = 0;
+  double fontHeight = 0.hsp;
   double realFontHeight = 0;
 
   BaseBlincText get weightThin {
@@ -162,57 +163,57 @@ abstract class BaseBlincText extends StatelessWidget {
   }
 
   BaseBlincText get heightXXXS {
-    _calculateFontHeight(newFontHeight: 12);
+    _calculateFontHeight(newFontHeight: 12.hsp.toInt());
     return this;
   }
 
   BaseBlincText get heightXXS {
-    _calculateFontHeight(newFontHeight: 16);
+    _calculateFontHeight(newFontHeight: 16.hsp.toInt());
     return this;
   }
 
   BaseBlincText get heightXS {
-    _calculateFontHeight(newFontHeight: 20);
+    _calculateFontHeight(newFontHeight: 20.hsp.toInt());
     return this;
   }
 
   BaseBlincText get heightSM {
-    _calculateFontHeight(newFontHeight: 24);
+    _calculateFontHeight(newFontHeight: 24.hsp.toInt());
     return this;
   }
 
   BaseBlincText get heightMD {
-    _calculateFontHeight(newFontHeight: 28);
+    _calculateFontHeight(newFontHeight: 28.hsp.toInt());
     return this;
   }
 
   BaseBlincText get heightLG {
-    _calculateFontHeight(newFontHeight: 32);
+    _calculateFontHeight(newFontHeight: 32.hsp.toInt());
     return this;
   }
 
   BaseBlincText get heightXL {
-    _calculateFontHeight(newFontHeight: 40);
+    _calculateFontHeight(newFontHeight: 40.hsp.toInt());
     return this;
   }
 
   BaseBlincText get heightXXL {
-    _calculateFontHeight(newFontHeight: 48);
+    _calculateFontHeight(newFontHeight: 48.hsp.toInt());
     return this;
   }
 
   BaseBlincText get heightXXXL {
-    _calculateFontHeight(newFontHeight: 56);
+    _calculateFontHeight(newFontHeight: 56.hsp.toInt());
     return this;
   }
 
   BaseBlincText get heightHuge {
-    _calculateFontHeight(newFontHeight: 64);
+    _calculateFontHeight(newFontHeight: 64.hsp.toInt());
     return this;
   }
 
   BaseBlincText get heightXHuge {
-    _calculateFontHeight(newFontHeight: 72);
+    _calculateFontHeight(newFontHeight: 72.hsp.toInt());
     return this;
   }
 }

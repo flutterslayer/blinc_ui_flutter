@@ -1,3 +1,4 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -27,7 +28,7 @@ class _GradientCircularProgressIndicator extends StatelessWidget {
         painter: _GradientCircularProgressPainter(
           radius: radius,
           gradientColors: gradientColors,
-          strokeWidth: strokeWidth,
+          strokeWidth: strokeWidth.wsp,
         ),
       ),
     );
@@ -61,12 +62,12 @@ class _GradientCircularProgressPainter extends CustomPainter {
     double offset = 0;
 
     /// The offset and size of the loading wheel
-    Rect rect = Offset(offset, offset) & Size(size.width, size.height);
+    Rect rect = Offset(offset, offset) & Size(size.width.wsp, size.height.hsp);
 
     /// Draws the loading wheel circle
     var paint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth;
+      ..strokeWidth = strokeWidth.wsp;
     paint.shader = SweepGradient(
             colors: gradientColors, startAngle: 0.0, endAngle: 2 * math.pi)
         .createShader(rect);
@@ -132,7 +133,7 @@ class LoadingSpinnerState extends State<LoadingSpinner>
         gradientColors: [widget.color, Colors.transparent],
 
         /// Thickness of the loading wheel
-        strokeWidth: 4,
+        strokeWidth: 4.wsp,
       ),
     );
   }

@@ -193,9 +193,9 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
     bool suffixIcon = false,
   }) {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 10,
-        right: 10,
+      padding: EdgeInsets.only(
+        left: 10.wsp,
+        right: 10.wsp,
       ),
       child: icon != null
           ? Icon(
@@ -240,12 +240,12 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
             },
             decoration: InputDecoration(
               errorMaxLines: 1,
-              errorStyle: const TextStyle(
+              errorStyle: TextStyle(
                 color: Colors.transparent,
                 fontSize: 0,
-                height: -10,
+                height: -10.hsp,
               ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 24),
+              contentPadding: EdgeInsets.symmetric(vertical: 24.hsp),
               border: InputBorder.none,
               labelText: widget.label,
               hintText: widget.placeholder,
@@ -270,9 +270,9 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(
-            top: 8,
-            left: 10,
+          padding: EdgeInsets.only(
+            top: 8.hsp,
+            left: 10.wsp,
           ),
           child: Text(
             _errorMessage ?? widget.descriptionText ?? '',
