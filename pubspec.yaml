@@ -1,7 +1,7 @@
 name: blinc_ui_flutter
 description: User-friendly custom widget pack. Including inputs, button, progress bar, typography, borders, gradient and other useful widgets.
-version: 0.0.1
-homepage:
+version: 0.0.3
+homepage: https://oneblinc.com/
 
 environment:
   sdk: ">=2.18.0 <3.0.0"
