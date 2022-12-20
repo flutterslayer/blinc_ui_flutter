@@ -1,5 +1,6 @@
 import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 /// The BlincInputComponent is responsible for creating Forms and Inputs.
@@ -58,6 +59,12 @@ class BlincInputComponent {
   /// [validator]  Validation (Ex.: BlincInputComponent.validations.required).
   ///
   /// [errorMessage] Error message displayed below the input, with proper styling.
+  ///
+  /// [onChanged] Calls the function whenever the user edit the text.
+  ///
+  /// [focusNode] An object that can be used by a stateful widget to obtain the keyboard focus and to handle keyboard events.
+  ///
+  /// [inputFormatters] Sets a list of input formatters for the field.
   static Widget textField({
     String? label,
     String? placeholder,
@@ -70,6 +77,9 @@ class BlincInputComponent {
     TextInputType? textInputType,
     FormFieldValidator<String>? validator,
     String? errorMessage,
+    void Function(String?)? onChanged,
+    FocusNode? focusNode,
+    List<TextInputFormatter>? inputFormatters,
   }) {
     return BlincInputTextField(
       label: label,
@@ -83,6 +93,49 @@ class BlincInputComponent {
       textInputType: textInputType,
       validator: validator,
       errorMessage: errorMessage,
+      onChanged: onChanged,
+      focusNode: focusNode,
+      inputFormatters: inputFormatters,
+    );
+  }
+
+  static Widget passwordField({
+    String? label,
+    String? placeholder,
+    bool obscureText = true,
+    bool changeableObscureText = true,
+    IconData? prefixIcon,
+    IconData? suffixIcon = Icons.visibility_off_outlined,
+    IconData? secondSuffixIcon = Icons.visibility_outlined,
+    IconData? errorIcon = Icons.visibility_off_outlined,
+    String? descriptionText,
+    bool enabled = true,
+    TextEditingController? textEditingController,
+    TextInputType? textInputType,
+    FormFieldValidator<String>? validator,
+    String? errorMessage,
+    void Function(String?)? onChanged,
+    FocusNode? focusNode,
+    List<TextInputFormatter>? inputFormatters,
+  }) {
+    return BlincInputTextField(
+      label: label,
+      placeholder: placeholder,
+      obscureText: obscureText,
+      changeableObscureText: changeableObscureText,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      secondSuffixIcon: secondSuffixIcon,
+      errorIcon: errorIcon,
+      descriptionText: descriptionText,
+      enabled: enabled,
+      textEditingController: textEditingController,
+      textInputType: textInputType,
+      validator: validator,
+      errorMessage: errorMessage,
+      onChanged: onChanged,
+      focusNode: focusNode,
+      inputFormatters: inputFormatters,
     );
   }
 
@@ -165,13 +218,22 @@ class BlincInputTextField extends StatefulWidget {
   final String? placeholder;
 
   /// If true, hides the text for passwords for example
-  final bool obscureText;
+  bool obscureText;
+
+  /// If true, inverts obscure text when click on suffix icon
+  final bool changeableObscureText;
 
   /// Sets the icon on the left side
   final IconData? prefixIcon;
 
   /// Sets the icon on the right side
-  final IconData? suffixIcon;
+  IconData? suffixIcon;
+
+  /// Sets the icon on the right side when obscure text is false
+  IconData? secondSuffixIcon;
+
+  /// Sets the error state icon
+  IconData? errorIcon;
 
   /// Sets the description text
   final String? descriptionText;
@@ -186,19 +248,34 @@ class BlincInputTextField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final String? errorMessage;
 
-  const BlincInputTextField({
+  /// Calls the function whenever the user edits the text
+  final void Function(String? value)? onChanged;
+
+  /// An object that can be used by a stateful widget to obtain the keyboard focus and to handle keyboard events.
+  final FocusNode? focusNode;
+
+  /// Sets the input formatters
+  final List<TextInputFormatter>? inputFormatters;
+
+  BlincInputTextField({
     Key? key,
     this.label,
     this.placeholder,
     this.obscureText = false,
+    this.changeableObscureText = false,
     this.prefixIcon,
     this.suffixIcon,
+    this.secondSuffixIcon = Icons.new_releases_outlined,
+    this.errorIcon = Icons.new_releases_outlined,
     this.descriptionText,
     this.enabled = true,
     this.textEditingController,
     this.textInputType,
     this.validator,
     this.errorMessage,
+    this.onChanged,
+    this.focusNode,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -206,7 +283,7 @@ class BlincInputTextField extends StatefulWidget {
 }
 
 class _BlincInputTextFieldState extends State<BlincInputTextField> {
-  final FocusNode _focusNode = FocusNode();
+  late final FocusNode _focusNode;
 
   Color _borderColor = AppColors.colorNeutral_400;
   Color _labelColor = AppColors.colorNeutral_900;
@@ -220,6 +297,7 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
   @override
   void initState() {
     super.initState();
+    _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(() {
       setState(() {
         _borderColor = _focusNode.hasFocus
@@ -256,15 +334,27 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
         right: 10,
       ),
       child: icon != null
-          ? Icon(
-              (hasSuffixIcon && _errorMessage != null) ||
-                      (hasSuffixIcon && widget.errorMessage != null)
-                  ? Icons.new_releases_outlined
-                  : icon,
-              color: ((hasSuffixIcon && _errorMessage != null) ||
-                      (hasSuffixIcon && widget.errorMessage != null)
-                  ? AppColors.colorRedError_300
-                  : AppColors.colorNeutral_800),
+          ? GestureDetector(
+              onTap: () {
+                if (widget.changeableObscureText) {
+                  final tempIcon = widget.suffixIcon;
+                  widget.suffixIcon = widget.secondSuffixIcon;
+                  widget.errorIcon = widget.secondSuffixIcon;
+                  widget.secondSuffixIcon = tempIcon;
+                  widget.obscureText = !widget.obscureText;
+                  setState(() {});
+                }
+              },
+              child: Icon(
+                (hasSuffixIcon && _errorMessage != null) ||
+                        (hasSuffixIcon && widget.errorMessage != null)
+                    ? widget.errorIcon
+                    : icon,
+                color: ((hasSuffixIcon && _errorMessage != null) ||
+                        (hasSuffixIcon && widget.errorMessage != null)
+                    ? AppColors.colorRedError_300
+                    : AppColors.colorNeutral_800),
+              ),
             )
           : null,
     );
@@ -284,6 +374,7 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: TextFormField(
+            inputFormatters: widget.inputFormatters,
             obscureText: widget.obscureText,
             focusNode: _focusNode,
             keyboardType: widget.textInputType,
@@ -330,6 +421,7 @@ class _BlincInputTextFieldState extends State<BlincInputTextField> {
                   ? AppColors.colorNeutral_400
                   : AppColors.colorNeutral_900,
             ),
+            onChanged: widget.onChanged,
           ),
         ),
         Padding(
