@@ -1,4 +1,5 @@
 import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
+import 'package:examples/pages/app_bar_example.dart';
 import 'package:examples/pages/borders_example.dart';
 import 'package:examples/pages/brand_example.dart';
 import 'package:examples/pages/button_example.dart';
@@ -25,6 +26,7 @@ void main() {
         '/progress_bar': (context) => const ProgressBarExample(),
         '/text': (context) => const TextExample(),
         '/login': (context) => const LoginPage(),
+        '/app_bar': (context) => const AppBarExample(),
       },
     ),
   );

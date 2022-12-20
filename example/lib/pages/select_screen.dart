@@ -30,6 +30,7 @@ class SelectScreen extends StatelessWidget {
               text: 'Progress Bar',
             ),
             selectBlock(context: context, route: '/text', text: 'Text'),
+            selectBlock(context: context, route: '/app_bar', text: 'App Bar'),
           ],
         )),
       ),
