@@ -23,6 +23,11 @@ class _ProgressBarExampleState extends State<ProgressBarExample> {
       updateValue();
     });
   }
+  @override
+  void dispose(){
+    timer.cancel();
+    super.dispose();
+  }
 
   void updateValue() {
     final addedValue = (value + 0.05);
@@ -39,21 +44,21 @@ class _ProgressBarExampleState extends State<ProgressBarExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor:
-          isDarkMode ? AppColors.colorNeutral_900 : AppColors.colorNeutral_0,
-      appBar: AppBar(
-        backgroundColor: Colors.black87,
-        title: const Text('Progress component example'),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 35.0),
-          child: Container(
-            alignment: Alignment.center,
-            child: SizedBox(
-              width: 350,
-              child: Expanded(
+    return AppResponsiveWidget(
+      child: Scaffold(
+        backgroundColor:
+            isDarkMode ? AppColors.colorNeutral_900 : AppColors.colorNeutral_0,
+        appBar: AppBar(
+          backgroundColor: Colors.black87,
+          title: const Text('Progress component example'),
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 35.0),
+            child: Container(
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: 350,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

@@ -1,3 +1,4 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
 /// BlincText will create a text widget with pre-built styles. They can be
@@ -41,7 +42,7 @@ abstract class BaseBlincText extends StatelessWidget {
   BaseBlincText({super.key});
 
   FontWeight _fontWeight = FontWeight.w400;
-  double _fontSize = 16;
+  double _fontSize = 16.wsp;
   double _fontHeight = 0;
   double _realFontHeight = 0;
 
@@ -95,84 +96,84 @@ abstract class BaseBlincText extends StatelessWidget {
 
   ///Defines a extra extra extra small font size for BlincText
   BaseBlincText get sizeXXXS {
-    _fontSize = 10;
+    _fontSize = 10.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
   ///Defines a extra extra small font size for BlincText
   BaseBlincText get sizeXXS {
-    _fontSize = 12;
+    _fontSize = 12.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
   ///Defines a extra small font size for BlincText
   BaseBlincText get sizeXS {
-    _fontSize = 14;
+    _fontSize = 14.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
   ///Defines a small font size for BlincText
   BaseBlincText get sizeSM {
-    _fontSize = 16;
+    _fontSize = 16.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
   ///Defines a medium font size for BlincText
   BaseBlincText get sizeMD {
-    _fontSize = 20;
+    _fontSize = 20.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
   ///Defines a large font size for BlincText
   BaseBlincText get sizeLG {
-    _fontSize = 24;
+    _fontSize = 24.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
   ///Defines a extra large font size for BlincText
   BaseBlincText get sizeXL {
-    _fontSize = 28;
+    _fontSize = 28.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
   ///Defines a extra extra large font size for BlincText
   BaseBlincText get sizeXXL {
-    _fontSize = 32;
+    _fontSize = 32.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
   ///Defines a extra extra extra large font size for BlincText
   BaseBlincText get sizeXXXL {
-    _fontSize = 40;
+    _fontSize = 40.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
   ///Defines a huge font size for BlincText
   BaseBlincText get sizeHuge {
-    _fontSize = 48;
+    _fontSize = 48.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
   ///Defines a extra huge font size for BlincText
   BaseBlincText get sizeXHuge {
-    _fontSize = 56;
+    _fontSize = 56.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
   ///Defines a extra extra huge font size for BlincText
   BaseBlincText get sizeXXHuge {
-    _fontSize = 64;
+    _fontSize = 64.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }

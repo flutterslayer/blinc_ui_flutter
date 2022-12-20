@@ -6,51 +6,53 @@ class SpacingExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black87,
-        title: const Text('Spacing component example'),
-      ),
-      body: SafeArea(
-        child: SizedBox(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              block(context),
-              BlincSpacer.horizontal.xxs,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BlincSpacer.vertical.xxxs,
-                  block2(),
-                  BlincSpacer.vertical.xs,
-                  block2(),
-                  BlincSpacer.vertical.sm,
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      block3(),
-                      BlincSpacer.horizontal.xxs,
-                      Column(
-                        children: [
-                          BlincSpacer.vertical.sm,
-                          block4(),
-                        ],
-                      ),
-                    ],
-                  ),
-                  BlincSpacer.vertical.xs,
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      block5(),
-                      BlincSpacer.horizontal.xxs,
-                      block6(),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+    return AppResponsiveWidget(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black87,
+          title: const Text('Spacing component example'),
+        ),
+        body: SafeArea(
+          child: SizedBox(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                block(context),
+                BlincSpacer.horizontal.xxs,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BlincSpacer.vertical.xxxs,
+                    block2(),
+                    BlincSpacer.vertical.xs,
+                    block2(),
+                    BlincSpacer.vertical.sm,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        block3(),
+                        BlincSpacer.horizontal.xxs,
+                        Column(
+                          children: [
+                            BlincSpacer.vertical.sm,
+                            block4(),
+                          ],
+                        ),
+                      ],
+                    ),
+                    BlincSpacer.vertical.xs,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        block5(),
+                        BlincSpacer.horizontal.xxs,
+                        block6(),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

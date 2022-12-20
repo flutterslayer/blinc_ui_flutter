@@ -1,3 +1,4 @@
+import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:blinc_ui_flutter/src/spacing.dart';
 import 'package:flutter/material.dart';
 
@@ -45,9 +46,9 @@ extension SelectOrientationAndSize on BlincSpacer {
   Widget get huge {
     switch (this) {
       case BlincSpacer.horizontal:
-        return const _CustomSpaceComponent(width: Spacing.huge);
+        return _CustomSpaceComponent(width: Spacing.huge.wsp);
       case BlincSpacer.vertical:
-        return const _CustomSpaceComponent(height: Spacing.huge);
+        return _CustomSpaceComponent(height: Spacing.huge.hsp);
     }
   }
 
@@ -55,9 +56,9 @@ extension SelectOrientationAndSize on BlincSpacer {
   Widget get xxxl {
     switch (this) {
       case BlincSpacer.horizontal:
-        return const _CustomSpaceComponent(width: Spacing.xxxl);
+        return _CustomSpaceComponent(width: Spacing.xxxl.wsp);
       case BlincSpacer.vertical:
-        return const _CustomSpaceComponent(height: Spacing.xxxl);
+        return _CustomSpaceComponent(height: Spacing.xxxl.hsp);
     }
   }
 
@@ -65,9 +66,9 @@ extension SelectOrientationAndSize on BlincSpacer {
   Widget get xxl {
     switch (this) {
       case BlincSpacer.horizontal:
-        return const _CustomSpaceComponent(width: Spacing.xxl);
+        return _CustomSpaceComponent(width: Spacing.xxl.wsp);
       case BlincSpacer.vertical:
-        return const _CustomSpaceComponent(height: Spacing.xxl);
+        return _CustomSpaceComponent(height: Spacing.xxl.hsp);
     }
   }
 
@@ -75,9 +76,9 @@ extension SelectOrientationAndSize on BlincSpacer {
   Widget get xl {
     switch (this) {
       case BlincSpacer.horizontal:
-        return const _CustomSpaceComponent(width: Spacing.xl);
+        return _CustomSpaceComponent(width: Spacing.xl.wsp);
       case BlincSpacer.vertical:
-        return const _CustomSpaceComponent(height: Spacing.xl);
+        return _CustomSpaceComponent(height: Spacing.xl.hsp);
     }
   }
 
@@ -85,9 +86,9 @@ extension SelectOrientationAndSize on BlincSpacer {
   Widget get lg {
     switch (this) {
       case BlincSpacer.horizontal:
-        return const _CustomSpaceComponent(width: Spacing.lg);
+        return _CustomSpaceComponent(width: Spacing.lg.wsp);
       case BlincSpacer.vertical:
-        return const _CustomSpaceComponent(height: Spacing.lg);
+        return _CustomSpaceComponent(height: Spacing.lg.hsp);
     }
   }
 
@@ -95,9 +96,9 @@ extension SelectOrientationAndSize on BlincSpacer {
   Widget get md {
     switch (this) {
       case BlincSpacer.horizontal:
-        return const _CustomSpaceComponent(width: Spacing.md);
+        return _CustomSpaceComponent(width: Spacing.md.wsp);
       case BlincSpacer.vertical:
-        return const _CustomSpaceComponent(height: Spacing.md);
+        return _CustomSpaceComponent(height: Spacing.md.hsp);
     }
   }
 
@@ -105,9 +106,9 @@ extension SelectOrientationAndSize on BlincSpacer {
   Widget get sm {
     switch (this) {
       case BlincSpacer.horizontal:
-        return const _CustomSpaceComponent(width: Spacing.sm);
+        return _CustomSpaceComponent(width: Spacing.sm.wsp);
       case BlincSpacer.vertical:
-        return const _CustomSpaceComponent(height: Spacing.sm);
+        return _CustomSpaceComponent(height: Spacing.sm.hsp);
     }
   }
 
@@ -115,9 +116,9 @@ extension SelectOrientationAndSize on BlincSpacer {
   Widget get xs {
     switch (this) {
       case BlincSpacer.horizontal:
-        return const _CustomSpaceComponent(width: Spacing.xs);
+        return _CustomSpaceComponent(width: Spacing.xs.wsp);
       case BlincSpacer.vertical:
-        return const _CustomSpaceComponent(height: Spacing.xs);
+        return _CustomSpaceComponent(height: Spacing.xs.hsp);
     }
   }
 
@@ -125,9 +126,9 @@ extension SelectOrientationAndSize on BlincSpacer {
   Widget get xxs {
     switch (this) {
       case BlincSpacer.horizontal:
-        return const _CustomSpaceComponent(width: Spacing.xxs);
+        return _CustomSpaceComponent(width: Spacing.xxs.wsp);
       case BlincSpacer.vertical:
-        return const _CustomSpaceComponent(height: Spacing.xxs);
+        return _CustomSpaceComponent(height: Spacing.xxs.hsp);
     }
   }
 
@@ -135,9 +136,9 @@ extension SelectOrientationAndSize on BlincSpacer {
   Widget get xxxs {
     switch (this) {
       case BlincSpacer.horizontal:
-        return const _CustomSpaceComponent(width: Spacing.xxxs);
+        return _CustomSpaceComponent(width: Spacing.xxxs.wsp);
       case BlincSpacer.vertical:
-        return const _CustomSpaceComponent(height: Spacing.xxxs);
+        return _CustomSpaceComponent(height: Spacing.xxxs.hsp);
     }
   }
 
@@ -145,9 +146,9 @@ extension SelectOrientationAndSize on BlincSpacer {
   Widget get zero {
     switch (this) {
       case BlincSpacer.horizontal:
-        return const _CustomSpaceComponent(width: Spacing.zero);
+        return _CustomSpaceComponent(width: Spacing.zero.wsp);
       case BlincSpacer.vertical:
-        return const _CustomSpaceComponent(height: Spacing.zero);
+        return _CustomSpaceComponent(height: Spacing.zero.hsp);
     }
   }
 }

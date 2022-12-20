@@ -41,7 +41,7 @@ class BlincProgressBar extends StatelessWidget {
       ),
       child: LinearProgressIndicator(
         value: value,
-        minHeight: 4,
+        minHeight: 4.hsp,
         color: _getColor(),
         backgroundColor: _getBackgroundColor(),
       ),
