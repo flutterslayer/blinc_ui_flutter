@@ -62,7 +62,7 @@ class BlincAppBar extends AppBar with PreferredSizeWidget {
             GestureDetector(
               onTap: iconOnPressed,
               child: Padding(
-                  padding: EdgeInsets.only(right: 14.wsp),
+                  padding: const EdgeInsets.only(right: 14),
                   child: Icon(
                     icon,
                   )),

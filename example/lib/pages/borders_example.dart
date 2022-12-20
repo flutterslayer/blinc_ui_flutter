@@ -6,48 +6,50 @@ class BordersExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black87,
-        title: const Text('Borders Component Example'),
-      ),
-      body: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('BlincBorders.zero'),
-                const SizedBox(height: 15),
-                block(BlincBorders.zero),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('BlincBorders.sm'),
-                const SizedBox(height: 15),
-                block(BlincBorders.sm),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('BlincBorders.md'),
-                const SizedBox(height: 15),
-                block(BlincBorders.md),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('BlincBorders.lg'),
-                const SizedBox(height: 15),
-                block(BlincBorders.lg),
-              ],
-            ),
-          ],
+    return AppResponsiveWidget(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black87,
+          title: const Text('Borders Component Example'),
+        ),
+        body: SafeArea(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('BlincBorders.zero'),
+                  const SizedBox(height: 15),
+                  block(BlincBorders.zero),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('BlincBorders.sm'),
+                  const SizedBox(height: 15),
+                  block(BlincBorders.sm),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('BlincBorders.md'),
+                  const SizedBox(height: 15),
+                  block(BlincBorders.md),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('BlincBorders.lg'),
+                  const SizedBox(height: 15),
+                  block(BlincBorders.lg),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

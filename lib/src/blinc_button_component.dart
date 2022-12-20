@@ -1,4 +1,3 @@
-import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:blinc_ui_flutter/src/blinc_colors.dart';
 import 'package:blinc_ui_flutter/src/loading_spinner_component.dart';
 import 'package:blinc_ui_flutter/src/spacing.dart';
@@ -38,6 +37,7 @@ class BlincButton extends StatefulWidget {
     this.isIconInverted,
     this.isLoading,
     this.isFluid,
+    this.disabled = false,
   }) : super(key: key);
 
   /// The button's text.
@@ -73,6 +73,9 @@ class BlincButton extends StatefulWidget {
   /// If true the button will take any space available
   final bool? isFluid;
 
+  /// If true the button will be disabled
+  final bool disabled;
+
   /// Creates a small button with primary theme
   BlincButton smallPrimary() {
     return BlincButton(
@@ -85,6 +88,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -100,6 +104,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -115,6 +120,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
       isUnderlined: true,
     );
   }
@@ -131,6 +137,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -146,6 +153,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -161,6 +169,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
       isUnderlined: true,
     );
   }
@@ -176,6 +185,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -190,6 +200,7 @@ class BlincButton extends StatefulWidget {
       isIconInverted: isIconInverted,
       isLoading: isLoading,
       isFluid: isFluid,
+      disabled: disabled,
     );
   }
 
@@ -205,9 +216,9 @@ class BlincButton extends StatefulWidget {
           return Stack(
             children: [
               Align(
-                alignment: Alignment(-0.7.wsp, 0.hsp),
+                alignment: const Alignment(-0.7, 0),
                 child: SizedBox(
-                  width: constraints.maxWidth / 2.wsp,
+                  width: constraints.maxWidth / 2,
                   child: BlincButton(
                     text: textLeft,
                     onPressed: onPressedLeft,
@@ -215,9 +226,9 @@ class BlincButton extends StatefulWidget {
                 ),
               ),
               Align(
-                alignment: Alignment(0.8.wsp, 0.hsp),
+                alignment: const Alignment(0.8, 0),
                 child: SizedBox(
-                  width: constraints.maxWidth / 2.wsp,
+                  width: constraints.maxWidth / 2,
                   child: BlincButton(
                     text: textRight,
                     onPressed: onPressedRight,
@@ -300,7 +311,7 @@ class _BlincButtonState extends State<BlincButton> {
       decoration: BoxDecoration(
         // Checks if the button is focused. If true, returns the custom border
         border: isFocused == true
-            ? Border.all(color: focusedBorderColor, width: 2.wsp)
+            ? Border.all(color: focusedBorderColor, width: 2)
             : null,
         borderRadius: BorderRadius.circular(10),
       ),
@@ -314,13 +325,13 @@ class _BlincButtonState extends State<BlincButton> {
           // minWidth of the button. If not defined will take the standard
           minWidth: widget.isFluid == true
               ? 0
-              : widget.blincButtonPresets?.minimumWidth.wsp ??
-                  DefaultPresets.minimumWidth.wsp,
+              : widget.blincButtonPresets?.minimumWidth ??
+                  DefaultPresets.minimumWidth,
           // minHeight of the button. If not defined will take the standard
           minHeight: widget.isFluid == true
               ? 0
-              : widget.blincButtonPresets?.minimumHeight.hsp ??
-                  DefaultPresets.minimumHeight.hsp,
+              : widget.blincButtonPresets?.minimumHeight ??
+                  DefaultPresets.minimumHeight,
         ),
         child: ElevatedButton(
           // Changes the state when the button focus changes
@@ -329,7 +340,7 @@ class _BlincButtonState extends State<BlincButton> {
               isFocused = value;
             });
           },
-          onPressed: widget.onPressed != null
+          onPressed: widget.onPressed != null && !widget.disabled
               ? () {
                   widget.onPressed!();
                 }
@@ -450,8 +461,8 @@ class _BlincButtonState extends State<BlincButton> {
                 // If isLoading is true will return only the loading widget
                 if (widget.isLoading == true)
                   SizedBox(
-                      width: 25.wsp,
-                      height: 25.hsp,
+                      width: 25,
+                      height: 25,
                       child: LoadingSpinner(
                         color: widget.buttonTheme?.loadingSpinnerColor ??
                             DefaultTheme.loadingSpinnerColor,
@@ -464,7 +475,7 @@ class _BlincButtonState extends State<BlincButton> {
                   if (widget.icon != null && widget.isIconInverted != true)
                     Flexible(
                       child: Padding(
-                        padding: EdgeInsets.only(right: 5.wsp),
+                        padding: const EdgeInsets.only(right: 5),
                         child: Icon(
                           widget.icon,
                           size: widget.blincButtonPresets?.iconSize ??
@@ -478,7 +489,7 @@ class _BlincButtonState extends State<BlincButton> {
                       child: Text(
                         widget.text!,
                         style: TextStyle(
-                          height: 1.5.hsp,
+                          height: 1.5,
                           decorationThickness: 1.2,
                           color: Colors.transparent,
                           fontSize: widget.blincButtonPresets?.fontSize,
@@ -492,7 +503,7 @@ class _BlincButtonState extends State<BlincButton> {
                       child: Text(
                         widget.text!,
                         style: TextStyle(
-                          height: 1.42.hsp,
+                          height: 1.42,
                           fontWeight: null,
                           fontSize: widget.blincButtonPresets?.fontSize,
                         ),
@@ -502,7 +513,7 @@ class _BlincButtonState extends State<BlincButton> {
                   // Returns an icon at the right side of the button
                   if (widget.icon != null && widget.isIconInverted == true)
                     Padding(
-                      padding: EdgeInsets.only(left: 1.wsp),
+                      padding: const EdgeInsets.only(left: 1),
                       child: Icon(
                         widget.icon,
                         size: widget.blincButtonPresets?.iconSize ??
@@ -538,8 +549,8 @@ class DefaultTheme {
 /// The default presets used when the button shape and sizes are not
 /// explicitly defined
 class DefaultPresets {
-  static double minimumWidth = 137.wsp;
-  static double minimumHeight = 32.hsp;
+  static const double minimumWidth = 137;
+  static const double minimumHeight = 32;
   static const padding = EdgeInsets.fromLTRB(0, 16, 0, 16);
   static var shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(8.0),
@@ -734,9 +745,9 @@ abstract class BlincButtonPresets {
 
 class SmallPresets implements BlincButtonPresets {
   @override
-  final minimumWidth = 137.wsp;
+  final minimumWidth = 137;
   @override
-  final minimumHeight = 32.hsp;
+  final minimumHeight = 32;
   @override
   final padding = const EdgeInsets.fromLTRB(0, 0, 0, 0);
   @override
@@ -753,9 +764,9 @@ class SmallPresets implements BlincButtonPresets {
 
 class LargePresets implements BlincButtonPresets {
   @override
-  final minimumWidth = 326.wsp;
+  final minimumWidth = 326;
   @override
-  final minimumHeight = 72.hsp;
+  final minimumHeight = 72;
   @override
   final padding = const EdgeInsets.all(0);
   @override
@@ -772,9 +783,9 @@ class LargePresets implements BlincButtonPresets {
 
 class DoublePrimaryPresets implements BlincButtonPresets {
   @override
-  final minimumWidth = 0.wsp;
+  final minimumWidth = 0;
   @override
-  final minimumHeight = 72.hsp;
+  final minimumHeight = 72;
   @override
   final padding = const EdgeInsets.only(
     left: Spacing.xs,
@@ -794,9 +805,9 @@ class DoublePrimaryPresets implements BlincButtonPresets {
 
 class DoubleSecondaryPresets implements BlincButtonPresets {
   @override
-  final minimumWidth = 0.wsp;
+  final minimumWidth = 0;
   @override
-  final minimumHeight = 72.hsp;
+  final minimumHeight = 72;
   @override
   final padding = const EdgeInsets.only(
     left: Spacing.xs,

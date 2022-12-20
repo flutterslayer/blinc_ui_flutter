@@ -32,8 +32,8 @@ class _CustomSpaceComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width?.wsp,
-      height: height?.hsp,
+      width: width,
+      height: height,
     );
   }
 }

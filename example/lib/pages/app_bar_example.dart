@@ -6,15 +6,17 @@ class AppBarExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BlincAppBar(
-        title: const Text('Password Recover',
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: AppColors.colorNeutral_800,
-        ),),
-        backOnPressed: () => Navigator.pop(context),
+    return AppResponsiveWidget(
+      child: Scaffold(
+        appBar: BlincAppBar(
+          title: const Text('Password Recover',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: AppColors.colorNeutral_800,
+          ),),
+          backOnPressed: () => Navigator.pop(context),
+        ),
       ),
     );
   }

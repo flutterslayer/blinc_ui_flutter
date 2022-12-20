@@ -170,7 +170,7 @@ class _BlincIconButtonState extends State<BlincIconButton> {
       decoration: BoxDecoration(
         // Checks if the button is focused. If true, returns the custom border
         border: isFocused == true
-            ? Border.all(color: focusedBorderColor, width: 2.wsp)
+            ? Border.all(color: focusedBorderColor, width: 2)
             : null,
         borderRadius: BorderRadius.circular(60),
       ),
@@ -183,11 +183,11 @@ class _BlincIconButtonState extends State<BlincIconButton> {
         child: SizedBox(
           // Width of the button. If not defined will take the standard
           width:
-              widget.iconPresets?.buttonSize.wsp ?? DefaultIconPresets.buttonSize.wsp,
+              widget.iconPresets?.buttonSize ?? DefaultIconPresets.buttonSize,
 
           // Height of the button. If not defined will take the standard
           height:
-              widget.iconPresets?.buttonSize.hsp ?? DefaultIconPresets.buttonSize.hsp,
+              widget.iconPresets?.buttonSize ?? DefaultIconPresets.buttonSize,
           child: ElevatedButton(
             clipBehavior: Clip.none,
 

@@ -36,8 +36,8 @@ abstract class BaseBlincText extends StatelessWidget {
   BaseBlincText({super.key});
 
   FontWeight fontWeight = FontWeight.w400;
-  double fontSize = 16;
-  double fontHeight = 0.hsp;
+  double fontSize = 16.wsp;
+  double fontHeight = 0;
   double realFontHeight = 0;
 
   BaseBlincText get weightThin {
@@ -81,73 +81,73 @@ abstract class BaseBlincText extends StatelessWidget {
   }
 
   BaseBlincText get sizeXXXS {
-    fontSize = 10;
+    fontSize = 10.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
 
   BaseBlincText get sizeXXS {
-    fontSize = 12;
+    fontSize = 12.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
 
   BaseBlincText get sizeXS {
-    fontSize = 14;
+    fontSize = 14.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
 
   BaseBlincText get sizeSM {
-    fontSize = 16;
+    fontSize = 16.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
 
   BaseBlincText get sizeMD {
-    fontSize = 20;
+    fontSize = 20.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
 
   BaseBlincText get sizeLG {
-    fontSize = 24;
+    fontSize = 24.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
 
   BaseBlincText get sizeXL {
-    fontSize = 28;
+    fontSize = 28.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
 
   BaseBlincText get sizeXXL {
-    fontSize = 32;
+    fontSize = 32.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
 
   BaseBlincText get sizeXXXL {
-    fontSize = 40;
+    fontSize = 40.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
 
   BaseBlincText get sizeHuge {
-    fontSize = 48;
+    fontSize = 48.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
 
   BaseBlincText get sizeXHuge {
-    fontSize = 56;
+    fontSize = 56.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
 
   BaseBlincText get sizeXXHuge {
-    fontSize = 64;
+    fontSize = 64.wsp;
     _calculateFontHeight(newFontHeight: realFontHeight.toInt());
     return this;
   }
@@ -163,57 +163,57 @@ abstract class BaseBlincText extends StatelessWidget {
   }
 
   BaseBlincText get heightXXXS {
-    _calculateFontHeight(newFontHeight: 12.hsp.toInt());
+    _calculateFontHeight(newFontHeight: 12);
     return this;
   }
 
   BaseBlincText get heightXXS {
-    _calculateFontHeight(newFontHeight: 16.hsp.toInt());
+    _calculateFontHeight(newFontHeight: 16);
     return this;
   }
 
   BaseBlincText get heightXS {
-    _calculateFontHeight(newFontHeight: 20.hsp.toInt());
+    _calculateFontHeight(newFontHeight: 20);
     return this;
   }
 
   BaseBlincText get heightSM {
-    _calculateFontHeight(newFontHeight: 24.hsp.toInt());
+    _calculateFontHeight(newFontHeight: 24);
     return this;
   }
 
   BaseBlincText get heightMD {
-    _calculateFontHeight(newFontHeight: 28.hsp.toInt());
+    _calculateFontHeight(newFontHeight: 28);
     return this;
   }
 
   BaseBlincText get heightLG {
-    _calculateFontHeight(newFontHeight: 32.hsp.toInt());
+    _calculateFontHeight(newFontHeight: 32);
     return this;
   }
 
   BaseBlincText get heightXL {
-    _calculateFontHeight(newFontHeight: 40.hsp.toInt());
+    _calculateFontHeight(newFontHeight: 40);
     return this;
   }
 
   BaseBlincText get heightXXL {
-    _calculateFontHeight(newFontHeight: 48.hsp.toInt());
+    _calculateFontHeight(newFontHeight: 48);
     return this;
   }
 
   BaseBlincText get heightXXXL {
-    _calculateFontHeight(newFontHeight: 56.hsp.toInt());
+    _calculateFontHeight(newFontHeight: 56);
     return this;
   }
 
   BaseBlincText get heightHuge {
-    _calculateFontHeight(newFontHeight: 64.hsp.toInt());
+    _calculateFontHeight(newFontHeight: 64);
     return this;
   }
 
   BaseBlincText get heightXHuge {
-    _calculateFontHeight(newFontHeight: 72.hsp.toInt());
+    _calculateFontHeight(newFontHeight: 72);
     return this;
   }
 }

@@ -39,56 +39,58 @@ class _ProgressBarExampleState extends State<ProgressBarExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor:
-          isDarkMode ? AppColors.colorNeutral_900 : AppColors.colorNeutral_0,
-      appBar: AppBar(
-        backgroundColor: Colors.black87,
-        title: const Text('Progress component example'),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 35.0),
-          child: Container(
-            alignment: Alignment.center,
-            child: SizedBox(
-              width: 350,
-              child: Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'Dark Mode',
-                          style: TextStyle(
-                            color: isDarkMode
-                                ? AppColors.colorNeutral_0
-                                : AppColors.colorNeutral_900,
+    return AppResponsiveWidget(
+      child: Scaffold(
+        backgroundColor:
+            isDarkMode ? AppColors.colorNeutral_900 : AppColors.colorNeutral_0,
+        appBar: AppBar(
+          backgroundColor: Colors.black87,
+          title: const Text('Progress component example'),
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 35.0),
+            child: Container(
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: 350,
+                child: Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Dark Mode',
+                            style: TextStyle(
+                              color: isDarkMode
+                                  ? AppColors.colorNeutral_0
+                                  : AppColors.colorNeutral_900,
+                            ),
                           ),
-                        ),
-                        Switch(
-                          value: isDarkMode,
-                          onChanged: ((value) {
-                            setState(() {
-                              isDarkMode = !isDarkMode;
-                            });
-                          }),
-                        ),
-                      ],
-                    ),
-                    BlincSpacer.vertical.xxs,
-                    BlincLogo(
-                      logoTheme:
-                          isDarkMode ? LogoTheme.white : LogoTheme.standard,
-                    ),
-                    BlincSpacer.vertical.xs,
-                    BlincProgressBar(
-                      value: value,
-                      dark: isDarkMode,
-                    ),
-                  ],
+                          Switch(
+                            value: isDarkMode,
+                            onChanged: ((value) {
+                              setState(() {
+                                isDarkMode = !isDarkMode;
+                              });
+                            }),
+                          ),
+                        ],
+                      ),
+                      BlincSpacer.vertical.xxs,
+                      BlincLogo(
+                        logoTheme:
+                            isDarkMode ? LogoTheme.white : LogoTheme.standard,
+                      ),
+                      BlincSpacer.vertical.xs,
+                      BlincProgressBar(
+                        value: value,
+                        dark: isDarkMode,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
