@@ -1,11 +1,15 @@
 import 'package:blinc_ui_flutter/blinc_ui_flutter.dart';
 import 'package:flutter/material.dart';
 
-class InputExample extends StatelessWidget {
-  InputExample({Key? key}) : super(key: key);
+class InputExample extends StatefulWidget {
+  const InputExample({Key? key}) : super(key: key);
 
+  @override
+  State<InputExample> createState() => _InputExampleState();
+}
+
+class _InputExampleState extends State<InputExample> {
   final _globalKey = GlobalKey<FormState>();
-
   void _validateForm() {
     _globalKey.currentState?.validate();
   }
@@ -175,4 +179,14 @@ class InputExample extends StatelessWidget {
       ),
     );
   }
+}
+
+class ModelTest {
+  final String name;
+  final int id;
+
+  ModelTest({
+    required this.name,
+    required this.id,
+  });
 }

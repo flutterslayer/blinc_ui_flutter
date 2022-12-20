@@ -21,7 +21,7 @@ void main() {
         '/borders': (context) => const BordersExample(),
         '/buttons': (context) => const ButtonExample(),
         '/shadows': (context) => const ShadowsExample(),
-        '/inputs': (context) => InputExample(),
+        '/inputs': (context) => const InputExample(),
         '/brand': (context) => const BrandExample(),
         '/progress_bar': (context) => const ProgressBarExample(),
         '/text': (context) => const TextExample(),

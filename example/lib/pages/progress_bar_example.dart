@@ -23,6 +23,11 @@ class _ProgressBarExampleState extends State<ProgressBarExample> {
       updateValue();
     });
   }
+  @override
+  void dispose(){
+    timer.cancel();
+    super.dispose();
+  }
 
   void updateValue() {
     final addedValue = (value + 0.05);
@@ -54,43 +59,41 @@ class _ProgressBarExampleState extends State<ProgressBarExample> {
               alignment: Alignment.center,
               child: SizedBox(
                 width: 350,
-                child: Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            'Dark Mode',
-                            style: TextStyle(
-                              color: isDarkMode
-                                  ? AppColors.colorNeutral_0
-                                  : AppColors.colorNeutral_900,
-                            ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Dark Mode',
+                          style: TextStyle(
+                            color: isDarkMode
+                                ? AppColors.colorNeutral_0
+                                : AppColors.colorNeutral_900,
                           ),
-                          Switch(
-                            value: isDarkMode,
-                            onChanged: ((value) {
-                              setState(() {
-                                isDarkMode = !isDarkMode;
-                              });
-                            }),
-                          ),
-                        ],
-                      ),
-                      BlincSpacer.vertical.xxs,
-                      BlincLogo(
-                        logoTheme:
-                            isDarkMode ? LogoTheme.white : LogoTheme.standard,
-                      ),
-                      BlincSpacer.vertical.xs,
-                      BlincProgressBar(
-                        value: value,
-                        dark: isDarkMode,
-                      ),
-                    ],
-                  ),
+                        ),
+                        Switch(
+                          value: isDarkMode,
+                          onChanged: ((value) {
+                            setState(() {
+                              isDarkMode = !isDarkMode;
+                            });
+                          }),
+                        ),
+                      ],
+                    ),
+                    BlincSpacer.vertical.xxs,
+                    BlincLogo(
+                      logoTheme:
+                          isDarkMode ? LogoTheme.white : LogoTheme.standard,
+                    ),
+                    BlincSpacer.vertical.xs,
+                    BlincProgressBar(
+                      value: value,
+                      dark: isDarkMode,
+                    ),
+                  ],
                 ),
               ),
             ),
