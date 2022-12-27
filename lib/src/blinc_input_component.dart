@@ -880,13 +880,14 @@ class BlincInputValidation {
             }
           }
         } catch (e) {
-          return 'Invalid Password. Please review it.';
+          return 'Please fulfill all requirements to create your password.';
         }
       }
     }
     return null;
   }
 
+  ///validates date on type mm/dd/yyyy
   String? validateDateOfBirth(String? value) {
     if (value == null || value.isEmpty) {
       return 'You need to informe a date.';
@@ -895,13 +896,33 @@ class BlincInputValidation {
       final data = DateFormat('M/d/y').parseStrict(value);
       final now = DateTime.now();
       if (data.isAfter(DateTime(now.year - 18, now.month, now.day))) {
-        return 'You must be 18 or older to create an\n account.';
+        return 'You must be 18 or older to create your account.';
       }
       if (data.isBefore(DateTime(1900))) {
         return 'Please enter a valid date.';
       }
     } catch (e) {
       return 'Please enter a date in mm/dd/yyyy format.';
+    }
+    return null;
+  }
+
+  ///validates date on type yyyy/MM/dd
+  String? blincValidateDateOfBirth(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'You need to informe a date.';
+    }
+    try {
+      final data = DateFormat('yyyy/MM/dd').parseStrict(value);
+      final now = DateTime.now();
+      if (data.isAfter(DateTime(now.year - 18, now.month, now.day))) {
+        return 'You must be 18 or older to create your account.';
+      }
+      if (data.isBefore(DateTime(1900))) {
+        return 'Please enter a valid date.';
+      }
+    } catch (e) {
+      return 'Please enter a date in yyyy/mm/dd format.';
     }
     return null;
   }
@@ -915,7 +936,7 @@ class BlincInputValidation {
 
   String? validateCellPhone(String? value) {
     if (value == null || value.length < 14) {
-      return 'Please enter a valid a phone number';
+      return 'Please enter a valid number.';
     }
     return null;
   }
@@ -926,7 +947,7 @@ class BlincInputValidation {
     ).hasMatch(value ?? '');
 
     if (!valid) {
-      return 'Please enter a valid e-mail';
+      return 'Please enter a valid e-mail.';
     }
     return null;
   }
