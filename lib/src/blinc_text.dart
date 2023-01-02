@@ -46,132 +46,132 @@ abstract class BaseBlincText extends StatelessWidget {
   double _fontHeight = 0;
   double _realFontHeight = 0;
 
-  ///Defines a thin font weight for BlincText
+  ///Defines a w100 font weight for BlincText
   BaseBlincText get weightThin {
     _fontWeight = FontWeight.w100;
     return this;
   }
 
-  ///Defines a light font weight for BlincText
+  ///Defines a w300 font weight for BlincText
   BaseBlincText get weightLight {
     _fontWeight = FontWeight.w300;
     return this;
   }
 
-  ///Defines a regular font weight for BlincText
+  ///Defines a w400 font weight for BlincText
   BaseBlincText get weightRegular {
     _fontWeight = FontWeight.w400;
     return this;
   }
 
-  ///Defines a medium font weight for BlincText
+  ///Defines a w500 font weight for BlincText
   BaseBlincText get weightMedium {
     _fontWeight = FontWeight.w500;
     return this;
   }
 
-  ///Defines a semi bold font weight for BlincText
+  ///Defines a w600 font weight for BlincText
   BaseBlincText get weightSemiBold {
     _fontWeight = FontWeight.w600;
     return this;
   }
 
-  ///Defines a bold font weight for BlincText
+  ///Defines a w700 font weight for BlincText
   BaseBlincText get weightBold {
     _fontWeight = FontWeight.w700;
     return this;
   }
 
-  ///Defines a extra bold  font weight for BlincText
+  ///Defines a w800 font weight for BlincText
   BaseBlincText get weightExtraBold {
     _fontWeight = FontWeight.w800;
     return this;
   }
 
-  ///Defines a black font weight for BlincText
+  ///Defines a w900 font weight for BlincText
   BaseBlincText get weightBlack {
     _fontWeight = FontWeight.w900;
     return this;
   }
 
-  ///Defines a extra extra extra small font size for BlincText
+  ///Defines a 10 font size for BlincText
   BaseBlincText get sizeXXXS {
     _fontSize = 10.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
-  ///Defines a extra extra small font size for BlincText
+  ///Defines a 12 font size for BlincText
   BaseBlincText get sizeXXS {
     _fontSize = 12.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
-  ///Defines a extra small font size for BlincText
+  ///Defines a 14 font size for BlincText
   BaseBlincText get sizeXS {
     _fontSize = 14.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
-  ///Defines a small font size for BlincText
+  ///Defines a 16 font size for BlincText
   BaseBlincText get sizeSM {
     _fontSize = 16.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
-  ///Defines a medium font size for BlincText
+  ///Defines a 20 font size for BlincText
   BaseBlincText get sizeMD {
     _fontSize = 20.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
-  ///Defines a large font size for BlincText
+  ///Defines a 24 font size for BlincText
   BaseBlincText get sizeLG {
     _fontSize = 24.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
-  ///Defines a extra large font size for BlincText
+  ///Defines a 28 font size for BlincText
   BaseBlincText get sizeXL {
     _fontSize = 28.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
-  ///Defines a extra extra large font size for BlincText
+  ///Defines a 32 font size for BlincText
   BaseBlincText get sizeXXL {
     _fontSize = 32.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
-  ///Defines a extra extra extra large font size for BlincText
+  ///Defines a 40 font size for BlincText
   BaseBlincText get sizeXXXL {
     _fontSize = 40.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
-  ///Defines a huge font size for BlincText
+  ///Defines a 48 font size for BlincText
   BaseBlincText get sizeHuge {
     _fontSize = 48.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
-  ///Defines a extra huge font size for BlincText
+  ///Defines a 56 font size for BlincText
   BaseBlincText get sizeXHuge {
     _fontSize = 56.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
     return this;
   }
 
-  ///Defines a extra extra huge font size for BlincText
+  ///Defines a 64 font size for BlincText
   BaseBlincText get sizeXXHuge {
     _fontSize = 64.wsp;
     _calculateFontHeight(newFontHeight: _realFontHeight.toInt());
@@ -188,67 +188,67 @@ abstract class BaseBlincText extends StatelessWidget {
     }
   }
 
-  ///Defines a extra extra extra small line height font size for BlincText
+  ///Defines a 12 line height font size for BlincText
   BaseBlincText get heightXXXS {
     _calculateFontHeight(newFontHeight: 12);
     return this;
   }
 
-  ///Defines a extra extra small line height font size for BlincText
+  ///Defines a 16 line height font size for BlincText
   BaseBlincText get heightXXS {
     _calculateFontHeight(newFontHeight: 16);
     return this;
   }
 
-  ///Defines a extra small line height font size for BlincText
+  ///Defines a 20 height font size for BlincText
   BaseBlincText get heightXS {
     _calculateFontHeight(newFontHeight: 20);
     return this;
   }
 
-  ///Defines a small line height font size for BlincText
+  ///Defines a 24 line height font size for BlincText
   BaseBlincText get heightSM {
     _calculateFontHeight(newFontHeight: 24);
     return this;
   }
 
-  ///Defines a medium line height font size for BlincText
+  ///Defines a 28 line height font size for BlincText
   BaseBlincText get heightMD {
     _calculateFontHeight(newFontHeight: 28);
     return this;
   }
 
-  ///Defines a large line height font size for BlincText
+  ///Defines a 32 line height font size for BlincText
   BaseBlincText get heightLG {
     _calculateFontHeight(newFontHeight: 32);
     return this;
   }
 
-  ///Defines a extra large line height font size for BlincText
+  ///Defines a 40 line height font size for BlincText
   BaseBlincText get heightXL {
     _calculateFontHeight(newFontHeight: 40);
     return this;
   }
 
-  ///Defines a extra extra large line height font size for BlincText
+  ///Defines a 48 line height font size for BlincText
   BaseBlincText get heightXXL {
     _calculateFontHeight(newFontHeight: 48);
     return this;
   }
 
-  ///Defines a extra extra extra large line height font size for BlincText
+  ///Defines a 56 line height font size for BlincText
   BaseBlincText get heightXXXL {
     _calculateFontHeight(newFontHeight: 56);
     return this;
   }
 
-  ///Defines a huge line height font size for BlincText
+  ///Defines a 64 line height font size for BlincText
   BaseBlincText get heightHuge {
     _calculateFontHeight(newFontHeight: 64);
     return this;
   }
 
-  ///Defines a extra huge line height font size for BlincText
+  ///Defines a 72 line height font size for BlincText
   BaseBlincText get heightXHuge {
     _calculateFontHeight(newFontHeight: 72);
     return this;
