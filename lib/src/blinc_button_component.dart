@@ -35,7 +35,7 @@ class BlincButton extends StatefulWidget {
     this.padding,
     this.icon,
     this.isIconInverted,
-    this.isLoading,
+    this.isLoading = false,
     this.isFluid,
     this.disabled = false,
   }) : super(key: key);
@@ -68,7 +68,7 @@ class BlincButton extends StatefulWidget {
   final bool? isIconInverted;
 
   /// If true it will show a loading spinner
-  final bool? isLoading;
+  final bool isLoading;
 
   /// If true the button will take any space available
   final bool? isFluid;
@@ -340,9 +340,11 @@ class _BlincButtonState extends State<BlincButton> {
               isFocused = value;
             });
           },
-          onPressed: widget.onPressed != null && !widget.disabled
+          onPressed: !widget.disabled
               ? () {
-                  widget.onPressed!();
+                  if (!widget.isLoading) {
+                    widget.onPressed?.call();
+                  }
                 }
               : null,
 
