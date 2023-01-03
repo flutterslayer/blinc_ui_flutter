@@ -26,13 +26,18 @@ class BlincText extends BaseBlincText {
     return Text(
       text,
       textAlign: textAlign,
-      style: TextStyle(
-        fontFamily: 'proxima_nova_font',
-        fontWeight: _fontWeight,
-        fontSize: _fontSize,
-        height: _fontHeight,
-        color: style == null ? null : style!.color,
-      ),
+      style: style?.copyWith(
+            fontFamily: 'proxima_nova_font',
+            fontWeight: _fontWeight,
+            fontSize: _fontSize,
+            height: _fontHeight,
+          ) ??
+          TextStyle(
+            fontFamily: 'proxima_nova_font',
+            fontWeight: _fontWeight,
+            fontSize: _fontSize,
+            height: _fontHeight,
+          ),
     );
   }
 }
